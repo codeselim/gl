@@ -7,5 +7,5 @@ Element::Element(ElementName* en, attributesMap* attrs) {
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children) {
 	this->children = children;
-	this->children = children; 
+	this->attrs = attrs;
 }
