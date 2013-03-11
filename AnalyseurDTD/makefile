@@ -1,3 +1,5 @@
+CPPS=data_structures/*.cpp
+
 all: analyseDTD
 analyseDTD: *.l *.y makefile
 	flex dtd.l
