@@ -1,4 +1,10 @@
 *.sublime-*
+*.output
+*.yy.c
+*.tab.c
+*.tab.h
+analyseDTD
+analyseXML
 
 # Compiled Object files
 *.slo
