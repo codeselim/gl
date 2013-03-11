@@ -148,15 +148,15 @@ Exercice 4
 ### 1. Structures de données ###
 ```c++
 /* XML */
-enum NodeType {#text, a, b, p}
+enum NodeType {#text, a, b, p};
 
 class Node {
     NodeType type;
-}
+};
 
 class TextNode : Node {
     string content;
-}
+};
 
 class Element : Node {
     list<Node*> * children;
@@ -166,30 +166,30 @@ class Element : Node {
 
     public:
         Element(ElementName* en, map<string, string>* attrs, list<Node*> * children = new list<Node>());
-}
+};
 
 /* DTD */
-enum Card {qmark, plus, star}
+enum Card {qmark, plus, star};
 
 class Dtd {
     map<string, DtdElt> * elements;
-}
+};
 
 class DtdElt {
    map<string, DtdAttr> * attributes;
    list<ChildElt> * children;
-}
+};
 
 
 class ChildElt {
     string eltName
     Card card
-}
+};
 
 class DtdAttr {
     string name;
     string type;
     bool required;
-}
+};
 
 ```
