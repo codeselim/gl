@@ -41,8 +41,17 @@ declaration
  ;
 
 xml_element
- : start empty_or_content 
+ : start attributes_opt empty_or_content 
  ;
+
+attributes_opt
+ : attributes_opt attribute
+ | /*empty*/
+ ;
+ attribute
+ : IDENT EQ STRING
+ ;
+
 start
  : START		
  | NSSTART	
