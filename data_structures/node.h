@@ -1,9 +1,10 @@
-
+#include <string>
 using namespace std;
 
 enum NodeType {_text, a, b, p};
 
-abstract class Node {
+class Node {
 	NodeType type;
-	string toXML() = 0;
+public:
+	virtual string toXML() = 0;
 };

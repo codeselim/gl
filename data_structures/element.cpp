@@ -1,20 +1,19 @@
-#include <stringstream>
+#include "element.h"
+#include <sstream>
 
-Element::Element(ElementName* en, attributesMap* attrs) {
-	nodeList* l = new nodeList();
-	this(en, attrs, l);
-}
-
-Element::Element(ElementName* en, attributesMap* attrs, nodeList* children) {
+Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
+	if(NULL == children) {
+		children = new nodeList();
+	}
 	this->children = children;
-	this->attrs = attrs;
+	this->attributes = attributes;
 }
 
 Element& Element::setParent(Element* e) {
 	this->parent = e;
 }
 
-Element& Element::getParent() {
+Element* Element::getParent() {
 	return this->parent;
 }
 
@@ -22,7 +21,7 @@ string Element::toXML() {
 	stringstream str;
 	str << this->name << endl;
 	for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
-		str << it->toXML();
+		str << (*it)->toXML();
 	}
 	return str.str();
 }
