@@ -1,11 +1,11 @@
+#include "element.h"
 
-
-Element::Element(ElementName* en, attributesMap* attrs) {
-	nodeList* l = new nodeList();
-	this(en, attrs, l);
-}
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children) {
-	this->children = children;
-	this->attrs = attrs;
+	if (children == NULL) {
+		this->children = new nodeList();
+	} else {
+		this->children = children;
+	}
+	this->attributes = attrs;
 }

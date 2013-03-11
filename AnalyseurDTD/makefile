@@ -1,4 +1,4 @@
-CPPS=data_structures/*.cpp
+CPPS:=../data_structures/*.cpp
 
 all: analyseDTD
 analyseDTD: *.l *.y makefile
