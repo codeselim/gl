@@ -1,11 +1,11 @@
 
 
-class Element : Node {
-    list<Node*> * children;
-    map<string, string> * attributes;
-    string namespace;
-    string name;
+Element::Element(ElementName* en, attributesMap* attrs) {
+	nodeList* l = new nodeList();
+	this(en, attrs, l);
+}
 
-    public:
-        Element(ElementName* en, map<string, string>* attrs, list<Node*> * children = new list<Node>());
-};
+Element::Element(ElementName* en, attributesMap* attrs, nodeList* children) {
+	this->children = children;
+	this->children = children; 
+}
