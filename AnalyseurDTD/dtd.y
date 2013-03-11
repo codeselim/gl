@@ -131,12 +131,12 @@ liste
 
 mixed
 : OUVREPAR PCDATA contenu_mixed 
-| OUVREPAR PCDATA FERMEPAR
 ;
 
 contenu_mixed
 : contenu_mixed BARRE NOM
 | FERMEPAR AST
+| FERMEPAR
 ;
 
 %%
