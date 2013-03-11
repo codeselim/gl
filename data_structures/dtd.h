@@ -1,3 +1,7 @@
+#ifndef __DTD_H_
+
+#define __DTD_H_
+
 /* DTD */
 #include <map>
 
@@ -10,3 +14,5 @@ typedef map<string, DtdElt> DtdEltMap;
 class Dtd {
 	DtdEltMap* elements;
 };
+
+#endif

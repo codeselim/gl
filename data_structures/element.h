@@ -1,8 +1,12 @@
+#ifndef __ELEMENT_H_
+
+#define __ELEMENT_H_
+
 #include <map>
 #include <list>
 #include <string>
-#include "../AnalyseurXML/commun.h"
 #include "node.h"
+#include "../AnalyseurXML/commun.h"
 
 using namespace std;
 
@@ -23,3 +27,5 @@ public:
         Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	virtual string toXML();
 };
+
+#endif

@@ -1,3 +1,7 @@
+#ifndef __DTD_ELT_H_
+
+#define __DTD_ELT_H_
+
 #include <map>
 #include <list>
 
@@ -9,3 +13,6 @@ class DtdElt {
 	DtdAttrMap * attributes;
 	list<ChildElt> * children;
 };
+
+#endif
+

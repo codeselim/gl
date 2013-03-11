@@ -6,7 +6,7 @@ Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = N
 		children = new nodeList();
 	}
 	this->children = children;
-	this->attributes = attributes;
+	this->attributes = attrs;
 }
 
 Element& Element::setParent(Element* e) {

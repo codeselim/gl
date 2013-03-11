@@ -1,3 +1,7 @@
+#ifndef __NODE_H_
+
+#define __NODE_H_
+
 #include <string>
 using namespace std;
 
@@ -8,3 +12,6 @@ class Node {
 public:
 	virtual string toXML() = 0;
 };
+
+#endif
+
