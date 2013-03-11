@@ -1,3 +1,3 @@
-#include "../data_structures/node.h"
-#include "../data_structures/element.h"
-#include "../data_structures/text_node.h"
+#include <node.h>
+#include <element.h>
+#include <text_node.h>
