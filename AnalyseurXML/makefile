@@ -1,13 +1,11 @@
 # CPPS:=../data_structures/element.o ../data_structures/text_node.o ../data_structures/child_elt.o ../data_structures/node.o
 
-CPP_FILES := $(wildcard ../data_structures/*.cpp)
-OBJ_FILES := $(CPP_FILES:.cpp=.o))
+CPP_FILES := element.cpp node.cpp text_node.cpp child_elt.cpp
+OBJ_FILES := $(addprefix ../data_structures/, $(CPP_FILES:.cpp=.o))
 
 all: analyseXML
 analyseXML: *.l *.y makefile
-	# cd ../data_structures
-	# g++ *.cpp
-	# cd -
+	cd ../data_structures ; pwd; g++ -c $(CPP_FILES)
 	flex  xml.l
 	bison --debug --verbose --defines=yy.tab.h xml.y
 	g++ -g -DYYDEBUG=1 -o analyseXML  lex.yy.c  xml.tab.c $(OBJ_FILES)
