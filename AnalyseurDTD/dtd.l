@@ -1,10 +1,13 @@
 %option 8bit
 
 %{
+  using namespace std;
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <list>
+#include <string>
 #include "yy.tab.h"
 
 static char* skipSpace(char *s) {

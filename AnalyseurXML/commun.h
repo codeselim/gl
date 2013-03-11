@@ -16,5 +16,4 @@ typedef pair<string,string> ElementName; // convention : name, namespace
 #define debug(x) ((void) 0)
 #endif
 
-
 #endif
