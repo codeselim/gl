@@ -23,5 +23,6 @@ string Element::toXML() {
 	str << this->name << endl;
 	for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
 		str << it->toXML();
-	} 
+	}
+	return str.str();
 }

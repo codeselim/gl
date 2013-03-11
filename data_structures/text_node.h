@@ -4,5 +4,6 @@
 using namespace std;
 
 class TextNode : Node {
-    string content;
+	string content;
+	string toXML();
 };
