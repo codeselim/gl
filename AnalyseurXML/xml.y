@@ -46,8 +46,17 @@ declaration
  ;
 
 element
- : ouvre vide_ou_contenu  
+ : ouvre attributs_opt vide_ou_contenu  
  ;
+
+attributs_opt
+ : attribut
+ | /*vide*/
+ ;
+attribut 
+ : NOM EGAL VALEUR
+ ;
+
 ouvre
  : OBALISE
  | OBALISEEN
