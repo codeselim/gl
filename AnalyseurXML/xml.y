@@ -2,6 +2,7 @@
 
 using namespace std;
 #include "commun.h"
+#include "struct_donnees_xml.h"
 
 int yywrap(void);
 void yyerror(char *msg);
