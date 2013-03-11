@@ -1,4 +1,6 @@
 
+using namespace std;
+
 class DtdAttr {
     string name;
     string type;
