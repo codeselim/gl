@@ -70,8 +70,12 @@ int main(int argc, char **argv)
   yydebug = 1; // pour enlever l'affichage de l'éxécution du parser, commenter cette ligne
 
   err = yyparse();
-  if (err != 0) printf("Parse ended with %d error(s)\n", err);
-  	else  printf("Parse ended with success\n", err);
+  
+  if (err != 0) {
+    printf("Parse ended with %d error(s)\n", err);
+  } else {
+    printf("Parse ended with success\n", err);
+  } 
   return 0;
 }
 int yywrap(void)
