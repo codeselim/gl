@@ -10,10 +10,14 @@ typedef map<string, string> attributesMap;
 class Element : Node {
     list<Node*> * children;
     map<string, string> * attributes;
+    Element* parent;
     string ns; // namespace
     string name;
 
     public:
 	Element(ElementName* en, attributesMap* attrs);
+	Element& setParent(Element* e);
+	Element* getParent();
         Element(ElementName* en, attributesMap* attrs,  nodeList* children);
+	string toXML();
 };
