@@ -4,6 +4,6 @@
 using namespace std;
 
 class ChildElt {
-    string eltName
-    Card card
+	string eltName;
+	Card card;
 };

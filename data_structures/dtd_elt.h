@@ -3,7 +3,9 @@
 
 using namespace std;
 
+typedef DtdAttrMap map<string, DtdAttr>;
+
 class DtdElt {
-   map<string, DtdAttr> * attributes;
-   list<ChildElt> * children;
+	DtdAttrMap * attributes;
+	list<ChildElt> * children;
 };
