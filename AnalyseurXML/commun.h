@@ -8,7 +8,7 @@ using namespace std;
 
 typedef pair<string,string> Attribut;
 typedef list<Attribut> AttList;
-typedef pair<string,string> ElementName;
+typedef pair<string,string> ElementName; // convention : name, namespace
 
 #ifdef DEBUG
 #define debug(x) (x)

@@ -8,9 +8,11 @@
 
 using namespace std;
 
-class TextNode : Node {
+class TextNode : public Node {
 	string content;
-	string toXML();
+public:
+	TextNode(string content);
+	virtual string toXML();
 };
 
 

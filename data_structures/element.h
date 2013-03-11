@@ -13,7 +13,7 @@ using namespace std;
 typedef list<Node*> nodeList;
 typedef map<string, string> attributesMap;
 
-class Element : Node {
+class Element : public Node {
 private:
     nodeList * children;
     attributesMap * attributes;
