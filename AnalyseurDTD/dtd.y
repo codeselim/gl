@@ -6,7 +6,7 @@ using namespace std;
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-
+#include "struct_donnees_dtd.h"
 
 void yyerror(char *msg);
 int yywrap(void);
