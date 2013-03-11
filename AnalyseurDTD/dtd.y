@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 {
   int err;
 
-  yydebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
+  //yydebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
   err = yyparse();
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
