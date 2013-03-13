@@ -10,15 +10,19 @@
 #include "../data_structures/node.h"
 #include "../data_structures/element.h"
 #include "../data_structures/text_node.h"
+#include "./test_utils.h"
+
 /*
  * Simple C++ Test Suite
  */
 
-void test1() {
+bool simpleToXMLWithAttributes() {
 	std::cout << "to_xml test 1" << std::endl;
+	fail("simpleToXMLWithAttributes", "Not Yet Implemented");
+	return true;
 }
 
-void test2() {
+bool simpleToXMLWithoutAttributes() {
 	std::cout << "to_xml test 2" << std::endl;
 	nodeList l = nodeList();
 	Node* b = new TextNode(string("Blorg"));
@@ -30,29 +34,45 @@ void test2() {
 	string result = a->toXML();
 	
 	if (result != expected) {
-		std::cout << "%TEST_FAILED% time=0 testname=test2 (to_xml) message=toXML did not answer expected result." << std::endl;
-		std::cout << "Expected : " << std::endl << expected << std::endl;
-		std::cout << "Got: " << std::endl << result << std::endl;
+		fail("simpleToXMLWithoutAttributes (to_xml)", "toXML did not answer expected result." << std::endl
+		 << "Expected : " << std::endl << expected << std::endl
+		 << "Got: " << std::endl << result << std::endl)
 	}
 	
 	delete b;
 	delete a;
-	
+	return true;
 }
 
+bool ComplexXMLWIthMixedElementsAndNodesWithoutAttributes() {
+	fail("ComplexXMLWIthMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
+	return true;
+}
+
+typedef bool(*test_func)(void);
+
 int main(int argc, char** argv) {
+	int fail_counter = 0;
+	test_func tests[] = {simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWIthMixedElementsAndNodesWithoutAttributes};
+	const char* tests_names[] = {"simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWIthMixedElementsAndNodesWithoutAttributes"};
+	int test_count = 3;
+
 	std::cout << "%SUITE_STARTING% to_xml" << std::endl;
 	std::cout << "%SUITE_STARTED%" << std::endl;
 
-	std::cout << "%TEST_STARTED% test1 (to_xml)" << std::endl;
-	test1();
-	std::cout << "%TEST_FINISHED% time=0 test1 (to_xml)" << std::endl;
-
-	std::cout << "%TEST_STARTED% test2 (to_xml)\n" << std::endl;
-	test2();
-	std::cout << "%TEST_FINISHED% time=0 test2 (to_xml)" << std::endl;
+	for (int i = 0; i < test_count; ++i)
+	{
+		const char* name = tests_names[i];
+		std::cout << "%TEST_STARTED% " << name << " (to_xml)" << std::endl;
+		if(!tests[i]()) {
+			fail_counter++;
+		}
+		std::cout << "%TEST_FINISHED% time=0 " << name << " (to_xml)" << std::endl;
+	}
 
 	std::cout << "%SUITE_FINISHED% time=0" << std::endl;
+
+	std::cout << test_count << " tests run. " << fail_counter << " failed." << std::endl;
 
 	return (EXIT_SUCCESS);
 }
