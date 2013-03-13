@@ -6,6 +6,11 @@ Document::Document(list<Node*> * declarations, Element* rootNode) {
 	this->declarations = declarations;
 }
 
-string Document::toXML() {
-	cout << "Appel à la fonction toXML de document" << endl;
+Document::~Document() {
+	cout << "TODO destructors" << endl;
 }
+
+string Document::toXML() {
+	return string("Appel à la fonction toXML de document");
+}
+

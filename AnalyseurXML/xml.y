@@ -5,8 +5,10 @@ using namespace std;
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
+
 #include "commun.h"
-#include "yy.tab.h"
+#include <element.h>
+#include <text_node.h>
 #include <document.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
@@ -16,16 +18,6 @@ int yylex(void);
 
 Document* rootExpr;
 %}
-
-%code requires {
-#ifndef __TYPES_HPP_INCLUDED__
-#define __TYPES_HPP_INCLUDED__
-#include <element.h>
-#include <text_node.h>
-#include <document.h>
-
-#endif
-}
 
 %union {
    char * s;
@@ -68,7 +60,7 @@ declarations_opt
  : declarations_opt declaration
  | /*vide*/
  ;
- 
+
 declaration
  : DOCTYPE NOM NOM VALEUR SUP
  ;
@@ -83,7 +75,7 @@ attributs_opt
  | /*vide*/ {$$ = new attributesMap();}
  ;
 
-attribut 
+attribut
  : NOM EGAL VALEUR  {$$ = new pair<string, string>(string($1), string($3));}
  ;
 
@@ -101,7 +93,7 @@ ferme_contenu_et_fin
  : SUP contenu_opt FBALISE  {$$ = $2;}
  ;
 
-contenu_opt 
+contenu_opt
  : contenu_opt DONNEES  {$$ = $1; $$->push_back(new TextNode($2));}
  | contenu_opt misc   {$$ = $1;}
  | contenu_opt element  {$$ = $1; $$->push_back($2);}
@@ -117,13 +109,19 @@ int main(int argc, char **argv) {
 
   // Document* document = NULL;
   err = yyparse();
-  
+
   if (err != 0) {
     printf("Parse ended with %d error(s)\n", err);
+    return 1;
   } else {
     printf("Parse ended with success\n", err);
-    rootExpr->toXML();
-  } 
+    cout << rootExpr->toXML() << endl;
+  }
+
+  if (rootExpr != NULL) {
+    delete rootExpr;
+  }
+
   return 0;
 }
 
