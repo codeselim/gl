@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "document.h"
 
 Document::Document(list<Node*> * declarations, Element* rootNode) {
@@ -11,6 +12,9 @@ Document::~Document() {
 }
 
 string Document::toXML() {
-	return string("Appel à la fonction toXML de document");
+	stringstream str;
+	str << this->declarations << endl;
+	str << this->rootNode->toXML();
+	return str.str();
 }
 
