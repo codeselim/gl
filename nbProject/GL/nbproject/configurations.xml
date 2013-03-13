@@ -15,47 +15,47 @@
       <logicalFolder name="AnalyseurDTD"
                      displayName="AnalyseurDTD"
                      projectFiles="true">
-        <itemPath>../../code/AnalyseurDTD/dtd.l</itemPath>
-        <itemPath>../../code/AnalyseurDTD/dtd.y</itemPath>
-        <itemPath>../../code/AnalyseurDTD/makefile</itemPath>
-        <itemPath>../../code/AnalyseurDTD/rap1.dtd</itemPath>
-        <itemPath>../../code/AnalyseurDTD/rap2.dtd</itemPath>
-        <itemPath>../../code/AnalyseurDTD/rap3.dtd</itemPath>
-        <itemPath>../../code/AnalyseurDTD/readme.txt</itemPath>
-        <itemPath>../../code/AnalyseurDTD/struct_donnees_dtd.h</itemPath>
+        <itemPath>../../AnalyseurDTD/dtd.l</itemPath>
+        <itemPath>../../AnalyseurDTD/dtd.y</itemPath>
+        <itemPath>../../AnalyseurDTD/makefile</itemPath>
+        <itemPath>../../AnalyseurDTD/rap1.dtd</itemPath>
+        <itemPath>../../AnalyseurDTD/rap2.dtd</itemPath>
+        <itemPath>../../AnalyseurDTD/rap3.dtd</itemPath>
+        <itemPath>../../AnalyseurDTD/readme.txt</itemPath>
+        <itemPath>../../AnalyseurDTD/struct_donnees_dtd.h</itemPath>
       </logicalFolder>
       <logicalFolder name="AnalyseurXML"
                      displayName="AnalyseurXML"
                      projectFiles="true">
-        <itemPath>../../code/AnalyseurXML/commun.h</itemPath>
-        <itemPath>../../code/AnalyseurXML/makefile</itemPath>
-        <itemPath>../../code/AnalyseurXML/rap1.xml</itemPath>
-        <itemPath>../../code/AnalyseurXML/rap2.xml</itemPath>
-        <itemPath>../../code/AnalyseurXML/readme.txt</itemPath>
-        <itemPath>../../code/AnalyseurXML/struct_donnees_xml.h</itemPath>
-        <itemPath>../../code/AnalyseurXML/xml.l</itemPath>
-        <itemPath>../../code/AnalyseurXML/xml.y</itemPath>
+        <itemPath>../../AnalyseurXML/commun.h</itemPath>
+        <itemPath>../../AnalyseurXML/makefile</itemPath>
+        <itemPath>../../AnalyseurXML/rap1.xml</itemPath>
+        <itemPath>../../AnalyseurXML/rap2.xml</itemPath>
+        <itemPath>../../AnalyseurXML/readme.txt</itemPath>
+        <itemPath>../../AnalyseurXML/struct_donnees_xml.h</itemPath>
+        <itemPath>../../AnalyseurXML/xml.l</itemPath>
+        <itemPath>../../AnalyseurXML/xml.y</itemPath>
       </logicalFolder>
       <logicalFolder name="data_structures"
                      displayName="data_structures"
                      projectFiles="true">
-        <itemPath>../../code/data_structures/child_elt.cpp</itemPath>
-        <itemPath>../../code/data_structures/child_elt.h</itemPath>
-        <itemPath>../../code/data_structures/document.cpp</itemPath>
-        <itemPath>../../code/data_structures/document.h</itemPath>
-        <itemPath>../../code/data_structures/dtd.cpp</itemPath>
-        <itemPath>../../code/data_structures/dtd.h</itemPath>
-        <itemPath>../../code/data_structures/dtd_attr.cpp</itemPath>
-        <itemPath>../../code/data_structures/dtd_attr.h</itemPath>
-        <itemPath>../../code/data_structures/dtd_elt.cpp</itemPath>
-        <itemPath>../../code/data_structures/dtd_elt.h</itemPath>
-        <itemPath>../../code/data_structures/element.cpp</itemPath>
-        <itemPath>../../code/data_structures/element.h</itemPath>
-        <itemPath>../../code/data_structures/main.cpp</itemPath>
-        <itemPath>../../code/data_structures/node.cpp</itemPath>
-        <itemPath>../../code/data_structures/node.h</itemPath>
-        <itemPath>../../code/data_structures/text_node.cpp</itemPath>
-        <itemPath>../../code/data_structures/text_node.h</itemPath>
+        <itemPath>../../data_structures/child_elt.cpp</itemPath>
+        <itemPath>../../data_structures/child_elt.h</itemPath>
+        <itemPath>../../data_structures/document.cpp</itemPath>
+        <itemPath>../../data_structures/document.h</itemPath>
+        <itemPath>../../data_structures/dtd.cpp</itemPath>
+        <itemPath>../../data_structures/dtd.h</itemPath>
+        <itemPath>../../data_structures/dtd_attr.cpp</itemPath>
+        <itemPath>../../data_structures/dtd_attr.h</itemPath>
+        <itemPath>../../data_structures/dtd_elt.cpp</itemPath>
+        <itemPath>../../data_structures/dtd_elt.h</itemPath>
+        <itemPath>../../data_structures/element.cpp</itemPath>
+        <itemPath>../../data_structures/element.h</itemPath>
+        <itemPath>../../data_structures/main.cpp</itemPath>
+        <itemPath>../../data_structures/node.cpp</itemPath>
+        <itemPath>../../data_structures/node.h</itemPath>
+        <itemPath>../../data_structures/text_node.cpp</itemPath>
+        <itemPath>../../data_structures/text_node.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -66,7 +66,7 @@
                      displayName="toXMLTest"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>../../code/tests/to_xml.cpp</itemPath>
+        <itemPath>../../tests/to_xml.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
