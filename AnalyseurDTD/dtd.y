@@ -11,17 +11,8 @@ void yyerror(char *msg);
 int yywrap(void);
 int yylex(void);
 
+Dtd* rootExpr = NULL;
 %}
-
-%code requires {
-#ifndef __TYPES_DTD_INCLUDED__
-#define __TYPES_DTD_INCLUDED__
-#include <dtd.h>
-#include <dtd_elt.h>
-#include <dtd_attr.h>
-#include <child_elt.h>
-#endif
-}
 
 %union {
    char *s;
@@ -34,51 +25,52 @@ int yylex(void);
 
 %%
 
-main: dtd_list_opt
+main
+: dtd_list_opt  {$$ = new Dtd($1); rootExpr = $$}
 ;
 
 dtd_list_opt
-: dtd_list_opt ATTLIST NOM att_definition_opt SUP
-| dtd_list_opt element_declaration
-| /* vide */
+: dtd_list_opt ATTLIST NOM att_definition_opt SUP {$$ = $1; $$->add_attrs($3, $4);}
+| dtd_list_opt element_declaration  {$$ = $1; $$->add_elt($2);}
+| /* vide */  {$$ = new DtdEltMap();}
 ;
 
 att_definition_opt
-: att_definition_opt attribut
-| /* vide */
+: att_definition_opt attribut {$$ = $1; $$->push_back($2);}
+| /* vide */  {$$ = new list<DtdAttr*>();}
 ;
 
 attribut
-: NOM att_type defaut_declaration
+: NOM att_type defaut_declaration   {$$ = new DtdAttr($1, $2, $3);}
 ;
 
 att_type
-: CDATA
-| TOKENTYPE
-| type_enumere
+: CDATA   {$$ = new AttrType($1);}
+| TOKENTYPE   {$$ = new AttrType($1);}
+| type_enumere  {$$ = new AttrType($1);}
 ;
 
 type_enumere
-: OUVREPAR liste_enum_plus FERMEPAR
+: OUVREPAR liste_enum_plus FERMEPAR   {$$ = $1;}
 ;
 
 liste_enum_plus
-: liste_enum BARRE NOM
+: liste_enum BARRE NOM  {$$ = $1; $$->push_back($3);}
 ;
 
 liste_enum
-: NOM
-| liste_enum BARRE NOM
+: NOM   {$$ = new list<string>(); $$->push_back($1);}
+| liste_enum BARRE NOM  {$$ = $1; $$->push_back($3);}
 ;
 
 defaut_declaration
-: DECLARATION
-| VALEUR
-| FIXED VALEUR
+: DECLARATION   {$$ = new DefaultDeclaration($1);}
+| VALEUR  {$$ = new DefaultDeclaration($1);}
+| FIXED VALEUR  {$$ = new DefaultDeclaration($2, true);}
 ;
 
 element_declaration
-: ELEMENT NOM content_spec SUP
+: ELEMENT NOM content_spec SUP  {$$ = }
 ;
 
 content_spec
@@ -153,12 +145,16 @@ contenu_mixed
 int main(int argc, char **argv)
 {
   int err;
-
   //yydebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
   err = yyparse();
-  if (err != 0) printf("Parse ended with %d error(s)\n", err);
-        else  printf("Parse ended with success\n", err);
+  if (err != 0) {
+    printf("Parse ended with %d error(s)\n", err);
+    return 1;
+  } else {
+    printf("Parse ended with success\n", err);
+    cout << rootExpr->toString() << endl;
+  }
   return 0;
 }
 int yywrap(void)

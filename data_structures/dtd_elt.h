@@ -12,6 +12,7 @@ typedef DtdAttrMap map<string, DtdAttr>;
 class DtdElt {
 	DtdAttrMap * attributes;
 	list<ChildElt> * children;
+	string name;
 };
 
 #endif
