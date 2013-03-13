@@ -64,8 +64,8 @@ bool simpleToXMLWithoutAttributes() {
 	return true;
 }
 
-bool ComplexXMLWIthMixedElementsAndNodesWithoutAttributes() {
-	fail("ComplexXMLWIthMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
+bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
+	fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
 	return true;
 }
 
@@ -73,8 +73,8 @@ typedef bool(*test_func)(void);
 
 int main(int argc, char** argv) {
 	int fail_counter = 0;
-	test_func tests[] = {simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWIthMixedElementsAndNodesWithoutAttributes};
-	const char* tests_names[] = {"simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWIthMixedElementsAndNodesWithoutAttributes"};
+	test_func tests[] = {simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWithMixedElementsAndNodesWithoutAttributes};
+	const char* tests_names[] = {"simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWithMixedElementsAndNodesWithoutAttributes"};
 	int test_count = 3;
 
 	std::cout << "%SUITE_STARTING% to_xml" << std::endl;
