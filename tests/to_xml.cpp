@@ -25,7 +25,7 @@ bool simpleToXMLWithAttributes() {
 	attributesMap attrMap;
 	attrMap["blorg1"] = "blurp";
 	attrMap["huhu"] = "haha";
-	attrMap["numeric"] = 42;
+	attrMap["numeric"] = "42";
 	Node* a = new Element(&en, &attrMap, &l);
 	
 	string expected = "<xml blorg1=\"blurp\" huhu=\"haha\" numeric=\"42\">\nBlorg\n</xml>";
