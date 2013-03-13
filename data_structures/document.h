@@ -17,6 +17,7 @@ private:
 
 public:
 	Document(list<Node*> * declarations, Element* rootNode);
+	~Document();
 	string toXML();
 };
 

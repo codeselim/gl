@@ -7,6 +7,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "commun.h"
+
+#include <element.h>
+#include <text_node.h>
+#include <document.h>
+
 #include "yy.tab.h"
 
 // si vous activez l'option -P de flex, changez les deux lignes suivantes
@@ -50,7 +55,7 @@ static char* mot(char *s)
 }
 
 /* extrait la première partie, l'espace de nom */
-static char * espaceDeNom(char *s)  
+static char * espaceDeNom(char *s)
 {
    char *name;
    int i,k;
@@ -63,8 +68,8 @@ static char * espaceDeNom(char *s)
 }
 
 /* extrait la deuxième partie après l'espace de nom */
-static char * separeNom(char *s) 
-{ 
+static char * separeNom(char *s)
+{
    char *name;
    int i,k;
    for (i=0;s[i]!=':';i++) ;
