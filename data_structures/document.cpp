@@ -11,11 +11,6 @@ Document::~Document() {
 }
 
 string Document::toXML() {
-<<<<<<< HEAD
-	cout << "Appel à la fonction toXML de document" << endl;
-}
-=======
 	return string("Appel à la fonction toXML de document");
 }
 
->>>>>>> dataStructures
