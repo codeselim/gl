@@ -70,7 +70,7 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	Node* d = new TextNode(string("Blorg2"));
 	Node* e = new TextNode(string("Blorg3"));
 	la.push_back(b);
-	lc.push_back(b);
+	lc.push_back(d);
 	ElementName ena = ElementName(string("xml"), string("blorg"));
 	ElementName enb = ElementName(string("yoyo"), string("blorg"));
 	Node* c = new Element(&enb, NULL, &lc);
