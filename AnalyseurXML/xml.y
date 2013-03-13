@@ -5,8 +5,10 @@ using namespace std;
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
+
 #include "commun.h"
-#include "yy.tab.h"
+#include <element.h>
+#include <text_node.h>
 #include <document.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
@@ -16,16 +18,6 @@ int yylex(void);
 
 Document* rootExpr;
 %}
-
-%code requires {
-#ifndef __TYPES_XML_INCLUDED__
-#define __TYPES_XML_INCLUDED__
-#include <element.h>
-#include <text_node.h>
-#include <document.h>
-
-#endif
-}
 
 %union {
    char * s;
@@ -120,10 +112,16 @@ int main(int argc, char **argv) {
 
   if (err != 0) {
     printf("Parse ended with %d error(s)\n", err);
+    return 1;
   } else {
     printf("Parse ended with success\n", err);
     cout << rootExpr->toXML() << endl;
   }
+
+  if (rootExpr != NULL) {
+    delete rootExpr;
+  }
+
   return 0;
 }
 
