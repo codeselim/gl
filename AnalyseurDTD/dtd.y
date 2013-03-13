@@ -70,14 +70,14 @@ defaut_declaration
 ;
 
 element_declaration
-: ELEMENT NOM content_spec SUP  {$$ = }
+: ELEMENT NOM content_spec SUP  {$$ = new DtdElt($2, $3);}
 ;
 
 content_spec
 : EMPTY
 | ANY
-| mixed
-| children
+| mixed   {}           /* liste */
+| children  {$$ = $1;} /* liste d'elements */
 ;
 
 children
@@ -119,16 +119,6 @@ contenu_seq_opt
 : contenu_seq_opt VIRGULE cp
 | /* vide */
 ;
-
-/*liste_opt
-: liste_opt NOM     {$$ = $1; $$->push_back(string($2));} // rajoute un élément à la liste
-| // vide           {$$ = new list<string>;} // règle réduite en premier, initialise la liste
-;
-
-liste
-: liste NOM         {$$ = $1; $$->push_back(string($2));}
-| NOM               {$$ = new list<string>; $$->push_back(string($1));}
-;*/
 
 mixed
 : OUVREPAR PCDATA contenu_mixed
