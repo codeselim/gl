@@ -17,7 +17,6 @@
  */
 
 bool simpleToXMLWithAttributes() {
-	std::cout << "to_xml test 2" << std::endl;
 	nodeList l = nodeList();
 	Node* b = new TextNode(string("Blorg"));
 	l.push_back(b);
@@ -43,7 +42,6 @@ bool simpleToXMLWithAttributes() {
 }
 
 bool simpleToXMLWithoutAttributes() {
-	std::cout << "to_xml test 2" << std::endl;
 	nodeList l = nodeList();
 	Node* b = new TextNode(string("Blorg"));
 	l.push_back(b);
@@ -65,7 +63,42 @@ bool simpleToXMLWithoutAttributes() {
 }
 
 bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
+	// Children lists for a and b elements
+	nodeList la = nodeList();
+	nodeList lc = nodeList();
+	Node* b = new TextNode(string("Blorg1"));
+	Node* d = new TextNode(string("Blorg2"));
+	Node* e = new TextNode(string("Blorg3"));
+	la.push_back(b);
+	lc.push_back(b);
+	ElementName ena = ElementName(string("xml"), string("blorg"));
+	ElementName enb = ElementName(string("yoyo"), string("blorg"));
+	Node* c = new Element(&enb, NULL, &lc);
+	la.push_back(c);
+	la.push_back(e);
+	Node* a = new Element(&ena, NULL, &la);
+	
+	
+	string expected = "<xml>\nBlorg1\n<yoyo>\nBlorg2\n</yoyo>\nBlorg3\n</xml>";
+	string result = a->toXML();
+	
+	if (result != expected) {
+		fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes (to_xml)", "toXML did not answer expected result." << std::endl
+		 << "Expected : " << std::endl << expected << std::endl
+		 << "Got: " << std::endl << result << std::endl)
+	}
+	
+	delete a;
+	delete b;
+	delete c;
+	delete d;
+	return true;
 	fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
+	return true;
+}
+
+bool testTemplateCopyPasteMe() {
+	fail("Put My Name here", "Error message here (Not Yet Implemented)");
 	return true;
 }
 
@@ -73,8 +106,11 @@ typedef bool(*test_func)(void);
 
 int main(int argc, char** argv) {
 	int fail_counter = 0;
+	// insert your new tests function pointers:
 	test_func tests[] = {simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWithMixedElementsAndNodesWithoutAttributes};
+	// insert here your new test names :
 	const char* tests_names[] = {"simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWithMixedElementsAndNodesWithoutAttributes"};
+	// increment this number each time you add a new test
 	int test_count = 3;
 
 	std::cout << "%SUITE_STARTING% to_xml" << std::endl;
