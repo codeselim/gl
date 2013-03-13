@@ -110,23 +110,6 @@ contenu_opt
 
 %%
 
-int main(int argc, char **argv) {
-  int err;
-
-  //yydebug = 1; // pour enlever l'affichage de l'exécution du parser, commenter cette ligne
-
-  // Document* document = NULL;
-  err = yyparse();
-  
-  if (err != 0) {
-    printf("Parse ended with %d error(s)\n", err);
-  } else {
-    printf("Parse ended with success\n", err);
-    rootExpr->toXML();
-  } 
-  return 0;
-}
-
 int yywrap(void)
 {
   return 1;
