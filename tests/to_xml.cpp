@@ -17,8 +17,28 @@
  */
 
 bool simpleToXMLWithAttributes() {
-	std::cout << "to_xml test 1" << std::endl;
-	fail("simpleToXMLWithAttributes", "Not Yet Implemented");
+	std::cout << "to_xml test 2" << std::endl;
+	nodeList l = nodeList();
+	Node* b = new TextNode(string("Blorg"));
+	l.push_back(b);
+	ElementName en = ElementName(string("xml"), string("blorg"));
+	attributesMap attrMap;
+	attrMap["blorg1"] = "blurp";
+	attrMap["huhu"] = "haha";
+	attrMap["numeric"] = 42;
+	Node* a = new Element(&en, &attrMap, &l);
+	
+	string expected = "<xml blorg1=\"blurp\" huhu=\"haha\" numeric=\"42\">\nBlorg\n</xml>";
+	string result = a->toXML();
+	
+	if (result != expected) {
+		fail("simpleToXMLWithAttributes (to_xml)", "toXML did not answer expected result." << std::endl
+		 << "Expected : " << std::endl << expected << std::endl
+		 << "Got: " << std::endl << result << std::endl)
+	}
+	
+	delete b;
+	delete a;
 	return true;
 }
 
