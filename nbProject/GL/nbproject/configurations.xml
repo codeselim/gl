@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="AnalyseurDTD"
+                     displayName="AnalyseurDTD"
+                     projectFiles="true">
+        <itemPath>../../code/AnalyseurDTD/dtd.l</itemPath>
+        <itemPath>../../code/AnalyseurDTD/dtd.y</itemPath>
+        <itemPath>../../code/AnalyseurDTD/makefile</itemPath>
+        <itemPath>../../code/AnalyseurDTD/rap1.dtd</itemPath>
+        <itemPath>../../code/AnalyseurDTD/rap2.dtd</itemPath>
+        <itemPath>../../code/AnalyseurDTD/rap3.dtd</itemPath>
+        <itemPath>../../code/AnalyseurDTD/readme.txt</itemPath>
+        <itemPath>../../code/AnalyseurDTD/struct_donnees_dtd.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="AnalyseurXML"
+                     displayName="AnalyseurXML"
+                     projectFiles="true">
+        <itemPath>../../code/AnalyseurXML/commun.h</itemPath>
+        <itemPath>../../code/AnalyseurXML/makefile</itemPath>
+        <itemPath>../../code/AnalyseurXML/rap1.xml</itemPath>
+        <itemPath>../../code/AnalyseurXML/rap2.xml</itemPath>
+        <itemPath>../../code/AnalyseurXML/readme.txt</itemPath>
+        <itemPath>../../code/AnalyseurXML/struct_donnees_xml.h</itemPath>
+        <itemPath>../../code/AnalyseurXML/xml.l</itemPath>
+        <itemPath>../../code/AnalyseurXML/xml.y</itemPath>
+      </logicalFolder>
+      <logicalFolder name="data_structures"
+                     displayName="data_structures"
+                     projectFiles="true">
+        <itemPath>../../code/data_structures/child_elt.cpp</itemPath>
+        <itemPath>../../code/data_structures/child_elt.h</itemPath>
+        <itemPath>../../code/data_structures/document.cpp</itemPath>
+        <itemPath>../../code/data_structures/document.h</itemPath>
+        <itemPath>../../code/data_structures/dtd.cpp</itemPath>
+        <itemPath>../../code/data_structures/dtd.h</itemPath>
+        <itemPath>../../code/data_structures/dtd_attr.cpp</itemPath>
+        <itemPath>../../code/data_structures/dtd_attr.h</itemPath>
+        <itemPath>../../code/data_structures/dtd_elt.cpp</itemPath>
+        <itemPath>../../code/data_structures/dtd_elt.h</itemPath>
+        <itemPath>../../code/data_structures/element.cpp</itemPath>
+        <itemPath>../../code/data_structures/element.h</itemPath>
+        <itemPath>../../code/data_structures/main.cpp</itemPath>
+        <itemPath>../../code/data_structures/node.cpp</itemPath>
+        <itemPath>../../code/data_structures/node.h</itemPath>
+        <itemPath>../../code/data_structures/text_node.cpp</itemPath>
+        <itemPath>../../code/data_structures/text_node.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="toXMLTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>../../code/tests/to_xml.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../../../../../../TP-IF/4IF/gl/code</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+      </compileType>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <rebuildPropChanged>true</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>
