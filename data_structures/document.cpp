@@ -7,5 +7,5 @@ Document::Document(list<Node*> * declarations, Element* rootNode) {
 }
 
 string Document::toXML() {
-	cout << "Appel à la fonction toXML de document" << endl;
+	return string("Appel à la fonction toXML de document");
 }

@@ -6,7 +6,6 @@ using namespace std;
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-#include "struct_donnees_dtd.h"
 
 void yyerror(char *msg);
 int yywrap(void);
@@ -14,8 +13,18 @@ int yylex(void);
 
 %}
 
-%union { 
-   char *s; 
+%code requires {
+#ifndef __TYPES_DTD_INCLUDED__
+#define __TYPES_DTD_INCLUDED__
+#include <dtd.h>
+#include <dtd_elt.h>
+#include <dtd_attr.h>
+#include <child_elt.h>
+#endif
+}
+
+%union {
+   char *s;
    list<string> *l;
 }
 
@@ -73,9 +82,9 @@ element_declaration
 ;
 
 content_spec
-: EMPTY 
-| ANY 
-| mixed 
+: EMPTY
+| ANY
+| mixed
 | children
 ;
 
@@ -130,7 +139,7 @@ liste
 ;*/
 
 mixed
-: OUVREPAR PCDATA contenu_mixed 
+: OUVREPAR PCDATA contenu_mixed
 ;
 
 contenu_mixed
