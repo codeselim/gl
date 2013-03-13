@@ -20,8 +20,10 @@ Element* Element::getParent() {
 
 string Element::toXML() {
 	stringstream str;
+	// The element tag...
 	str << "<" << this->name;
 
+	// Its attributes...
 	if (NULL != this->attributes)
 	{
 		for(attributesMap::iterator it1 = this->attributes->begin(); it1 != this->attributes->end(); ++it1) {
@@ -29,7 +31,8 @@ string Element::toXML() {
 		}
 	}
 
-	str << ">";// open the XML tag
+	str << ">";// close the XML tag
+	// Its children...
 	if (NULL != this->children)
 	{
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
