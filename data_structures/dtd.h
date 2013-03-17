@@ -7,7 +7,9 @@
 
 using namespace std;
 
-enum Card {qmark, plus, star};
+enum Card {NONE, QMARK, PLUS, STAR};
+enum ListType {CHOICE, SEQ};
+enum EltType {TOKEN, PCDATA};
 
 class DtdEltMap {
 	map<string, DtdElt>* elt_map;

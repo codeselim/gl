@@ -74,60 +74,64 @@ element_declaration
 ;
 
 content_spec
-: EMPTY
-| ANY
-| mixed   {}           /* liste */
-| children  {$$ = $1;} /* liste d'elements */
+: EMPTY   {$$ = new EltContent(EMPTY);}
+| ANY   {$$ = new EltContent(ANY);}
+| mixed   {$$ = new EltContent($1);}
+| children  {$$ = new EltContent($1);}
 ;
 
+/* ptr Element */
 children
-: choice card_opt
-| seq card_opt
+: choice card_opt {$$ = new ChildListElt($1, CHOICE, $2);}
+| seq card_opt {$$ = new ChildListElt($1, SEQ, $2);}
 ;
 
 card_opt
-: PTINT
-| PLUS
-| AST
-| /* vide */
+: PTINT {$$ = QMARK;}
+| PLUS {$$ = PLUS;}
+| AST {$$ = STAR;}
+| /* vide */ {$$ = NONE;}
 ;
 
+/* ptr Element */
 name_or_choice_or_seq
-: NOM
-| choice
-| seq
+: NOM   {$$ = new ChildElt($1);}
+| choice  {$$ = $1}
+| seq  {$$ = $1}
 ;
 
+/* ptr Element */
 cp
-: name_or_choice_or_seq card_opt
+: name_or_choice_or_seq card_opt {$$ = $1; $$->setCard($2);}
 ;
 
+/* ptr Element */
 choice
-: OUVREPAR cp contenu_choice FERMEPAR
+: OUVREPAR cp contenu_choice FERMEPAR   {$$ = new ChildListElt(CHOICE); $$->add($1); $$->add($2)}
 ;
 
 contenu_choice
-: contenu_choice BARRE cp
-| BARRE cp
+: contenu_choice BARRE cp { $$ = $1; $$->add($3);}
+| BARRE cp { $$ = new ChildListElt(CHOICE); $$->add($2);}
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = new ChildListElt(SEQ); $$->add($1); $$->add($2)}
 ;
 
 contenu_seq_opt
-: contenu_seq_opt VIRGULE cp
-| /* vide */
+: contenu_seq_opt VIRGULE cp {$$ = $1; $$->add(cp);}
+| /* vide */ {$$ = new ChildListElt(SEQ);}
 ;
 
 mixed
-: OUVREPAR PCDATA contenu_mixed
+: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new Element(PCDATA)); }
 ;
 
 contenu_mixed
-: contenu_mixed BARRE NOM
-| FERMEPAR AST
-| FERMEPAR
+: contenu_mixed BARRE NOM {$$ = $1; $$-> add(new ChildElt($3)); }
+| FERMEPAR AST {$$ = new ChildListElt(CHOICE); $$->setCard(STAR); }
+| FERMEPAR {$$ = new ChildListElt(CHOICE); }
 ;
 
 %%
