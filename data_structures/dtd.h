@@ -24,6 +24,7 @@ class Dtd {
 public:
 	Dtd(DtdEltMap* lst_elements): elements(lst_elements) {};
 	string toString() {return string("TODO: DTD::toString()"); };
+	list<DtdAttr*> * getAttributes(string eltName) { return attr_map[eltName]; };
 };
 
 #endif
