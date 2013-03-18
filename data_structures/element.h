@@ -33,6 +33,7 @@ public:
 		@return string valid XML for this element
 	*/
 	virtual string toXML();
+	string getName() { return name; };
 };
 
 #endif
