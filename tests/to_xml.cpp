@@ -73,8 +73,8 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	la.push_back(b);
 	lc.push_back(d);
 	ElementName ena = ElementName(string("xml"), string("blorg"));
-	ElementName enb = ElementName(string("yoyo"), string("blorg"));
-	Node* c = new Element(&enb, NULL, &lc);
+	ElementName enc = ElementName(string("yoyo"), string("blorg"));
+	Node* c = new Element(&enc, NULL, &lc);
 	la.push_back(c);
 	la.push_back(e);
 	Node* a = new Element(&ena, NULL, &la);
@@ -94,7 +94,46 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	delete c;
 	delete d;
 	return true;
-	fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
+}
+
+
+bool ComplexXMLWithMixedElementsAndNodesWithAttributes() {
+	// Children lists for a and b elements
+	nodeList la = nodeList();
+	nodeList lc = nodeList();
+	Node* b = new TextNode(string("Blorg1"));
+	Node* d = new TextNode(string("Blorg2"));
+	Node* e = new TextNode(string("Blorg3"));
+	la.push_back(b);
+	lc.push_back(d);
+	attributesMap attrMapa, attrMapc;
+	//* Recall: The attributes will be output in alphabetical order, not in the order of addition to the attributesMap
+	attrMapa["blorg1"] = "blurp";
+	attrMapa["huhu"] = "haha";
+	attrMapc["numeric"] = "42";
+	attrMapc["vulgar"] = "Hey, you touch my tralala.";
+	attrMapc["type"] = "xml";
+
+	ElementName ena = ElementName(string("xml"), string("blorg"));
+	ElementName enc = ElementName(string("yoyo"), string("blorg"));
+	Node* c = new Element(&enc, &attrMapc, &lc);
+	la.push_back(c);
+	la.push_back(e);
+	Node* a = new Element(&ena, &attrMapa, &la);
+	
+	string expected = "<xml blorg1=\"blurp\" huhu=\"haha\">\nBlorg1\n<yoyo numeric=\"42\" type=\"xml\" vulgar=\"Hey, you touch my tralala.\">\nBlorg2\n</yoyo>\nBlorg3\n</xml>";
+	string result = a->toXML();
+	
+	if (result != expected) {
+		fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes (to_xml)", "toXML did not answer expected result." << std::endl
+		 << "\n------------------------\nExpected : " << std::endl << expected << std::endl
+		 << "------------------------\nGot: " << std::endl << result << std::endl)
+	}
+	
+	delete a;
+	delete b;
+	delete c;
+	delete d;
 	return true;
 }
 
@@ -166,7 +205,9 @@ bool testDocumentToXML() {
        if (outfile.is_open()){ 
            outfile<<rapport_elem->toXML();
        }
-       else fail("testDocumentToXML", "Failed to write output file");
+       else {
+           fail("testDocumentToXML", "Failed to write output file");
+       }
        
 //	
 //	if (result != expected) {
@@ -187,11 +228,23 @@ typedef bool(*test_func)(void);
 int main(int argc, char** argv) {
 	int fail_counter = 0;
 	// insert your new tests function pointers:
-	test_func tests[] = {testDocumentToXML, simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWithMixedElementsAndNodesWithoutAttributes};
+	test_func tests[] = {
+		simpleToXMLWithAttributes, 
+		simpleToXMLWithoutAttributes, 
+		ComplexXMLWithMixedElementsAndNodesWithoutAttributes,
+		ComplexXMLWithMixedElementsAndNodesWithAttributes,
+                testDocumentToXML
+	};
 	// insert here your new test names :
-	const char* tests_names[] = {"testDocumentToXML", "simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWithMixedElementsAndNodesWithoutAttributes"};
+	const char* tests_names[] = {
+		"simpleToXMLWithAttributes", 
+		"simpleToXMLWithoutAttributes", 
+		"ComplexXMLWithMixedElementsAndNodesWithoutAttributes", 
+		"ComplexXMLWithMixedElementsAndNodesWithAttributes",
+                "testDocumentToXML"
+	};
 	// increment this number each time you add a new test
-	int test_count = 4;
+	int test_count = 5;
 
 	std::cout << "%SUITE_STARTING% to_xml" << std::endl;
 	std::cout << "%SUITE_STARTED%" << std::endl;
@@ -200,7 +253,12 @@ int main(int argc, char** argv) {
 	{
 		const char* name = tests_names[i];
 		std::cout << "%TEST_STARTED% " << name << " (to_xml)" << std::endl;
-		if(!tests[i]()) {
+		try {
+			if(!tests[i]()) {
+				fail_counter++;
+			}
+		} catch(exception e) { //Let's assume we will not test exception throwing for "passing" tests but only for "failing" them
+			std::cout << "%TEST_FAILED% time=0 testname=" << name << " (to_xml) message="  << "Exception raised" << e.what() << std::endl;
 			fail_counter++;
 		}
 		std::cout << "%TEST_FINISHED% time=0 " << name << " (to_xml)" << std::endl;

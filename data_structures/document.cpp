@@ -18,3 +18,11 @@ string Document::toXML() {
 	return str.str();
 }
 
+string Document::getDtdFileName() {
+	cerr << "TODO getDtdFileName" << endl;
+	return string("");
+	// for (list<Node*>::iterator i = declarations.begin(); i != declarations.end(); ++i) {
+
+
+	// }
+}
