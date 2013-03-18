@@ -167,7 +167,12 @@ int main(int argc, char** argv) {
 	{
 		const char* name = tests_names[i];
 		std::cout << "%TEST_STARTED% " << name << " (to_xml)" << std::endl;
-		if(!tests[i]()) {
+		try {
+			if(!tests[i]()) {
+				fail_counter++;
+			}
+		} catch(exception e) { //Let's assume we will not test exception throwing for "passing" tests but only for "failing" them
+			std::cout << "%TEST_FAILED% time=0 testname=" << name << " (to_xml) message="  << "Exception raised" << e.what() << std::endl;
 			fail_counter++;
 		}
 		std::cout << "%TEST_FINISHED% time=0 " << name << " (to_xml)" << std::endl;
