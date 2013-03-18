@@ -54,10 +54,11 @@ string Element::getSpaceSeparatedChildrenList() {
 	if (NULL != this->children)
 	{
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
-			result << space << (*it)->
+			result << space << (*it)->getName();
 			space = " ";
 		}
 	}
+	return result;
 }
 
 string Element::getName() {
