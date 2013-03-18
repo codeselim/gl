@@ -5,20 +5,20 @@
 #include <string>
 #include <list>
 
+#include "enums.h"
+
 using namespace std;
 
 
-
 class AttrType {
-	enum Type {CDATA, ID, IDREF, IDREFS, NMTOKEN, NMTOKENS, ENTITY, ENTITIES, NOTATION, _ENUM};
 	list<string>* enumValues;
 	Type type;
-	stringToType(string strType);
+	Type stringToType(string strType);
 
 	public:
 		AttrType(string cdata_or_token);
 		AttrType(list<string>* enums);
-		~AttrType()
+		~AttrType();
 };
 
 class DefaultDeclaration {
@@ -39,6 +39,7 @@ class DtdAttr {
 	  DtdAttr(string _name, AttrType* _type, DefaultDeclaration* _defaultDecl ):
 	  	name(_name), type(_type), defaultDecl(_defaultDecl){};
 	  ~DtdAttr();
+	  string toString() { return name;};
 };
 
 #endif

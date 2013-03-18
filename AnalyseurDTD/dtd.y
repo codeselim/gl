@@ -7,6 +7,8 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 
+#include <dtd.h>
+
 void yyerror(char *msg);
 int yywrap(void);
 int yylex(void);
@@ -15,18 +17,41 @@ Dtd* rootExpr = NULL;
 %}
 
 %union {
-   char *s;
-   list<string> *l;
+  char *s;
+  list<string> *l;
+  Dtd* dtd;
+  DtdEltMap* dem;
+  DtdElt* de;
+  list<DtdAttr*> * dal;
+  DtdAttr* da;
+  AttrType* at;
+  DefaultDeclaration* dd;
+  EltContent* ec;
+  Element* e;
+  ChildListElt* cle;
+Card card;
 }
 
 %token ELEMENT ATTLIST SUP OUVREPAR FERMEPAR VIRGULE BARRE FIXED EMPTY ANY PCDATA AST PTINT PLUS CDATA
 %token <s> NOM TOKENTYPE DECLARATION VALEUR
-/*%type <l> liste_opt liste*/
+
+%type <dtd> main
+%type <dem> dtd_list_opt
+%type <de> element_declaration
+%type <dal> att_definition_opt
+%type <da> attribut
+%type <at> att_type
+%type <l> type_enumere liste_enum_plus liste_enum
+%type <dd> defaut_declaration
+%type <ec> content_spec
+%type <e> name_or_choice_or_seq cp
+%type <cle> children choice contenu_choice seq contenu_seq_opt mixed contenu_mixed
+%type <card> card_opt
 
 %%
 
 main
-: dtd_list_opt  {$$ = new Dtd($1); rootExpr = $$}
+: dtd_list_opt  {$$ = new Dtd($1); rootExpr = $$;}
 ;
 
 dtd_list_opt
@@ -45,13 +70,13 @@ attribut
 ;
 
 att_type
-: CDATA   {$$ = new AttrType($1);}
+: CDATA   {$$ = new AttrType(string("CDATA"));}
 | TOKENTYPE   {$$ = new AttrType($1);}
 | type_enumere  {$$ = new AttrType($1);}
 ;
 
 type_enumere
-: OUVREPAR liste_enum_plus FERMEPAR   {$$ = $1;}
+: OUVREPAR liste_enum_plus FERMEPAR   {$$ = $2;}
 ;
 
 liste_enum_plus
@@ -70,12 +95,12 @@ defaut_declaration
 ;
 
 element_declaration
-: ELEMENT NOM content_spec SUP  {$$ = new DtdElt($2, $3);}
+: ELEMENT NOM content_spec SUP  {$$ = new DtdElt(string($2), $3);}
 ;
 
 content_spec
-: EMPTY   {$$ = new EltContent(EMPTY);}
-| ANY   {$$ = new EltContent(ANY);}
+: EMPTY   {$$ = new EltContent(T_EMPTY);}
+| ANY   {$$ = new EltContent(T_ANY);}
 | mixed   {$$ = new EltContent($1);}
 | children  {$$ = new EltContent($1);}
 ;
@@ -88,7 +113,7 @@ children
 
 card_opt
 : PTINT {$$ = QMARK;}
-| PLUS {$$ = PLUS;}
+| PLUS {$$ = C_PLUS;}
 | AST {$$ = STAR;}
 | /* vide */ {$$ = NONE;}
 ;
@@ -96,8 +121,8 @@ card_opt
 /* ptr Element */
 name_or_choice_or_seq
 : NOM   {$$ = new ChildElt($1);}
-| choice  {$$ = $1}
-| seq  {$$ = $1}
+| choice  {$$ = $1;}
+| seq  {$$ = $1;}
 ;
 
 /* ptr Element */
@@ -107,7 +132,7 @@ cp
 
 /* ptr Element */
 choice
-: OUVREPAR cp contenu_choice FERMEPAR   {$$ = new ChildListElt(CHOICE); $$->add($1); $$->add($2)}
+: OUVREPAR cp contenu_choice FERMEPAR   {$$ = new ChildListElt(CHOICE); $$->add($2); $$->add($3);}
 ;
 
 contenu_choice
@@ -116,16 +141,16 @@ contenu_choice
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = new ChildListElt(SEQ); $$->add($1); $$->add($2)}
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = new ChildListElt(SEQ); $$->add($2); $$->add($3);}
 ;
 
 contenu_seq_opt
-: contenu_seq_opt VIRGULE cp {$$ = $1; $$->add(cp);}
+: contenu_seq_opt VIRGULE cp {$$ = $1; $$->add($3);}
 | /* vide */ {$$ = new ChildListElt(SEQ);}
 ;
 
 mixed
-: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new Element(PCDATA)); }
+: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt()); }
 ;
 
 contenu_mixed

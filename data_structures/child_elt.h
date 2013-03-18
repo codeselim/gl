@@ -3,21 +3,26 @@
 #define __CHILD_ELT_H_
 
 #include <string>
-#include "dtd.h"
+
+#include "enums.h"
 
 using namespace std;
 
 class Element {
+protected:
 	Card card;
+	Element(Card theCard = NONE): card(theCard) {};
 public:
-	setCard(theCard) { card = theCard; };
+	void setCard(Card theCard) { card = theCard; };
 };
 
 class ChildListElt: public Element {
 	list<Element*> * eltList;
 	ListType type;
 public:
-	add(Element* elt) { eltList->push_back(elt); };
+	void add(Element* elt) { eltList->push_back(elt); };
+	ChildListElt(Element* elt, ListType theType, Card theCard):
+		Element(theCard), eltList(new list<Element*>()), type(theType) {eltList->push_back(elt); };
 	ChildListElt(ListType theType): type(theType), eltList(new list<Element*>()) {};
 	~ChildListElt() {delete eltList; };
 };
@@ -27,8 +32,8 @@ class ChildElt: public Element {
 	EltType eltType;
 public:
 	ChildElt(string name, Card theCard = NONE, EltType type = TOKEN):
-		eltName(name), card(theCard), eltType(type) {};
-	ChildElt(): eltName("PCDATA"), card(NONE), eltType(PCDATA) {};
+		Element(theCard), eltName(name), eltType(type) {};
+	ChildElt(): eltName("PCDATA"), eltType(T_PCDATA) {};
 
 };
 

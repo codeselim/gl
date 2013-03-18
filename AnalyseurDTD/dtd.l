@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <list>
 #include <string>
+
+#include <dtd.h>
+
 #include "yy.tab.h"
 
 static char* skipSpace(char *s) {
@@ -21,7 +24,7 @@ static char* skipSpace(char *s) {
   buf[lastnonspace+1] = '\0';
   return strdup(buf);
 }
-  
+
 /* affecte la valeur de la chaine de caractère et renvoie le token */
 #define stringreturn(tokenval) yylval.s=skipSpace(yytext);return(tokenval)
 
@@ -57,7 +60,7 @@ any         "ANY"
 
 %s DEDANS
 
-/* 
+/*
    INITIAL : en dehors d'un bloc ELEMENT ou ATTLIST
    DEDANS : dans un bloc ELEMENT ou ATTLIST
 */

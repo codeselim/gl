@@ -5,33 +5,39 @@
 #include <map>
 #include <list>
 
+#include "enums.h"
+#include "dtd_attr.h"
+#include "child_elt.h"
+
 using namespace std;
 
-typedef DtdAttrMap map<string, DtdAttr>;
-enum EltContentType {ANY, EMPTY, LIST}
+typedef map<string, DtdAttr*> DtdAttrMap;
 
 class EltContent {
-	ChildElt* content;
+	Element* content;
 	EltContentType contentType;
 	Card card;
 
 public:
 	EltContent(EltContentType type):
 		contentType(type), content(NULL) {};
-	EltContent(ChildElt * contentList, EltContentType type = LIST):
-		contentType(type), content(contentElt) {};
-	~EltContent() {if(content != NULL) delete content};
+	EltContent(Element * contentList, EltContentType type = LIST):
+		contentType(type), content(contentList) {};
+	~EltContent() {if(content != NULL) delete content; };
 };
 
 class DtdElt {
-	DtdAttrMap * attributes;
+	// DtdAttrMap * attributes;
 	EltContent* content;
 	string name;
 
 public:
-	DtdElt(DtdAttrMap* theAttributes, EltContent theContent):
-		attributes(theAttributes), content(theContent) {};
-	~DtdElt() {delete attributes; delete content;};
+	string getName() { return name; };
+	DtdElt(string theName, EltContent* theContent):
+		name(theName), content(theContent) {};
+	// DtdElt(DtdAttrMap* theAttributes, EltContent* theContent):
+		// attributes(theAttributes), content(theContent) {};
+	~DtdElt() {/*delete attributes;*/ delete content; };
 };
 
 #endif
