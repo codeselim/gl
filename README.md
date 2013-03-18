@@ -14,3 +14,4 @@ Développement d'un processeur XML
 
 1. Document de conception: env 30 pages
 2. (! make test => lance les tests)
+3. Avoir une méthode getRegex() renvoyant l'expression régulière associée dans l'objet représentant un élément dans la structure de la DTD
