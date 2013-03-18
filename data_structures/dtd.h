@@ -16,6 +16,8 @@ public:
 	DtdEltMap(): elt_map(new map<string, DtdElt*>()), attr_map(new map<string, list<DtdAttr*> *>()) {};
 	void add_elt(DtdElt* element) { elt_map->insert(pair<string, DtdElt*>(element->getName(), element)); };
 	void add_attrs(string element, list<DtdAttr*> * attList) ;
+	list<DtdAttr*> * getAttributes(string eltName) { return (*attr_map)[eltName]; };
+	string toString();
 	~DtdEltMap();
 };
 
@@ -23,7 +25,7 @@ class Dtd {
 	DtdEltMap* elements;
 public:
 	Dtd(DtdEltMap* lst_elements): elements(lst_elements) {};
-	string toString() {return string("TODO: DTD::toString()"); };
+	string toString();
 };
 
 #endif

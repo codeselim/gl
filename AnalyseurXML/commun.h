@@ -5,6 +5,7 @@ using namespace std;
 #include <list>
 #include <utility>
 #include <string>
+#include <exception>
 
 typedef pair<string,string> Attribut;
 typedef list<Attribut> AttList;
@@ -15,5 +16,10 @@ typedef pair<string,string> ElementName; // convention : name, namespace
 #else
 #define debug(x) ((void) 0)
 #endif
+
+
+struct NotYetImplementedException : std::exception {
+	const char* what() {return "Not Yet Implemented.";}
+};
 
 #endif

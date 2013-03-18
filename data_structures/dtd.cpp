@@ -1,18 +1,13 @@
 #include "dtd.h"
+#include <sstream>
 
 void DtdEltMap::add_attrs(string element, list<DtdAttr*> * attList) {
 		list<DtdAttr*> * l = (*attr_map)[element];
 		if (l == NULL) {
 			l = new list<DtdAttr*>();
 		}
-
-		// for (list<DtdAttr*>::iterator i = attList->begin(); i != attList->end(); ++i) {
-		// 	l->push_back(*i);
-		// }
-		// attList->clear();
 		l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
 		delete attList;
-		// delete attList;
 	}
 
 DtdEltMap::~DtdEltMap() {
@@ -28,3 +23,15 @@ DtdEltMap::~DtdEltMap() {
 	}
 	delete elt_map;
 }
+
+string DtdEltMap::toString() {
+	stringstream str;
+
+	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
+		str << "tagname: " << i->first << endl;
+		str << i->second->toString() << endl;
+	}
+	return str.str();
+};
+
+string Dtd::toString() {return elements->toString(); };

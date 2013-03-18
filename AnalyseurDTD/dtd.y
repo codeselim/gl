@@ -26,8 +26,8 @@ Dtd* rootExpr = NULL;
   DtdAttr* da;
   AttrType* at;
   DefaultDeclaration* dd;
-  EltContent* ec;
-  Element* e;
+  /* EltContent* ec; */
+  Child* c;
   ChildListElt* cle;
 Card card;
 }
@@ -37,14 +37,14 @@ Card card;
 
 %type <dtd> main
 %type <dem> dtd_list_opt
-%type <de> element_declaration
+/*%type <de> element_declaration */
 %type <dal> att_definition_opt
 %type <da> attribut
 %type <at> att_type
 %type <l> type_enumere liste_enum_plus liste_enum
 %type <dd> defaut_declaration
-%type <ec> content_spec
-%type <e> name_or_choice_or_seq cp
+/*%type <ec> content_spec*/
+%type <e> name_or_choice_or_seq cp content_spec element_declaration
 %type <cle> children choice contenu_choice seq contenu_seq_opt mixed contenu_mixed
 %type <card> card_opt
 
@@ -95,14 +95,14 @@ defaut_declaration
 ;
 
 element_declaration
-: ELEMENT NOM content_spec SUP  {$$ = new DtdElt(string($2), $3);}
+: ELEMENT NOM content_spec SUP  {$$ = $3; $$->setName(string($2));}
 ;
 
 content_spec
-: EMPTY   {$$ = new EltContent(T_EMPTY);}
-| ANY   {$$ = new EltContent(T_ANY);}
-| mixed   {$$ = new EltContent($1);}
-| children  {$$ = new EltContent($1);}
+: EMPTY   {$$ = new ChildElt(T_EMPTY);}
+| ANY   {$$ = new ChildElt(T_ANY);}
+| mixed   {$$ = $1;}
+| children  {$$ = $1;}
 ;
 
 /* ptr Element */
@@ -150,7 +150,7 @@ contenu_seq_opt
 ;
 
 mixed
-: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt()); }
+: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt(T_PCDATA)); }
 ;
 
 contenu_mixed
