@@ -23,6 +23,26 @@ fichierXML = fopen(chemin, "r");
  if (fichierXML != NULL)
     {
 	char resultat[100];
+	int compt = 0;
+	char chaine[1000];
+
+	while(fgets(chaine, 1000, fichierXML) != NULL)
+	{
+		compt++;
+		if(NULL != chaine)
+		if (chaine[1] == '!')
+			break;
+	}
+
+	rewind(fichierXML);
+
+	int i = 0;
+	while(i < compt -1)
+	{
+		fgets(chaine, 1000, fichierXML);
+		i++;
+	}
+
 	fscanf(fichierXML, "<!DOCTYPE %s SYSTEM \"%s",resultat,resultat);
 	resultat[strlen(resultat)-2] = '\0';
 	fclose(fichierXML);
