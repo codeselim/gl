@@ -58,7 +58,7 @@ string Element::getSpaceSeparatedChildrenList() {
 			space = " ";
 		}
 	}
-	return result;
+	return result.str();
 }
 
 string Element::getName() {
