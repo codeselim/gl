@@ -30,7 +30,7 @@ fichierXML = fopen(chemin, "r");
 	{
 		compt++;
 		if(NULL != chaine)
-		if (chaine[1] == '!')
+		if (chaine[1] == '!' && chaine[2] == 'D' && chaine[3] == 'O')
 			break;
 	}
 
