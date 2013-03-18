@@ -14,14 +14,14 @@ using namespace std;
 typedef map<string, DtdAttr*> DtdAttrMap;
 
 class EltContent {
-	Element* content;
+	DtdElement* content;
 	EltContentType contentType;
 	Card card;
 
 public:
 	EltContent(EltContentType type):
 		contentType(type), content(NULL) {};
-	EltContent(Element * contentList, EltContentType type = LIST):
+	EltContent(DtdElement * contentList, EltContentType type = LIST):
 		contentType(type), content(contentList) {};
 	~EltContent() {if(content != NULL) delete content; };
 };
