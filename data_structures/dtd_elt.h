@@ -5,14 +5,39 @@
 #include <map>
 #include <list>
 
+#include "enums.h"
+#include "dtd_attr.h"
+#include "child_elt.h"
+
 using namespace std;
 
-typedef DtdAttrMap map<string, DtdAttr>;
+typedef map<string, DtdAttr*> DtdAttrMap;
+
+class EltContent {
+	Element* content;
+	EltContentType contentType;
+	Card card;
+
+public:
+	EltContent(EltContentType type):
+		contentType(type), content(NULL) {};
+	EltContent(Element * contentList, EltContentType type = LIST):
+		contentType(type), content(contentList) {};
+	~EltContent() {if(content != NULL) delete content; };
+};
 
 class DtdElt {
-	DtdAttrMap * attributes;
-	list<ChildElt> * children;
+	// DtdAttrMap * attributes;
+	EltContent* content;
 	string name;
+
+public:
+	string getName() { return name; };
+	DtdElt(string theName, EltContent* theContent):
+		name(theName), content(theContent) {};
+	// DtdElt(DtdAttrMap* theAttributes, EltContent* theContent):
+		// attributes(theAttributes), content(theContent) {};
+	~DtdElt() {/*delete attributes;*/ delete content; };
 };
 
 #endif
