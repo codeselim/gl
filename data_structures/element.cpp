@@ -1,5 +1,6 @@
 #include "element.h"
 #include <sstream>
+#include <exception>
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
 	if(NULL == children) {
@@ -41,4 +42,14 @@ string Element::toXML() {
 	}
 	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
+}
+
+nodeList* Element::getChildren() {
+	NotYetImplementedException e;
+	throw e;
+}
+
+string Element::getSpaceSeparatedChildrenList() {
+	NotYetImplementedException e;
+	throw e;
 }
