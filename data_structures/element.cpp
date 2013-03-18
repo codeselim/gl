@@ -36,9 +36,9 @@ string Element::toXML() {
 	if (NULL != this->children)
 	{
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
-			str << endl << (*it)->toXML() << endl;
+			str << endl << (*it)->toXML();
 		}
 	}
-	str << "</" << this->name << ">";// close the XML tag
+	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
 }
