@@ -141,8 +141,6 @@ bool testTemplateCopyPasteMe() {
 	return true;
 }
 
-typedef bool(*test_func)(void);
-
 int main(int argc, char** argv) {
 	int fail_counter = 0;
 	// insert your new tests function pointers:
