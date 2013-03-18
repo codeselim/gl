@@ -4,6 +4,7 @@
 
 #include <map>
 #include <list>
+#include <sstream>
 
 #include "enums.h"
 #include "dtd_attr.h"
@@ -11,33 +12,38 @@
 
 using namespace std;
 
-typedef map<string, DtdAttr*> DtdAttrMap;
+// typedef map<string, DtdAttr*> DtdAttrMap;
 
-class EltContent {
-	Element* content;
-	EltContentType contentType;
-	Card card;
+// class EltContent {
+// 	DtdElement* content;
+// 	EltContentType contentType;
+// 	Card card;
 
-public:
-	EltContent(EltContentType type):
-		contentType(type), content(NULL) {};
-	EltContent(Element * contentList, EltContentType type = LIST):
-		contentType(type), content(contentList) {};
-	~EltContent() {if(content != NULL) delete content; };
-};
+// public:
+// 	EltContent(EltContentType type):
+// 		contentType(type), content(NULL) {};
+// 	EltContent(DtdElement * contentList, EltContentType type = LIST):
+// 		contentType(type), content(contentList) {};
+// 	~EltContent() {if(content != NULL) delete content; };
+// };
 
 class DtdElt {
 	// DtdAttrMap * attributes;
-	EltContent* content;
+	Child* content;
 	string name;
 
 public:
 	string getName() { return name; };
-	DtdElt(string theName, EltContent* theContent):
+	DtdElt(string theName, Child* theContent):
 		name(theName), content(theContent) {};
 	// DtdElt(DtdAttrMap* theAttributes, EltContent* theContent):
 		// attributes(theAttributes), content(theContent) {};
 	~DtdElt() {/*delete attributes;*/ delete content; };
+	string toString() {
+		stringstream str;
+		str << name << endl << content->toString() << endl;
+		return str.str();
+	}
 };
 
 #endif
