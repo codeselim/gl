@@ -26,6 +26,7 @@ public:
 	Element* getParent();
         Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	virtual string toXML();
+	string getName() { return name; };
 };
 
 #endif
