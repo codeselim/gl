@@ -24,7 +24,14 @@ private:
 public:
 	Element& setParent(Element* e);
 	Element* getParent();
-        Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
+	nodeList* getChildren();
+	string getSpaceSeparatedChildrenList();
+    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
+	/*
+		@function toXML Serializes the current element (and its children) to a XML string
+		/!\ The attributes are ALWAYS output in alphabetical order /!\
+		@return string valid XML for this element
+	*/
 	virtual string toXML();
 	string getName() { return name; };
 };
