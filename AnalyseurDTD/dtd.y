@@ -37,14 +37,14 @@ Card card;
 
 %type <dtd> main
 %type <dem> dtd_list_opt
-/*%type <de> element_declaration */
+%type <de> element_declaration content_spec
 %type <dal> att_definition_opt
 %type <da> attribut
 %type <at> att_type
 %type <l> type_enumere liste_enum_plus liste_enum
 %type <dd> defaut_declaration
 /*%type <ec> content_spec*/
-%type <e> name_or_choice_or_seq cp content_spec element_declaration
+%type <c> name_or_choice_or_seq cp
 %type <cle> children choice contenu_choice seq contenu_seq_opt mixed contenu_mixed
 %type <card> card_opt
 
@@ -99,10 +99,10 @@ element_declaration
 ;
 
 content_spec
-: EMPTY   {$$ = new ChildElt(T_EMPTY);}
-| ANY   {$$ = new ChildElt(T_ANY);}
-| mixed   {$$ = $1;}
-| children  {$$ = $1;}
+: EMPTY   {$$ = new DtdElt(T_EMPTY);}
+| ANY   {$$ = new DtdElt(T_ANY);}
+| mixed   {$$ = new DtdElt($1);}
+| children  {$$ = new DtdElt($1);}
 ;
 
 /* ptr Element */

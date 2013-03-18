@@ -30,12 +30,14 @@ using namespace std;
 class DtdElt {
 	// DtdAttrMap * attributes;
 	Child* content;
+	EltType type;
 	string name;
 
 public:
 	string getName() { return name; };
-	DtdElt(string theName, Child* theContent):
-		name(theName), content(theContent) {};
+	DtdElt(Child* theContent):name(""), content(theContent) {};
+	DtdElt(EltType theType):name(""), content(NULL), type(theType) {};
+	void setName(string theName) {name = theName;};
 	// DtdElt(DtdAttrMap* theAttributes, EltContent* theContent):
 		// attributes(theAttributes), content(theContent) {};
 	~DtdElt() {/*delete attributes;*/ delete content; };
