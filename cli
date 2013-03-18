@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+from optparse import OptionParser
+parser = OptionParser()
+parser.add_option("-d", "--dtd", dest="filename",
+                  help="Specify the path to the DTD file. This will override the inner-XML DTD file is any is specified.")
+parser.add_option("-x", "--xsl", dest="filename",
+                  help="Specify the path to the XSL file. This will override the inner-XML XSL file is any is specified.", metavar="FILE")
+(options, args) = parser.parse_args()
+
+print (options, args)
