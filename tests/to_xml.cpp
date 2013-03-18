@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 #include "../data_structures/node.h"
 #include "../data_structures/element.h"
 #include "../data_structures/text_node.h"
@@ -103,7 +104,81 @@ bool testTemplateCopyPasteMe() {
 }
 
 bool testDocumentToXML() {
-	fail("testDocumentToXML", "Error message here (Not Yet Implemented)");
+    
+        Node* p_text = new TextNode(string("Comme l'écriture d'un compilateur est une tâche fort complexe, le programmateur a tout intérêt à travailler."));
+        Node* titre_text = new TextNode(string("Réalisation d'un compilateur"));
+        Node* resume_text = new TextNode(string("Ceci est extrait du livre \"Réaliser un compilateur : les outils Lex et Yacc\" de Nino Silverio."));
+        
+        nodeList p_children = nodeList();
+        nodeList titre_children = nodeList();
+        nodeList resume_children = nodeList();
+        nodeList section_children = nodeList();
+        nodeList chapitre_children = nodeList();
+        nodeList rapport_children = nodeList();
+        
+        ElementName titre = ElementName(string("titre"), string(""));
+        ElementName p = ElementName(string("p"), string(""));
+        ElementName section = ElementName(string("section"), string(""));
+        ElementName chapitre = ElementName(string("chapitre"), string(""));
+        ElementName resume = ElementName(string("resume"), string(""));
+        ElementName rapport = ElementName(string("rapport"), string(""));
+        
+         
+        p_children.push_back(p_text);
+	Node* p_elem = new Element(&p, NULL, &p_children);
+        
+        titre_children.push_back(titre_text);
+        Node* titre_elem = new Element(&titre, NULL, &titre_children);
+        
+        section_children.push_back(titre_elem);
+        section_children.push_back(p_elem);
+        Node* section_elem = new Element(&section, NULL, &section_children);
+        
+        chapitre_children.push_back(section_elem);
+        Node* chapitre_elem = new Element(&chapitre, NULL, &chapitre_children);
+        
+        resume_children.push_back(resume_text);
+        Node* resume_elem = new Element(&resume, NULL, &resume_children);
+        
+        rapport_children.push_back(resume_elem);
+        rapport_children.push_back(chapitre_elem);
+        Node* rapport_elem = new Element(&rapport, NULL, &rapport_children);
+        
+        
+        string line;
+        string text = "";
+        ifstream xmlfile;
+        const char * filename = "../../tests/testfile1.xml";
+        xmlfile.open(filename, ios::in);
+        if(xmlfile.is_open()) { 
+                while (getline (xmlfile,line)){
+                        //getline (xmlfile,myline,'\t');
+                    text+=line;
+                }
+        }
+        else {
+            fail("testDocumentToXML", "Failed to open xml file in ifstream");
+        }     
+                
+       //having problems with encoding, i will write outputs to a file
+       ofstream outfile;
+       outfile.open("../../tests/output.txt", ios::trunc);
+       if (outfile.is_open()){ 
+           outfile<<rapport_elem->toXML();
+       }
+       else fail("testDocumentToXML", "Failed to write output file");
+       
+//	
+//	if (result != expected) {
+//		fail("simpleToXMLWithAttributes (to_xml)", "toXML did not answer expected result." << std::endl
+//		 << "Expected : " << std::endl << expected << std::endl
+//		 << "Got: " << std::endl << result << std::endl)
+//	}
+//        	
+//	delete b;
+//	delete a;
+       xmlfile.close();
+       outfile.close();
 	return true;
 }
 
