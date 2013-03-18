@@ -50,6 +50,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
+	${TESTDIR}/TestFiles/f2 \
 	${TESTDIR}/TestFiles/f1
 
 # C Compiler Flags
@@ -126,9 +127,19 @@ ${OBJECTDIR}/_ext/676253835/element.o: ../../data_structures/element.cpp
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/_ext/1635097729/element_getters.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
+
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/_ext/1635097729/to_xml.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+
+
+${TESTDIR}/_ext/1635097729/element_getters.o: ../../tests/element_getters.cpp 
+	${MKDIR} -p ${TESTDIR}/_ext/1635097729
+	${RM} $@.d
+	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
 
 
 ${TESTDIR}/_ext/1635097729/to_xml.o: ../../tests/to_xml.cpp 
@@ -258,6 +269,7 @@ ${OBJECTDIR}/_ext/676253835/element_nomain.o: ${OBJECTDIR}/_ext/676253835/elemen
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${TESTDIR}/TestFiles/f2 || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
 	    ./${TEST} || true; \
