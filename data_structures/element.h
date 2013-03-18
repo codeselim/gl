@@ -24,7 +24,9 @@ private:
 public:
 	Element& setParent(Element* e);
 	Element* getParent();
-        Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
+	nodeList* getChildren();
+	string getSpaceSeparatedChildrenList();
+    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	virtual string toXML();
 };
 
