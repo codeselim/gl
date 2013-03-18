@@ -97,6 +97,13 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	return true;
 }
 
+
+bool ComplexXMLWithMixedElementsAndNodesWithAttributes() {
+	
+	fail("ComplexXMLWithMixedElementsAndNodesWithoutAttributes", "Not Yet Implemented");
+	return true;
+}
+
 bool testTemplateCopyPasteMe() {
 	fail("Put My Name here", "Error message here (Not Yet Implemented)");
 	return true;
@@ -107,11 +114,21 @@ typedef bool(*test_func)(void);
 int main(int argc, char** argv) {
 	int fail_counter = 0;
 	// insert your new tests function pointers:
-	test_func tests[] = {simpleToXMLWithAttributes, simpleToXMLWithoutAttributes, ComplexXMLWithMixedElementsAndNodesWithoutAttributes};
+	test_func tests[] = {
+		simpleToXMLWithAttributes, 
+		simpleToXMLWithoutAttributes, 
+		ComplexXMLWithMixedElementsAndNodesWithoutAttributes,
+		ComplexXMLWithMixedElementsAndNodesWithAttributes
+	};
 	// insert here your new test names :
-	const char* tests_names[] = {"simpleToXMLWithAttributes", "simpleToXMLWithoutAttributes", "ComplexXMLWithMixedElementsAndNodesWithoutAttributes"};
+	const char* tests_names[] = {
+		"simpleToXMLWithAttributes", 
+		"simpleToXMLWithoutAttributes", 
+		"ComplexXMLWithMixedElementsAndNodesWithoutAttributes", 
+		"ComplexXMLWithMixedElementsAndNodesWithAttributes"
+	};
 	// increment this number each time you add a new test
-	int test_count = 3;
+	int test_count = 4;
 
 	std::cout << "%SUITE_STARTING% to_xml" << std::endl;
 	std::cout << "%SUITE_STARTED%" << std::endl;
