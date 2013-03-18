@@ -11,6 +11,7 @@ class Node {
 	NodeType type;
 public:
 	virtual string toXML() = 0;
+	virtual string getName() = 0;
 };
 
 #endif
