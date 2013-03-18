@@ -19,3 +19,5 @@ analyseXML
 *.lai
 *.la
 *.a
+/nbProject/GL/build/
+/nbProject/GL/dist/
