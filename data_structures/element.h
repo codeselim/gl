@@ -23,6 +23,7 @@ private:
 
 public:
 	Element& setParent(Element* e);
+	virtual string getName();
 	Element* getParent();
 	nodeList* getChildren();
 	string getSpaceSeparatedChildrenList();
