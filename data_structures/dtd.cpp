@@ -1,4 +1,5 @@
 #include "dtd.h"
+#include <sstream>
 
 void DtdEltMap::add_attrs(string element, list<DtdAttr*> * attList) {
 		list<DtdAttr*> * l = (*attr_map)[element];
@@ -17,10 +18,20 @@ DtdEltMap::~DtdEltMap() {
 		delete i->second;
 	}
 	delete attr_map;
-	for (map<string, DtdElement*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
+	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
 		delete i->second;
 	}
 	delete elt_map;
 }
 
-// string toString() {return string("TODO: DTD::toString()"); };
+string DtdEltMap::toString() {
+	stringstream str;
+
+	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
+		str << "tagname: " << i->first << endl;
+		str << i->second->toString() << endl;
+	}
+	return str.str();
+};
+
+string Dtd::toString() {return elements->toString(); };

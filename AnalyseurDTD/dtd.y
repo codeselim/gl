@@ -21,13 +21,13 @@ Dtd* rootExpr = NULL;
   list<string> *l;
   Dtd* dtd;
   DtdEltMap* dem;
-  /*DtdElt* de;*/
+  DtdElt* de;
   list<DtdAttr*> * dal;
   DtdAttr* da;
   AttrType* at;
   DefaultDeclaration* dd;
   /* EltContent* ec; */
-  DtdElement* e;
+  Child* c;
   ChildListElt* cle;
 Card card;
 }
