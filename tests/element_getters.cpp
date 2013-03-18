@@ -39,8 +39,8 @@ bool testGetChildren() {
 		fail("testGetChildren", "\n-------------------------\nExpected (a) : " << expected << "\n-------------------------\nGot: " << result);
 	}
 	
-	expected = &la;
-	result = ((Element*)b)->getChildren();
+	expected = &lc;
+	result = ((Element*)c)->getChildren();
 	if (expected != result)
 	{
 		fail("testGetChildren", "\n-------------------------\nExpected (b): " << expected << "\n-------------------------\nGot: " << result);
@@ -76,7 +76,7 @@ bool testGetSpaceSeparatedChildrenList() {
 	}
 	
 	expected = "#PCDATA";
-	result = ((Element*)b)->getSpaceSeparatedChildrenList();
+	result = ((Element*)c)->getSpaceSeparatedChildrenList();
 	if (expected != result)
 	{
 		fail("testGetChildren", "\n-------------------------\nExpected (b): " << expected << "\n-------------------------\nGot: " << result);
