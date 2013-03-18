@@ -19,6 +19,7 @@ protected:
 public:
 	void setCard(Card theCard) { card = theCard; };
 	virtual string toString() = 0;
+	string cardToString();
 };
 
 class ChildListElt: public Child {
@@ -38,7 +39,7 @@ class ChildElt: public Child {
 public:
 	ChildElt(string name, Card theCard = NONE, EltType type = TOKEN):
 		Child(theCard, type) {eltName = name; };
-	ChildElt(EltType theType): Child(NONE, theType), eltName("")  {};
+	ChildElt(): Child(NONE, T_PCDATA), eltName("#PC_DATA")  {};
 	string getName() { return eltName; };
 	string setName(string name) { eltName = name; };
 	virtual string toString();

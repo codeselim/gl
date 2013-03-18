@@ -150,7 +150,7 @@ contenu_seq_opt
 ;
 
 mixed
-: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt(T_PCDATA)); }
+: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt()); }
 ;
 
 contenu_mixed

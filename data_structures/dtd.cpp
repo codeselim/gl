@@ -28,7 +28,6 @@ string DtdEltMap::toString() {
 	stringstream str;
 
 	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
-		str << "tagname: " << i->first << endl;
 		str << i->second->toString() << endl;
 	}
 	return str.str();
