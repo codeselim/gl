@@ -1,4 +1,3 @@
-#include "element.h"
 #include <iostream>
 using namespace std;
 #define DBG
@@ -24,7 +23,7 @@ int main(int argc, char** argv) {
 		is_xsl = true;
 		xslfile = argv[3];
 #ifdef DBG
-		cout << "DTD: " << xslfile << endl;
+		cout << "XSL: " << xslfile << endl;
 #endif
 	}
 	// Put main test logic here
