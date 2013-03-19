@@ -105,10 +105,9 @@ content_spec
 | children  {$$ = new DtdElt($1);}
 ;
 
-/* ptr Element */
 children
-: choice card_opt {$$ = new ChildListElt($1, CHOICE, $2);}
-| seq card_opt {$$ = new ChildListElt($1, SEQ, $2);}
+: choice card_opt {$$ = $1; $$->setCard($2);}
+| seq card_opt {$$ = $1; $$->setCard($2);}
 ;
 
 card_opt
@@ -118,30 +117,28 @@ card_opt
 | /* vide */ {$$ = NONE;}
 ;
 
-/* ptr Element */
 name_or_choice_or_seq
 : NOM   {$$ = new ChildElt($1);}
 | choice  {$$ = $1;}
 | seq  {$$ = $1;}
 ;
 
-/* ptr Element */
 cp
 : name_or_choice_or_seq card_opt {$$ = $1; $$->setCard($2);}
 ;
 
-/* ptr Element */
 choice
 : OUVREPAR cp contenu_choice FERMEPAR   {$$ = new ChildListElt(CHOICE); $$->add($2); $$->add($3);}
 ;
 
 contenu_choice
 : contenu_choice BARRE cp { $$ = $1; $$->add($3);}
-| BARRE cp { $$ = new ChildListElt(CHOICE); $$->add($2);}
+// | BARRE cp { $$ = new ChildListElt(CHOICE); $$->add($2);}
+| BARRE cp { $$ = (ChildListElt*)$2;}
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = new ChildListElt(SEQ); $$->add($2); $$->add($3);}
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->add($2);}
 ;
 
 contenu_seq_opt

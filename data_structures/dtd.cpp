@@ -2,13 +2,31 @@
 #include <sstream>
 
 void DtdEltMap::add_attrs(string element, list<DtdAttr*> * attList) {
-		list<DtdAttr*> * l = (*attr_map)[element];
+	map<string, DtdElt*>::iterator it = elt_map->find(element);
+
+	if (it == elt_map->end()) {
+		elt_map->insert(pair<string, DtdElt*>(element, new DtdElt(element, attList)));
+	} else {
+		list<DtdAttr*> * l = it->second->getAttributes();
 		if (l == NULL) {
-			l = new list<DtdAttr*>();
+			it->second->setAttributes(attList);
+		} else {
+			l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
+			delete attList;
 		}
-		l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
-		delete attList;
 	}
+
+}
+
+void DtdEltMap::add_elt(DtdElt* element) {
+	map<string, DtdElt*>::iterator it = elt_map->find(element->getName());
+
+	if (it == elt_map->end()) {
+		elt_map->insert(pair<string, DtdElt*>(element->getName(), element));
+	} else {
+		it->second->copy(element);
+	}
+}
 
 DtdEltMap::~DtdEltMap() {
 	for (map<string, list<DtdAttr*> *>::iterator i = attr_map->begin(); i != attr_map->end(); ++i) {
