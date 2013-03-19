@@ -4,18 +4,19 @@
 #include <map>
 #include <iostream>
 
-#include "dtd_elt.h"
+#include "child_elt.h"
 #include "dtd_attr.h"
 
 using namespace std;
 
 class DtdEltMap {
-	map<string, DtdElt*>* elt_map;
+	map<string, DtdElement*>* elt_map;
 	map<string, list<DtdAttr*> * > * attr_map;
 public:
-	DtdEltMap(): elt_map(new map<string, DtdElt*>()), attr_map(new map<string, list<DtdAttr*> *>()) {};
-	void add_elt(DtdElt* element) { elt_map->insert(pair<string, DtdElt*>(element->getName(), element)); };
+	DtdEltMap(): elt_map(new map<string, DtdElement*>()), attr_map(new map<string, list<DtdAttr*> *>()) {};
+	void add_elt(DtdElement* element) { elt_map->insert(pair<string, DtdElement*>(element->getName(), element)); };
 	void add_attrs(string element, list<DtdAttr*> * attList) ;
+	list<DtdAttr*> * getAttributes(string eltName) { return (*attr_map)[eltName]; };
 	~DtdEltMap();
 };
 
@@ -23,7 +24,7 @@ class Dtd {
 	DtdEltMap* elements;
 public:
 	Dtd(DtdEltMap* lst_elements): elements(lst_elements) {};
-	string toString() {return string("TODO: DTD::toString()"); };
+	string toString();
 };
 
 #endif

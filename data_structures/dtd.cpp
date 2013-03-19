@@ -5,14 +5,8 @@ void DtdEltMap::add_attrs(string element, list<DtdAttr*> * attList) {
 		if (l == NULL) {
 			l = new list<DtdAttr*>();
 		}
-
-		// for (list<DtdAttr*>::iterator i = attList->begin(); i != attList->end(); ++i) {
-		// 	l->push_back(*i);
-		// }
-		// attList->clear();
 		l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
 		delete attList;
-		// delete attList;
 	}
 
 DtdEltMap::~DtdEltMap() {
@@ -23,8 +17,10 @@ DtdEltMap::~DtdEltMap() {
 		delete i->second;
 	}
 	delete attr_map;
-	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
+	for (map<string, DtdElement*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
 		delete i->second;
 	}
 	delete elt_map;
 }
+
+// string toString() {return string("TODO: DTD::toString()"); };
