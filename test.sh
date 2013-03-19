@@ -1,10 +1,7 @@
 cd AnalyseurXML
-make
-./analyseXMl < $1
-make clean
-TEMP=$(grep SYSTEM $1)
-${TEMP#}
-echo $TEMP
+
+TEMP=$(grep -E '(<!DOCTYPE)(.*?)\"(.*?)\"' $1)
+echo $TEMP[1]
 echo dtd
 echo $DTD
 cd ../AnalyseurDTD

@@ -45,11 +45,22 @@ string Element::toXML() {
 }
 
 nodeList* Element::getChildren() {
-	NotYetImplementedException e;
-	throw e;
+	return this->children;
 }
 
 string Element::getSpaceSeparatedChildrenList() {
-	NotYetImplementedException e;
-	throw e;
+	stringstream result;
+	string space = "";
+	if (NULL != this->children)
+	{
+		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+			result << space << (*it)->getName();
+			space = " ";
+		}
+	}
+	return result.str();
+}
+
+string Element::getName() {
+	return this->name;
 }

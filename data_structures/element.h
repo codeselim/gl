@@ -23,6 +23,7 @@ private:
 
 public:
 	Element& setParent(Element* e);
+	virtual string getName();
 	Element* getParent();
 	nodeList* getChildren();
 	string getSpaceSeparatedChildrenList();
@@ -33,7 +34,6 @@ public:
 		@return string valid XML for this element
 	*/
 	virtual string toXML();
-	string getName() { return name; };
 };
 
 #endif
