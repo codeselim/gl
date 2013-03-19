@@ -13,4 +13,7 @@
 <!ATTLIST section
         titre CDATA #IMPLIED
 >
+<!ATTLIST section
+        surtitre CDATA #IMPLIED
+>
 <!ELEMENT p (#PCDATA)>
