@@ -77,6 +77,7 @@ attributs_opt
 
 attribut
  : NOM EGAL VALEUR  {$$ = new pair<string, string>(string($1), string($3));}
+ | ENNOM EGAL VALEUR  {$$ = new pair<string, string>(string($1), string($3));}
  ;
 
 ouvre
@@ -91,6 +92,7 @@ vide_ou_contenu
 
 ferme_contenu_et_fin
  : SUP contenu_opt FBALISE  {$$ = $2;}
+ | SUP contenu_opt FBALISEEN  {$$ = $2;}
  ;
 
 contenu_opt

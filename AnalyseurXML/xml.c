@@ -11,6 +11,7 @@ using namespace std;
 
 extern Document* rootExpr;
 int yyparse();
+extern int yydebug;
 
 int main(int argc, char **argv) {
   int err;
