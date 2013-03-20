@@ -37,14 +37,14 @@ Card card;
 
 %type <dtd> main
 %type <dem> dtd_list_opt
-/*%type <de> element_declaration */
+%type <de> element_declaration content_spec
 %type <dal> att_definition_opt
 %type <da> attribut
 %type <at> att_type
 %type <l> type_enumere liste_enum_plus liste_enum
 %type <dd> defaut_declaration
 /*%type <ec> content_spec*/
-%type <e> name_or_choice_or_seq cp content_spec element_declaration
+%type <c> name_or_choice_or_seq cp
 %type <cle> children choice contenu_choice seq contenu_seq_opt mixed contenu_mixed
 %type <card> card_opt
 
@@ -99,16 +99,15 @@ element_declaration
 ;
 
 content_spec
-: EMPTY   {$$ = new ChildElt(T_EMPTY);}
-| ANY   {$$ = new ChildElt(T_ANY);}
-| mixed   {$$ = $1;}
-| children  {$$ = $1;}
+: EMPTY   {$$ = new DtdElt(T_EMPTY);}
+| ANY   {$$ = new DtdElt(T_ANY);}
+| mixed   {$$ = new DtdElt($1);}
+| children  {$$ = new DtdElt($1);}
 ;
 
-/* ptr Element */
 children
-: choice card_opt {$$ = new ChildListElt($1, CHOICE, $2);}
-| seq card_opt {$$ = new ChildListElt($1, SEQ, $2);}
+: choice card_opt {$$ = $1; $$->setCard($2);}
+| seq card_opt {$$ = $1; $$->setCard($2);}
 ;
 
 card_opt
@@ -118,30 +117,28 @@ card_opt
 | /* vide */ {$$ = NONE;}
 ;
 
-/* ptr Element */
 name_or_choice_or_seq
 : NOM   {$$ = new ChildElt($1);}
 | choice  {$$ = $1;}
 | seq  {$$ = $1;}
 ;
 
-/* ptr Element */
 cp
 : name_or_choice_or_seq card_opt {$$ = $1; $$->setCard($2);}
 ;
 
-/* ptr Element */
 choice
 : OUVREPAR cp contenu_choice FERMEPAR   {$$ = new ChildListElt(CHOICE); $$->add($2); $$->add($3);}
 ;
 
 contenu_choice
 : contenu_choice BARRE cp { $$ = $1; $$->add($3);}
-| BARRE cp { $$ = new ChildListElt(CHOICE); $$->add($2);}
+// | BARRE cp { $$ = new ChildListElt(CHOICE); $$->add($2);}
+| BARRE cp { $$ = (ChildListElt*)$2;}
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = new ChildListElt(SEQ); $$->add($2); $$->add($3);}
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->add($2);}
 ;
 
 contenu_seq_opt
@@ -150,7 +147,7 @@ contenu_seq_opt
 ;
 
 mixed
-: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt(T_PCDATA)); }
+: OUVREPAR PCDATA contenu_mixed {$$ = $3; $$->add(new ChildElt()); }
 ;
 
 contenu_mixed
