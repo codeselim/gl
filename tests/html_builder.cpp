@@ -11,6 +11,7 @@
 #include "../data_structures/xsl_element.h"
 #include "../xsl/html_builder.h"
 #include "./test_utils.h"
+ #include "../data_structures/text_node.h"
 
 /*
  * Simple C++ Test Suite
@@ -29,20 +30,76 @@ bool htmlb_instanciation() {
 	return true;
 }
 
+bool html_building(){
+
+        //<xml>
+        //Blorg
+        //</xml>
+        nodeList l;
+        Node* b = new TextNode(string("Blorg"));
+        l.push_back(b);
+        ElementName en = ElementName(string("blorg"), string("xml"));
+        Element* a = Element::createElement(&en, NULL, &l);
+
+        //<xsl:template match="xml">
+        //<html>
+        //<body>
+        //<xsl:apply-templates/>
+        //</body>
+        //</html>
+        //</xsl:template>
+        nodeList n;
+        nodeList n1;
+        nodeList n2;
+        nodeList n3;
+        nodeList n4;
+        ElementName dt = ElementName(string("xsl"), string("stylesheet"));
+        ElementName dt1 = ElementName(string("xsl"), string("template"));
+        ElementName dt2 = ElementName(string("blorg"), string("html"));
+        ElementName dt3 = ElementName(string("blorg"), string("body"));
+        ElementName dt4 = ElementName(string("xsl"), string("apply-templates"));
+        attributesMap am;
+        am["match"] = "xml";
+        Node* f = Element::createElement(&dt4, NULL, &n4);
+        n3.push_back(f);
+        Node* e = Element::createElement(&dt3, NULL, &n3);
+        n2.push_back(e);
+        Node* d = Element::createElement(&dt2, NULL, &n2);
+        n1.push_back(d);
+        XSLElement* c1 = (XSLElement*) Element::createElement(&dt1, &am, &n1);
+        n.push_back(c1);
+        XSLElement* root = (XSLElement*) Element::createElement(&dt, NULL, &n);
+
+        HTMLBuilder htmlb(root, a);
+        string result = htmlb.html();
+
+        //
+        //
+        //
+        string expected = "<html>\n<body>\nBlorg\n</body>\n</html>";
+        if (expected != result)
+        {
+        	fail("html_building", "Result did not match expected.\nExpected: \n-----------------\n" << expected << "\n-----------------\nResult: \n-----------------\n" << result << "\n-----------------" << std::endl)
+        }
+        return true;
+}
+
 typedef bool(*test_func)(void);
 
 int main(int argc, char** argv) {
 	int fail_counter = 0;
 	// insert your new tests function pointers:
 	test_func tests[] = {
-		htmlb_instanciation
+		htmlb_instanciation,
+        html_building
 	};
 	// insert here your new test names :
 	const char* tests_names[] = {
-		"htmlb_instanciation"
+		"htmlb_instanciation",
+        "html_building"
 	};
 	// increment this number each time you add a new test
-	int test_count = 1;
+	int test_count = 2;
 
 	std::cout << "%SUITE_STARTING% html_builder" << std::endl;
 	std::cout << "%SUITE_STARTED%" << std::endl;
