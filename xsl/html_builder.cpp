@@ -4,7 +4,7 @@
 #include "stdlib.h"
 #include "string.h"
 
-#define DBG
+// #define DBG
 
 #ifdef DBG
 #include "iostream"
@@ -38,18 +38,18 @@ void HTMLBuilder::createIndex() {
 	for(nodeList::iterator it = children->begin(); it != children->end(); ++it) {
 		if((*it)->getName() == "template") {
 			XSLElement* xslel = (XSLElement*)(*it);
-			index[xslel->getAttributeValue("match")] = xslel;
+			string matchAgainst = xslel->getAttributeValue("match");
+            index[matchAgainst] = xslel;
 		}
 	}
 }
 
 string HTMLBuilder::html() {
 	stringstream str;
-	// Its children...
 	
 	if (NULL != this->xml_root)
 	{
-		str << this->do_build_html_on_children(this->xml_root);
+		str << this->build_html(this->xml_root);
 	}
 	return str.str();
 }
@@ -63,7 +63,7 @@ string HTMLBuilder::do_build_html_on_children(Node* node) {
 		{
 			str << build_html(curr);
 		} else {
-			str << curr->toXML();
+			str << endl << curr->toXML();
 		}
 	}
 	return str.str();
@@ -71,27 +71,38 @@ string HTMLBuilder::do_build_html_on_children(Node* node) {
 
 
 string HTMLBuilder::build_html(Node* curr) {
-	// Is there any template for this node ?
-	throw NotYetImplementedException();
 	stringstream str;
 
-	templateIndex::iterator it = index.find(curr->getName());
+	string currName = curr->getName();
+    templateIndex::iterator it = index.find(currName);
 
 	if (it != index.end())
 	{
 		XSLElement* xslel = it->second;
-		const char* tmp = xslel->toXML().c_str();
-		const char* pch = strstr(tmp, APPLY_TEMPLATES_STR);
+		int newLineLen = strlen("\n");
+		string tmpstring = xslel->toXML();
+		const char* tmp = tmpstring.c_str();
 		const char* end = tmp;
-		while(*end++);// find the end of the string
+		while(*(end++));// find the end of the string
 		end--; // not the \0 to be taken into account (if we did ++end instead of end++ then the empty string would cause a array overread)
-		char* before = (char*)malloc(sizeof(char) * (pch - tmp) + 1);
-		char* after = (char*)malloc(sizeof(char) * (end - pch) + 1);
-		strncpy (before, tmp, APPLY_TEMPLATES_STR_LEN);// copy the beginning of the string to "before"
-		strcpy (after, pch + APPLY_TEMPLATES_STR_LEN); // copy the end of the string to "end"
+		int openingTagLen = xslel->xmlOpeningTag().length();
+		int closingTagLen = xslel->xmlClosingTag().length();
+		const char* openingTagPtr = tmp+openingTagLen + newLineLen;//necessarily begins at 0... ! //strstr(tmp, openingTag);
+		const char* closingTagPtr = end-closingTagLen - newLineLen; //necessarily ends at end-closingTagLen strstr(tmp, xslel->xmlClosingTag().c_str());
+		const char* pch = strstr(tmp, APPLY_TEMPLATES_STR);
+		int beforeSize = (pch - openingTagPtr);
+		int afterSize = (closingTagPtr - (pch + APPLY_TEMPLATES_STR_LEN));
+		char* before = (char*)malloc(sizeof(char) * beforeSize + 1);
+		char* after = (char*)malloc(sizeof(char) * afterSize + 1);
+		strncpy (before, openingTagPtr, beforeSize);// copy the beginning of the string to "before"
+		strncpy (after, pch + APPLY_TEMPLATES_STR_LEN + 1, afterSize); // copy the end of the string to "end"
 #ifdef DBG
+		std::cout << "tmp: ||" << tmp << "||" << std::endl;
+		std::cout << "Opening tag: ||" << openingTagPtr << "||" << std::endl;
+		std::cout << "Beforesize=" << beforeSize << std::endl;
+		std::cout << "Aftersize=" << afterSize << std::endl;
 		std::cout << "Before=" << before << std::endl;
-		std::cout << "After=" << before << std::endl;
+		std::cout << "After=" << after << std::endl;
 #endif
 		str << before << do_build_html_on_children(xslel) << after;
 		free(before);
