@@ -26,10 +26,10 @@ bool testGetChildren() {
 	lc.push_back(d);
 	ElementName ena = ElementName(string("xml"), string("blorg"));
 	ElementName enc = ElementName(string("yoyo"), string("blorg"));
-	Node* c = new Element(&enc, NULL, &lc);
+	Node* c = Element::createElement(&enc, NULL, &lc);
 	la.push_back(c);
 	la.push_back(e);
-	Node* a = new Element(&ena, NULL, &la);
+	Node* a = Element::createElement(&ena, NULL, &la);
 
 	nodeList *expected, *result;
 	expected = &la;
@@ -58,14 +58,14 @@ bool testGetSpaceSeparatedChildrenList() {
 	Node* e = new TextNode(string("Blorg3"));
 	ElementName ena = ElementName(string("xml"), string("blorg"));
 	ElementName enc = ElementName(string("yoyo"), string("blorg"));
-	Node* c = new Element(&enc, NULL, &lc);
+	Node* c = Element::createElement(&enc, NULL, &lc);
 	// A children
 	la.push_back(b);
 	la.push_back(c);
 	la.push_back(e);
 	// C children
 	lc.push_back(d);
-	Node* a = new Element(&ena, NULL, &la);
+	Node* a = Element::createElement(&ena, NULL, &la);
 
 	string expected, result;
 	expected = "#PCDATA yoyo #PCDATA";

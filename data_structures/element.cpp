@@ -8,7 +8,7 @@ Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList
 		// Instanciate a XSL element
 		throw NotYetImplementedException();
 	} else {
-		return new Element(en, attrs, children);
+		return Element::createElement(en, attrs, children);
 	}
 }
 
