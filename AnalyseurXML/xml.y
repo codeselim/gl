@@ -32,7 +32,7 @@ Document* rootExpr;
    SpecialNode * sn;
 }
 
-%token EGAL SLASH SUP SUPSPECIAL DOCTYPE
+%token EGAL SLASH SUP SUPSPECIAL INFSPECIAL DOCTYPE
 %token <s> ENCODING VALEUR DONNEES COMMENT NOM ENNOM
 %token <en> OBALISEEN OBALISE OBALISESPECIALE FBALISE FBALISEEN
 
@@ -74,6 +74,14 @@ declaration
  				map->insert(pair<string,string>(string("rootName"), $2));
  				$$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);  
  				}
+ /*				
+ | INFSPECIAL attribut attribut SUPSPECIAL {
+ 				attributesMap* map2 = new attributesMap();
+ 				map2->insert(*$2);
+ 				map2->insert(*$3);
+ 				$$ = new SpecialNode(SNT_XML_VER, new ElementName("", "xml"), map2);
+ 				}
+	*/
  ;
 
 

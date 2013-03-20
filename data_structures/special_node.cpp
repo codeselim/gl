@@ -15,13 +15,25 @@ string SpecialNode::cardToString() {
 string SpecialNode::toXML() {
 	stringstream str;
 	
-	str << "<" << cardToString();
+	switch(this->type){
+		case SNT_DOCTYPE:
+		str << "<" << cardToString();	
+		str << " " <<  (*attributes)["rootName"] << " " << (*attributes)["ref"] << " \"" << (*attributes)["fileUrl"] << "\">";
+		break;
+		case SNT_XML_VER:
+		str << "<" << cardToString();
+		for(attributesMap::iterator it1 = attributes->begin(); it1 != attributes->end(); ++it1) {
+			str << " " << (it1->first) << " " << (it1->second) << " ";
+		}
+		break;	
+	}
+	
 
 
 	//	for(attributesMap::iterator it1 = attributes->begin(); it1 != attributes->end(); ++it1) {
 	//		str << " " << (it1->first) << " " << (it1->second) << " ";
 	//	}
-		str << " " <<  (*attributes)["rootName"] << " " << (*attributes)["ref"] << " \"" << (*attributes)["fileUrl"] << "\">";
+		
 
 	// str << ">";// close the XML tag
 	// // Its children...
