@@ -50,9 +50,10 @@ else if (eltContentType == LIST || eltContentType == TOKEN) {
   boost::regex ex(dtdEltRegex);
   if (boost::regex_match(childrenstring, ex)) 
   {
-    cout << "match" << endl;
+    cout << "CA MATCH" << endl;
   }
   else {
+  	cout << "CA MATCH PAAAAAAAAAAAAAAAAAS" << endl;
   	return false;
   }
 	//TODO

@@ -19,6 +19,7 @@ string Child::typeToString() {
 		case T_PCDATA: return "(PCDATA)";
 		case TOKEN: return "(TOKEN)";
 	}
+}
 
 EltType Child::getType() {
 	return type;

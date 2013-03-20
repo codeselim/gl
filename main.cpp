@@ -86,18 +86,15 @@ int main(int argc, char** argv) {
   err = dtdparse(&dtd);
   fclose(dtdin);
 
-<<<<<<< HEAD
 	if (err != 0) {
   	cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
     return EXIT_FAILURE;
-=======
-	  	//Validating xml with dtd
-	  	Validate validator(xmlDocument, dtd);
-	  	cout << validator.isValid() << endl;
+
+
 
   	}
->>>>>>> 8765b712092a6d9ca3e7af6ad2b255f3dda330ff
-  }
+
+
 
 
   cout << dtd->toString() << endl;
@@ -105,6 +102,9 @@ int main(int argc, char** argv) {
 
   /* dtd et xmlDocument sont maintenant correctement initialisés. */
 
+	  	//Validating xml with dtd
+	  	Validate validator(xmlDocument, dtd);
+	  	cout << validator.isValid() << endl;
 
   delete dtd;
   delete xmlDocument;
