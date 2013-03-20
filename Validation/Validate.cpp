@@ -33,6 +33,10 @@ string childrenstring = elt->getSpaceSeparatedChildrenList();
 DtdElt * dtdElt = elements->getElement(eltName);
 string dtdEltRegex = dtdElt->getChildren()->toString();
 EltType eltContentType = dtdElt->getChildren()->getType();
+cout << "ELT CONTENT TYPE : " << eltContentType << endl;
+cout << "ELT NAME : " << eltName << endl;
+cout << "REGEX : " << dtdEltRegex << endl;
+cout << "CHILDREN : " << childrenstring << endl;
 
 if( eltContentType == T_EMPTY) {
 	if(childrenstring.length() > 0) {
@@ -48,6 +52,9 @@ else if (eltContentType == LIST || eltContentType == TOKEN) {
   {
     cout << "match" << endl;
   }
+  else {
+  	return false;
+  }
 	//TODO
 }
 
@@ -56,13 +63,15 @@ nodeList* children = elt->getChildren();
 // Validate children element nodes
 for(nodeList::iterator itNode = children->begin(); itNode != children->end(); itNode++) {
 	if((*itNode)->getName() != "#PCDATA") {
-		isElementValid((Element*)*itNode);
+		if(isElementValid((Element*)*itNode) == false) {
+			return false;
+		}
 	}
 }
-
+	return true;
 }
 
 bool Validate::isValid() {
-	isElementValid(xml->getRoot());
+	return isElementValid(xml->getRoot());
 }
 
