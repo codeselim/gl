@@ -26,7 +26,7 @@ bool simpleToXMLWithAttributes() {
 	attrMap["blorg1"] = "blurp";
 	attrMap["huhu"] = "haha";
 	attrMap["numeric"] = "42";
-	Node* a = new Element(&en, &attrMap, &l);
+	Node* a = Element::createElement(&en, &attrMap, &l);
 	
 	string expected = "<xml blorg1=\"blurp\" huhu=\"haha\" numeric=\"42\">\nBlorg\n</xml>";
 	string result = a->toXML();
@@ -47,7 +47,7 @@ bool simpleToXMLWithoutAttributes() {
 	Node* b = new TextNode(string("Blorg"));
 	l.push_back(b);
 	ElementName en = ElementName(string("xml"), string("blorg"));
-	Node* a = new Element(&en, NULL, &l);
+	Node* a = Element::createElement(&en, NULL, &l);
 	
 	string expected = "<xml>\nBlorg\n</xml>";
 	string result = a->toXML();
@@ -74,10 +74,10 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	lc.push_back(d);
 	ElementName ena = ElementName(string("xml"), string("blorg"));
 	ElementName enc = ElementName(string("yoyo"), string("blorg"));
-	Node* c = new Element(&enc, NULL, &lc);
+	Node* c = Element::createElement(&enc, NULL, &lc);
 	la.push_back(c);
 	la.push_back(e);
-	Node* a = new Element(&ena, NULL, &la);
+	Node* a = Element::createElement(&ena, NULL, &la);
 	
 	
 	string expected = "<xml>\nBlorg1\n<yoyo>\nBlorg2\n</yoyo>\nBlorg3\n</xml>";
@@ -116,10 +116,10 @@ bool ComplexXMLWithMixedElementsAndNodesWithAttributes() {
 
 	ElementName ena = ElementName(string("xml"), string("blorg"));
 	ElementName enc = ElementName(string("yoyo"), string("blorg"));
-	Node* c = new Element(&enc, &attrMapc, &lc);
+	Node* c = Element::createElement(&enc, &attrMapc, &lc);
 	la.push_back(c);
 	la.push_back(e);
-	Node* a = new Element(&ena, &attrMapa, &la);
+	Node* a = Element::createElement(&ena, &attrMapa, &la);
 	
 	string expected = "<xml blorg1=\"blurp\" huhu=\"haha\">\nBlorg1\n<yoyo numeric=\"42\" type=\"xml\" vulgar=\"Hey, you touch my tralala.\">\nBlorg2\n</yoyo>\nBlorg3\n</xml>";
 	string result = a->toXML();
@@ -164,24 +164,24 @@ bool testDocumentToXML() {
         
          
         p_children.push_back(p_text);
-	Node* p_elem = new Element(&p, NULL, &p_children);
+	Node* p_elem = Element::createElement(&p, NULL, &p_children);
         
         titre_children.push_back(titre_text);
-        Node* titre_elem = new Element(&titre, NULL, &titre_children);
+        Node* titre_elem = Element::createElement(&titre, NULL, &titre_children);
         
         section_children.push_back(titre_elem);
         section_children.push_back(p_elem);
-        Node* section_elem = new Element(&section, NULL, &section_children);
+        Node* section_elem = Element::createElement(&section, NULL, &section_children);
         
         chapitre_children.push_back(section_elem);
-        Node* chapitre_elem = new Element(&chapitre, NULL, &chapitre_children);
+        Node* chapitre_elem = Element::createElement(&chapitre, NULL, &chapitre_children);
         
         resume_children.push_back(resume_text);
-        Node* resume_elem = new Element(&resume, NULL, &resume_children);
+        Node* resume_elem = Element::createElement(&resume, NULL, &resume_children);
         
         rapport_children.push_back(resume_elem);
         rapport_children.push_back(chapitre_elem);
-        Node* rapport_elem = new Element(&rapport, NULL, &rapport_children);
+        Node* rapport_elem = Element::createElement(&rapport, NULL, &rapport_children);
         
         
         string line;

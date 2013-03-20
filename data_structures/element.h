@@ -20,14 +20,19 @@ private:
     Element* parent;
     string ns; // namespace
     string name;
+    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 
 public:
+	/** @function createELement
+	 * Factory method that creates a XML Element
+	 * @return the created element
+	 */
+	static Element* createElement(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	Element& setParent(Element* e);
 	virtual string getName();
 	Element* getParent();
 	nodeList* getChildren();
 	string getSpaceSeparatedChildrenList();
-    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
 		/!\ The attributes are ALWAYS output in alphabetical order /!\
