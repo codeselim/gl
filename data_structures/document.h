@@ -18,7 +18,7 @@ private:
 public:
 	Document(list<Node*> * declarations, Element* rootNode);
 	~Document();
-	string toXML();
+	virtual string toXML() const;
 	string getRootName(){return rootNode->getName();};
 	string getDtdFileName();
 };

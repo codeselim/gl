@@ -40,7 +40,7 @@ string Element::getAttributeValue(string attr) {
 	}
 }
 
-string Element::toXML() {
+string Element::toXML() const {
 	stringstream str;
 	// The element tag...
 	str << "<" << this->name;

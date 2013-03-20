@@ -3,8 +3,11 @@
 #include "../data_structures/text_node.h"
 
 // Constant for toXML() comparison
-const XSLElement APPLY_TEMPLATES = Element::createElement(&(ElementName(string("xsl"), string("apply-templates"))), NULL, NULL);
-const char* APPLY_TEMPLATES_STR = APPLY_TEMPLATES.toXML().c_str();
+const XSLElement* APPLY_TEMPLATES = (const XSLElement*) Element::createElement(
+	new ElementName(string("xsl"), string("apply-templates")), 
+	NULL, 
+	NULL);
+const char* APPLY_TEMPLATES_STR = (const char*) APPLY_TEMPLATES->toXML().c_str();
 
 HTMLBuilder::HTMLBuilder(XSLElement* xsl_root, Element* xml_root) {
 	this->xsl_root = xsl_root;

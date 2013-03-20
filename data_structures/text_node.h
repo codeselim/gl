@@ -12,7 +12,7 @@ class TextNode : public Node {
 	string content;
 public:
 	TextNode(string content);
-	virtual string toXML();
+	virtual string toXML() const;
 	virtual string getName();
 	static string NODE_NAME;
 };

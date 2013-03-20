@@ -6,7 +6,7 @@ TextNode::TextNode(string content) {
 	this->content = content;
 }
 
-string TextNode::toXML() {
+string TextNode::toXML() const {
 	return this->content;
 }
 
