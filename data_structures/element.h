@@ -39,7 +39,7 @@ public:
 		/!\ The attributes are ALWAYS output in alphabetical order /!\
 		@return string valid XML for this element
 	*/
-	virtual string toXML();
+	virtual string toXML() const;
 };
 
 #endif

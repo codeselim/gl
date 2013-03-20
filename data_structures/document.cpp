@@ -11,7 +11,7 @@ Document::~Document() {
 	cout << "TODO destructors" << endl;
 }
 
-string Document::toXML() {
+string Document::toXML() const {
 	stringstream str;
 	str << this->declarations << endl;
 	str << this->rootNode->toXML();
