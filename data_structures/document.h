@@ -5,6 +5,7 @@
 #include <string>
 #include "node.h"
 #include "element.h"
+#include "special_node.h"
 #include "../AnalyseurXML/commun.h"
 
 using namespace std;
@@ -13,10 +14,10 @@ using namespace std;
 class Document {
 private:
 	Element* rootNode;
-	list<Node*> *  declarations;
+	list<SpecialNode*> *  declarations;
 
 public:
-	Document(list<Node*> * declarations, Element* rootNode);
+	Document(list<SpecialNode*> * declarations, Element* rootNode);
 	~Document();
 	string toXML();
 	string getRootName(){return rootNode->getName();};

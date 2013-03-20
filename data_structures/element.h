@@ -15,14 +15,14 @@ typedef map<string, string> attributesMap;
 
 class Element : public Node {
 private:
-    nodeList * children;
-    Element* parent;
-    string ns; // namespace
-    string name;
+	nodeList * children;
+	Element* parent;
+	string ns; // namespace
+	string name;
 
 protected:
 	attributesMap * attributes;
-	
+
 public:
 	Element& setParent(Element* e);
 	virtual string getName();
@@ -30,7 +30,7 @@ public:
 	nodeList* getChildren();
 	string getSpaceSeparatedChildrenList();
 	attributesMap* getAttributes() {return attributes ;}
-    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
+  Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
 		/!\ The attributes are ALWAYS output in alphabetical order /!\

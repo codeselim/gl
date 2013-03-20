@@ -14,6 +14,7 @@ class SpecialNode: public Element {
 	public:
 		SpecialNode(SpecialNodeType atype, ElementName* en, attributesMap* attrs) : Element(en,  attrs, NULL), type (atype){}
 		virtual string toXML();
+		virtual string getName();
 		string cardToString();
 		SpecialNodeType getType() { return type; }
 };

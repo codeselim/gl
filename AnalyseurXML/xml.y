@@ -31,6 +31,7 @@ int xmllex(void);
    attributesMap * am;
    Document * d;
    SpecialNode * sn;
+   list<SpecialNode*> * snl;
 }
 
 %token EGAL SLASH SUP SUPSPECIAL DOCTYPE
@@ -39,16 +40,17 @@ int xmllex(void);
 
 %type <en> ouvre
 %type <elt> element
-%type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin declarations_opt
+%type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin
 %type <attr> attribut
 %type <am> attributs_opt
 %type <d> document
 %type <sn> declaration
+%type <snl> declarations_opt
 
 %%
 
 document
- : declarations_opt element misc_seq_opt  {$$ = new Document(NULL, $2); *xmlDocument = $$;}
+ : declarations_opt element misc_seq_opt  {$$ = new Document($1, $2); *xmlDocument = $$;}
  ;
 
 
@@ -64,7 +66,7 @@ misc
 
 declarations_opt
  : declarations_opt declaration { $$ = $1; $$->push_back($2);}
- | /*vide*/ { $$ = new list<Node*>();}
+ | /*vide*/ { $$ = new list<SpecialNode*>();}
  ;
 
 declaration

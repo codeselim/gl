@@ -1,4 +1,4 @@
-CPP_SRC = dtd.cpp dtd_elt.cpp child_elt.cpp dtd_attr.cpp element.cpp node.cpp text_node.cpp document.cpp
+CPP_SRC = dtd.cpp dtd_elt.cpp child_elt.cpp dtd_attr.cpp element.cpp node.cpp text_node.cpp document.cpp special_node.cpp
 CPP_FILES = $(addprefix data_structures/, $(CPP_SRC))
 OBJ_FILES = $(CPP_FILES:.cpp=.o)
 DSDIR = data_structures
