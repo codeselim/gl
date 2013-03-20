@@ -7,9 +7,9 @@ INCLUDES = -I$(CURDIR)/../data_structures -I$(CURDIR)
 all: analyseDTD
 
 analyseDTD: *.l *.y makefile $(OBJ_FILES)
-	flex dtd.l
-	bison --debug --verbose --defines=yy.tab.h dtd.y
-	g++ -g -DYYDEBUG=1 -o analyseDTD  lex.yy.c dtd.tab.c $(OBJ_FILES) $(INCLUDES)
+	flex -Pdtd dtd.l
+	bison -p dtd --debug --verbose --defines=dtd.tab.h dtd.y
+	g++ -g -DYYDEBUG=1 -o analyseDTD  lex.dtd.c dtd.tab.c $(OBJ_FILES) $(INCLUDES)
 
 clean:
 	-rm -rf *.tab.c lex.*.c *.tab.h *.output analyseDTD $(OBJ_FILES)

@@ -1,12 +1,14 @@
 #include <iostream>
+#include <dtd.tab.h>
+
 using namespace std;
 #define DBG
 int main(int argc, char** argv) {
 	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
-	// is manage by the "cli" file and we are thus garantueed there will always be a first argument 
-	// (excluded the binary's name) that is the XML file name and the 
+	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
+	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
-	char* xmlfile = argv[1]; 
+	char* xmlfile = argv[1];
 #ifdef DBG
 		cout << "XML file: " << xmlfile << endl;
 #endif
@@ -26,7 +28,31 @@ int main(int argc, char** argv) {
 		cout << "XSL: " << xslfile << endl;
 #endif
 	}
+
+
+	extern FILE* dtdin;
+	extern Dtd* rootExpr;
+
+  FILE* fid;
+  int err;
+  fid = fopen("rap1.dtd", "r");
+  //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
+
+  dtdin = fid;
+  err = dtdparse();
+  if (err != 0) {
+    printf("Parse ended with %d error(s)\n", err);
+    return 1;
+  } else {
+    printf("Parse ended with success\n", err);
+    cout << rootExpr->toString() << endl;
+  }
+
+  fclose(fid);
+  return 0;
+
+
 	// Put main test logic here
-	
+
 	return 0;
 }

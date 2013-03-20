@@ -12,9 +12,9 @@ using namespace std;
 #include <document.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
-int yywrap(void);
-void yyerror(const char *msg);
-int yylex(void);
+int xmlwrap(void);
+void xmlerror(const char *msg);
+int xmllex(void);
 
 Document* rootExpr;
 %}
@@ -102,12 +102,12 @@ contenu_opt
 
 %%
 
-int yywrap(void)
+int xmlwrap(void)
 {
   return 1;
 }
 
-void yyerror(const char *msg) {
+void xmlerror(const char *msg) {
   cout << msg;
 }
 

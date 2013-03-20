@@ -9,9 +9,9 @@ using namespace std;
 
 #include <dtd.h>
 
-void yyerror(char *msg);
-int yywrap(void);
-int yylex(void);
+void dtderror(char *msg);
+int dtdwrap(void);
+int dtdlex(void);
 
 Dtd* rootExpr = NULL;
 %}
@@ -160,10 +160,14 @@ contenu_mixed
 
 int main(int argc, char **argv)
 {
+  extern FILE* dtdin;
+  FILE* fid;
   int err;
-  //yydebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
+  fid = fopen("rap1.dtd", "r");
+  //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
-  err = yyparse();
+  dtdin = fid;
+  err = dtdparse();
   if (err != 0) {
     printf("Parse ended with %d error(s)\n", err);
     return 1;
@@ -171,14 +175,16 @@ int main(int argc, char **argv)
     printf("Parse ended with success\n", err);
     cout << rootExpr->toString() << endl;
   }
+
+  fclose(fid);
   return 0;
 }
-int yywrap(void)
+int dtdwrap(void)
 {
   return 1;
 }
 
-void yyerror(char *msg)
+void dtderror(char *msg)
 {
   fprintf(stderr, "%s\n", msg);
 }
