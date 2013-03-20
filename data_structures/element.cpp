@@ -40,9 +40,9 @@ string Element::getAttributeValue(string attr) {
 	}
 }
 
-string Element::toXML() const {
+string Element::xmlOpeningTag() const {
 	stringstream str;
-	// The element tag...
+
 	str << "<" << this->name;
 
 	// Its attributes...
@@ -54,8 +54,21 @@ string Element::toXML() const {
 	}
 
 	str << ">";// close the XML tag
-	str << this->getInnerXML();
+	return str.str();
+}
+
+string Element::xmlClosingTag() const {
+	stringstream str;
 	str << endl << "</" << this->name << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::toXML() const {
+	stringstream str;
+	// The element tag...
+	str << this->xmlOpeningTag();
+	str << this->getInnerXML();
+	str << this->xmlClosingTag();
 	return str.str();
 }
 

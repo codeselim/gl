@@ -41,6 +41,8 @@ public:
 	*/
 	virtual string toXML() const;
 	virtual string getInnerXML() const;
+	virtual string xmlOpeningTag() const;
+	virtual string xmlClosingTag() const;
 };
 
 #endif
