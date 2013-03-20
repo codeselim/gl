@@ -69,7 +69,9 @@ declarations_opt
 declaration
  : DOCTYPE NOM NOM VALEUR SUP { 
  				attributesMap* map = new attributesMap();
- 				map->insert(pair<string,string>("DTD_FILE_NAME", $4));
+ 				map->insert(pair<string,string>(string("fileUrl"), $4));
+ 				map->insert(pair<string,string>(string("ref"), $3));
+ 				map->insert(pair<string,string>(string("rootName"), $2));
  				$$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);  
  				}
  ;

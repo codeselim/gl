@@ -4,21 +4,24 @@
 #include "special_node.h"
 
 
+string SpecialNode::cardToString() {
+	switch (this->type) {
+		case SNT_DOCTYPE: return "!DOCTYPE";
+		case SNT_XML_VER: return "?xml";
+		case SNT_SPECIAL: return "?"; //TODO
+	}
+}
+
 string SpecialNode::toXML() {
 	stringstream str;
 	
-	// The element tag...
-	str << "<docrype dude>>>";
-	//if(this->type == )
-	// str << "<" << this->name;
+	str << "<" << cardToString();
 
-	// // Its attributes...
-	// if (NULL != this->attributes)
-	// {
-	// 	for(attributesMap::iterator it1 = this->attributes->begin(); it1 != this->attributes->end(); ++it1) {
-	// 		str << " " << (it1->first) << "=" << "\"" << (it1->second) << "\"";
-	// 	}
-	// }
+
+	//	for(attributesMap::iterator it1 = attributes->begin(); it1 != attributes->end(); ++it1) {
+	//		str << " " << (it1->first) << " " << (it1->second) << " ";
+	//	}
+		str << " " <<  (*attributes)["rootName"] << " " << (*attributes)["ref"] << " \"" << (*attributes)["fileUrl"] << "\">";
 
 	// str << ">";// close the XML tag
 	// // Its children...

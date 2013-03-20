@@ -16,11 +16,13 @@ typedef map<string, string> attributesMap;
 class Element : public Node {
 private:
     nodeList * children;
-    attributesMap * attributes;
     Element* parent;
     string ns; // namespace
     string name;
 
+protected:
+	attributesMap * attributes;
+	
 public:
 	Element& setParent(Element* e);
 	virtual string getName();
