@@ -2,6 +2,16 @@
 #include <sstream>
 #include <exception>
 
+Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/) {
+	if ("xsl" == en->second)
+	{
+		// Instanciate a XSL element
+		throw NotYetImplementedException();
+	} else {
+		return new Element(en, attrs, children);
+	}
+}
+
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
 	if(NULL == children) {
 		children = new nodeList();

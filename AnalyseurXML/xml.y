@@ -67,7 +67,7 @@ declaration
 
 
 element
- : ouvre attributs_opt vide_ou_contenu  {$$ = new Element($1, $2, $3);}
+ : ouvre attributs_opt vide_ou_contenu  {$$ = Element::createElement($1, $2, $3);}
  ;
 
 attributs_opt
