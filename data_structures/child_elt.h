@@ -19,8 +19,9 @@ protected:
 public:
 	void setCard(Card theCard) { card = theCard; };
 	virtual string toString() = 0;
-	string cardToString();
 	EltType getType();
+	string cardToString(); /* Retourne ?, + ou * suivant la valeur de card */
+
 };
 
 class ChildListElt: public Child {

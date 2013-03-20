@@ -51,16 +51,19 @@
         <itemPath>../../data_structures/dtd_elt.h</itemPath>
         <itemPath>../../data_structures/element.cpp</itemPath>
         <itemPath>../../data_structures/element.h</itemPath>
-        <itemPath>../../data_structures/main.cpp</itemPath>
         <itemPath>../../data_structures/node.cpp</itemPath>
         <itemPath>../../data_structures/node.h</itemPath>
         <itemPath>../../data_structures/text_node.cpp</itemPath>
         <itemPath>../../data_structures/text_node.h</itemPath>
       </logicalFolder>
+<<<<<<< HEAD
       <logicalFolder name="Validation" displayName="Validation" projectFiles="true">
         <itemPath>../../Validation/Validate.cpp</itemPath>
         <itemPath>../../Validation/Validate.h</itemPath>
       </logicalFolder>
+=======
+      <itemPath>../../main.cpp</itemPath>
+>>>>>>> master
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -109,6 +112,33 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+<<<<<<< HEAD
+=======
+      <item path="../../data_structures/child_elt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../data_structures/document.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd_attr.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd_elt.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/element.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/node.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/text_node.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+>>>>>>> master
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -166,6 +196,33 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+<<<<<<< HEAD
+=======
+      <item path="../../data_structures/child_elt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../data_structures/document.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd_attr.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/dtd_elt.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/element.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/node.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../data_structures/text_node.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+>>>>>>> master
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
