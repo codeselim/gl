@@ -21,3 +21,4 @@ analyseXML
 *.a
 /nbProject/GL/build/
 /nbProject/GL/dist/
+tests/output.txt
