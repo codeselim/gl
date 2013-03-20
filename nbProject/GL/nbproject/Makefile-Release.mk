@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/676253835/child_elt.o \
 	${OBJECTDIR}/_ext/676253835/dtd_attr.o \
 	${OBJECTDIR}/_ext/676253835/dtd.o \
+	${OBJECTDIR}/_ext/676253835/xsl_element.o \
 	${OBJECTDIR}/_ext/676253835/document.o \
 	${OBJECTDIR}/_ext/43898991/main.o \
 	${OBJECTDIR}/_ext/1445279537/html_builder.o \
@@ -97,6 +98,11 @@ ${OBJECTDIR}/_ext/676253835/dtd.o: nbproject/Makefile-${CND_CONF}.mk ../../data_
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd.o ../../data_structures/dtd.cpp
+
+${OBJECTDIR}/_ext/676253835/xsl_element.o: nbproject/Makefile-${CND_CONF}.mk ../../data_structures/xsl_element.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/xsl_element.o ../../data_structures/xsl_element.cpp
 
 ${OBJECTDIR}/_ext/676253835/document.o: nbproject/Makefile-${CND_CONF}.mk ../../data_structures/document.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
@@ -204,6 +210,19 @@ ${OBJECTDIR}/_ext/676253835/dtd_nomain.o: ${OBJECTDIR}/_ext/676253835/dtd.o ../.
 	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_nomain.o ../../data_structures/dtd.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/dtd.o ${OBJECTDIR}/_ext/676253835/dtd_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/676253835/xsl_element_nomain.o: ${OBJECTDIR}/_ext/676253835/xsl_element.o ../../data_structures/xsl_element.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/676253835/xsl_element.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/xsl_element_nomain.o ../../data_structures/xsl_element.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/676253835/xsl_element.o ${OBJECTDIR}/_ext/676253835/xsl_element_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/676253835/document_nomain.o: ${OBJECTDIR}/_ext/676253835/document.o ../../data_structures/document.cpp 

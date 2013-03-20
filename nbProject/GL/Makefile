@@ -53,8 +53,8 @@ CCADMIN=CCadmin
 # build
 build: .build-post
 
-.build-pre:
-# Add your pre 'build' code here...
+.build-pre: 
+	cd ../../ && make analyseDTD && make analyseXML
 
 .build-post: .build-impl
 # Add your post 'build' code here...

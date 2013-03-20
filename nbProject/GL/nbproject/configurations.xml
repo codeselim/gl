@@ -55,6 +55,8 @@
         <itemPath>../../data_structures/node.h</itemPath>
         <itemPath>../../data_structures/text_node.cpp</itemPath>
         <itemPath>../../data_structures/text_node.h</itemPath>
+        <itemPath>../../data_structures/xsl_element.cpp</itemPath>
+        <itemPath>../../data_structures/xsl_element.h</itemPath>
       </logicalFolder>
       <logicalFolder name="xsl" displayName="xsl" projectFiles="true">
         <itemPath>../../xsl/html_builder.cpp</itemPath>
@@ -97,6 +99,22 @@
         <compilerSet>GNU|GNU</compilerSet>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>../../AnalyseurDTD</pElem>
+            <pElem>../../AnalyseurXML</pElem>
+            <pElem>../../data_structures</pElem>
+            <pElem>../../xsl</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>../../AnalyseurDTD</pElem>
+            <pElem>../../AnalyseurXML</pElem>
+            <pElem>../../data_structures</pElem>
+            <pElem>../../xsl</pElem>
+          </incDir>
+        </ccTool>
       </compileType>
       <item path="../../data_structures/child_elt.cpp"
             ex="false"

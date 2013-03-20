@@ -2,6 +2,10 @@
 #include <sstream>
 #include "../data_structures/text_node.h"
 
+// Constant for toXML() comparison
+const XSLElement APPLY_TEMPLATES = Element::createElement(&(ElementName(string("xsl"), string("apply-templates"))), NULL, NULL);
+const char* APPLY_TEMPLATES_STR = APPLY_TEMPLATES.toXML().c_str();
+
 HTMLBuilder::HTMLBuilder(XSLElement* xsl_root, Element* xml_root) {
 	this->xsl_root = xsl_root;
 	this->xml_root = xml_root;
@@ -31,6 +35,8 @@ string HTMLBuilder::html() {
 			if (TextNode::NODE_NAME != curr->getName()) // Not a text node
 			{
 				str << build_html(curr);
+			} else {
+				str << curr->toXML();
 			}
 		}
 	}
@@ -40,11 +46,15 @@ string HTMLBuilder::html() {
 string HTMLBuilder::build_html(Node* curr) {
 	// Is there any template for this node ?
 	throw NotYetImplementedException();
-	return string("");
-	// templateIndex::iterator it = index.find(curr->getName());
+	stringstream str;
 
-	// if (it->second != index.end())
-	// {
+	templateIndex::iterator it = index.find(curr->getName());
+
+	if (it->second != index.end())
+	{
+		XSLElement* xslel = it->second;
+		string tmp = xslel->toXML();
 		
-	// }
+	}
+	return str.str();
 }
