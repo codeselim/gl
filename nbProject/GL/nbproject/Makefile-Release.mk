@@ -40,7 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/676253835/dtd_attr.o \
 	${OBJECTDIR}/_ext/676253835/dtd.o \
 	${OBJECTDIR}/_ext/676253835/document.o \
-	${OBJECTDIR}/_ext/676253835/main.o \
+	${OBJECTDIR}/_ext/43898991/main.o \
 	${OBJECTDIR}/_ext/676253835/text_node.o \
 	${OBJECTDIR}/_ext/676253835/dtd_elt.o \
 	${OBJECTDIR}/_ext/676253835/element.o
@@ -50,6 +50,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl \
 	${TESTDIR}/TestFiles/f1
 
 # C Compiler Flags
@@ -101,10 +102,10 @@ ${OBJECTDIR}/_ext/676253835/document.o: nbproject/Makefile-${CND_CONF}.mk ../../
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/document.o ../../data_structures/document.cpp
 
-${OBJECTDIR}/_ext/676253835/main.o: nbproject/Makefile-${CND_CONF}.mk ../../data_structures/main.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
+${OBJECTDIR}/_ext/43898991/main.o: nbproject/Makefile-${CND_CONF}.mk ../../main.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/43898991
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main.o ../../data_structures/main.cpp
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/43898991/main.o ../../main.cpp
 
 ${OBJECTDIR}/_ext/676253835/text_node.o: nbproject/Makefile-${CND_CONF}.mk ../../data_structures/text_node.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
@@ -126,9 +127,19 @@ ${OBJECTDIR}/_ext/676253835/element.o: nbproject/Makefile-${CND_CONF}.mk ../../d
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl: ${TESTDIR}/_ext/1635097729/element_getters.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.cc}   -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl $^ ${LDLIBSOPTIONS} 
+
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/_ext/1635097729/to_xml.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+
+
+${TESTDIR}/_ext/1635097729/element_getters.o: ../../tests/element_getters.cpp 
+	${MKDIR} -p ${TESTDIR}/_ext/1635097729
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
 
 
 ${TESTDIR}/_ext/1635097729/to_xml.o: ../../tests/to_xml.cpp 
@@ -202,17 +213,17 @@ ${OBJECTDIR}/_ext/676253835/document_nomain.o: ${OBJECTDIR}/_ext/676253835/docum
 	    ${CP} ${OBJECTDIR}/_ext/676253835/document.o ${OBJECTDIR}/_ext/676253835/document_nomain.o;\
 	fi
 
-${OBJECTDIR}/_ext/676253835/main_nomain.o: ${OBJECTDIR}/_ext/676253835/main.o ../../data_structures/main.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/676253835/main.o`; \
+${OBJECTDIR}/_ext/43898991/main_nomain.o: ${OBJECTDIR}/_ext/43898991/main.o ../../main.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/43898991
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/43898991/main.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main_nomain.o ../../data_structures/main.cpp;\
+	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/43898991/main_nomain.o ../../main.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/_ext/676253835/main.o ${OBJECTDIR}/_ext/676253835/main_nomain.o;\
+	    ${CP} ${OBJECTDIR}/_ext/43898991/main.o ${OBJECTDIR}/_ext/43898991/main_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/676253835/text_node_nomain.o: ${OBJECTDIR}/_ext/676253835/text_node.o ../../data_structures/text_node.cpp 
@@ -258,6 +269,7 @@ ${OBJECTDIR}/_ext/676253835/element_nomain.o: ${OBJECTDIR}/_ext/676253835/elemen
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
 	    ./${TEST} || true; \

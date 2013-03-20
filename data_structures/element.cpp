@@ -1,5 +1,6 @@
 #include "element.h"
 #include <sstream>
+#include <exception>
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
 	if(NULL == children) {
@@ -41,4 +42,25 @@ string Element::toXML() {
 	}
 	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
+}
+
+nodeList* Element::getChildren() {
+	return this->children;
+}
+
+string Element::getSpaceSeparatedChildrenList() {
+	stringstream result;
+	string space = "";
+	if (NULL != this->children)
+	{
+		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+			result << space << (*it)->getName();
+			space = " ";
+		}
+	}
+	return result.str();
+}
+
+string Element::getName() {
+	return this->name;
 }

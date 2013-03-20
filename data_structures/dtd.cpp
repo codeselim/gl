@@ -1,19 +1,32 @@
 #include "dtd.h"
+#include <sstream>
 
 void DtdEltMap::add_attrs(string element, list<DtdAttr*> * attList) {
-		list<DtdAttr*> * l = (*attr_map)[element];
-		if (l == NULL) {
-			l = new list<DtdAttr*>();
-		}
+	map<string, DtdElt*>::iterator it = elt_map->find(element);
 
-		// for (list<DtdAttr*>::iterator i = attList->begin(); i != attList->end(); ++i) {
-		// 	l->push_back(*i);
-		// }
-		// attList->clear();
-		l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
-		delete attList;
-		// delete attList;
+	if (it == elt_map->end()) {
+		elt_map->insert(pair<string, DtdElt*>(element, new DtdElt(element, attList)));
+	} else {
+		list<DtdAttr*> * l = it->second->getAttributes();
+		if (l == NULL) {
+			it->second->setAttributes(attList);
+		} else {
+			l->splice(l->end(), *attList); /* déplacer les éléments de attList vers l */
+			delete attList;
+		}
 	}
+
+}
+
+void DtdEltMap::add_elt(DtdElt* element) {
+	map<string, DtdElt*>::iterator it = elt_map->find(element->getName());
+
+	if (it == elt_map->end()) {
+		elt_map->insert(pair<string, DtdElt*>(element->getName(), element));
+	} else {
+		it->second->copy(element);
+	}
+}
 
 DtdEltMap::~DtdEltMap() {
 	for (map<string, list<DtdAttr*> *>::iterator i = attr_map->begin(); i != attr_map->end(); ++i) {
@@ -28,3 +41,14 @@ DtdEltMap::~DtdEltMap() {
 	}
 	delete elt_map;
 }
+
+string DtdEltMap::toString() {
+	stringstream str;
+
+	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
+		str << i->second->toString() << endl;
+	}
+	return str.str();
+};
+
+string Dtd::toString() {return elements->toString(); };

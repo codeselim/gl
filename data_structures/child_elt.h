@@ -3,38 +3,46 @@
 #define __CHILD_ELT_H_
 
 #include <string>
+#include <list>
+#include <iostream>
 
 #include "enums.h"
 
 using namespace std;
 
-class Element {
+class Child {
 protected:
 	Card card;
-	Element(Card theCard = NONE): card(theCard) {};
+	EltType type;
+	Child(Card theCard = NONE, EltType theType = T_PCDATA):
+		card(theCard), type(theType){};
 public:
 	void setCard(Card theCard) { card = theCard; };
+	virtual string toString() = 0;
+	string cardToString();
 };
 
-class ChildListElt: public Element {
-	list<Element*> * eltList;
-	ListType type;
+class ChildListElt: public Child {
+	list<Child*> * eltList;
+	ListType listType;
 public:
-	void add(Element* elt) { eltList->push_back(elt); };
-	ChildListElt(Element* elt, ListType theType, Card theCard):
-		Element(theCard), eltList(new list<Element*>()), type(theType) {eltList->push_back(elt); };
-	ChildListElt(ListType theType): type(theType), eltList(new list<Element*>()) {};
+	void add(Child* elt) { eltList->push_back(elt); };
+	ChildListElt(Child* elt, ListType theType, Card theCard):
+		Child(theCard), eltList(new list<Child*>()), listType(theType) {eltList->push_back(elt); };
+	ChildListElt(ListType theType): listType(theType), eltList(new list<Child*>()) {};
 	~ChildListElt() {delete eltList; };
+	virtual string toString();
 };
 
-class ChildElt: public Element {
+class ChildElt: public Child {
 	string eltName;
-	EltType eltType;
 public:
 	ChildElt(string name, Card theCard = NONE, EltType type = TOKEN):
-		Element(theCard), eltName(name), eltType(type) {};
-	ChildElt(): eltName("PCDATA"), eltType(T_PCDATA) {};
-
+		Child(theCard, type) {eltName = name; };
+	ChildElt(): Child(NONE, T_PCDATA), eltName("#PC_DATA")  {};
+	string getName() { return eltName; };
+	string setName(string name) { eltName = name; };
+	virtual string toString();
 };
 
 #endif
