@@ -7,6 +7,8 @@
 #include <dtd.tab.h>
 #include <xml.tab.h>
 
+#include <Validate.h>
+
 using namespace std;
 #define DBG
 
@@ -65,6 +67,10 @@ int main(int argc, char** argv) {
 		  err = dtdparse(&dtd);
 	  	fclose(dtdin);
 	  	cout << dtd->toString() << endl;
+
+	  	//Validating xml with dtd
+	  	Validate validator(xmlDocument, dtd);
+	  	cout << validator.isValid() << endl;
 
   	}
   }
