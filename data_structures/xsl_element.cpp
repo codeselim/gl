@@ -2,10 +2,10 @@
 
 using namespace std;
 
-XSLElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/): Element(en, attrs, children) {
+XSLElement::XSLElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/): Element(en, attrs, children) {
 		
 }
 
 bool hasApplyTemplate() {
-
+	return false;
 }

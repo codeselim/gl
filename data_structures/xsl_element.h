@@ -8,10 +8,10 @@
 using namespace std;
 
 class XSLElement : public Element {
-protected:
-
 private:
     XSLElement(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
+
+friend Element* Element::createElement(ElementName*, attributesMap*,  nodeList*);
 
 public:
 	bool hasApplyTemplate();
