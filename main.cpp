@@ -9,12 +9,14 @@
 #include <dtd.tab.h>
 #include <xml.tab.h>
 
+#include <Validate.h>
+
 using namespace std;
 #define DBG
 
+
 int dtdparse(Dtd**);
 int xmlparse(Document**);
-
 
 int main(int argc, char** argv) {
 	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
@@ -84,9 +86,17 @@ int main(int argc, char** argv) {
   err = dtdparse(&dtd);
   fclose(dtdin);
 
+<<<<<<< HEAD
 	if (err != 0) {
   	cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
     return EXIT_FAILURE;
+=======
+	  	//Validating xml with dtd
+	  	Validate validator(xmlDocument, dtd);
+	  	cout << validator.isValid() << endl;
+
+  	}
+>>>>>>> 8765b712092a6d9ca3e7af6ad2b255f3dda330ff
   }
 
 

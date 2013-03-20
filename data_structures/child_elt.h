@@ -19,6 +19,7 @@ protected:
 public:
 	void setCard(Card theCard) { card = theCard; };
 	virtual string toString() = 0;
+	EltType getType();
 	string cardToString(); /* Retourne ?, + ou * suivant la valeur de card */
 	string typeToString();
 };

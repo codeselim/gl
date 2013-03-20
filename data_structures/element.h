@@ -27,6 +27,7 @@ public:
 	Element* getParent();
 	nodeList* getChildren();
 	string getSpaceSeparatedChildrenList();
+	attributesMap* getAttributes() {return attributes ;}
     Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
