@@ -5,19 +5,19 @@ Validate::Validate(Document *xmlFile, Dtd * dtdFile) {
 	dtd = dtdFile;
 }
 
-bool Validate::isElementValid(Element *elt) {
+bool Validate::isElementValid(Element* elt) {
 	string eltName = elt->getName();
-	attributesMap attrXml = elt->getAttributes();
-	DtdEltMap* elements = dtd->getElements();
+	attributesMap* attrXml = elt->getAttributes();
+	DtdEltMap* elements = dtd->getElementMap();
 	list<DtdAttr*> * attrDtd = elements->getAttributes(eltName);
 	bool foundAttr = false;
 
 // Check attributes
-	for(attributesMap::iterator itXml = attrXml.begin(); itXml != attrXml.end(); itXml++) {
-		  string attrNameXml = itXml->first();
+	for(attributesMap::iterator itXml = attrXml->begin(); itXml != attrXml->end(); itXml++) {
+		  string attrNameXml = itXml->first;
 		  foundAttr = false;
-		  for (*(attrDtd)::iterator itDtd = attrDtd->begin(); itDtd != attrDtd->end(); itDtd++) {
-		  	string attrNameDtd = (*itDtd)->tostring();
+		  for (list<DtdAttr*>::iterator itDtd = attrDtd->begin(); itDtd != attrDtd->end(); itDtd++) {
+		  	string attrNameDtd = (*itDtd)->toString();
 		  	if(attrNameXml == attrNameDtd ) {
 		  		foundAttr = true;
 		  	}
@@ -29,28 +29,28 @@ bool Validate::isElementValid(Element *elt) {
 }
 
 // Check children
-string childrenstring = elt->getChildren();
-DtdElement * dtdElt = elements.get(eltName);
-string dtdEltRegex = dtdElt->getChildren()->tostring();
+string childrenstring = elt->getSpaceSeparatedChildrenList();
+DtdElt * dtdElt = elements->getElement(eltName);
+string dtdEltRegex = dtdElt->getChildren()->toString();
 EltType eltContentType = dtdElt->getChildren()->getType();
-T_PCDATA, TOKEN
-if( eltType == T_EMPTY) {
+
+if( eltContentType == T_EMPTY) {
 	if(childrenstring.length() > 0) {
 		return false;
 	}
 }
-else if (eltType == LIST || eltType == TOKEN) {
+else if (eltContentType == LIST || eltContentType == TOKEN) {
 	//Match regex
-	string regex = createRegex(dtdElt);
+	//string regex = createRegex(dtdElt);
 	//TODO
 }
 
 // Get children of the current xml element
-NodeList children = elt->getChildren();
+nodeList* children = elt->getChildren();
 // Validate children element nodes
-for(NodeList::iterator itNode = children.begin(); itNode != children.end(); itNode++) {
-	if((*itNode)->getType() == ELEMENT) {
-		isElementValid(*itNode);
+for(nodeList::iterator itNode = children->begin(); itNode != children->end(); itNode++) {
+	if((*itNode)->getName() != "#PCDATA") {
+		isElementValid((Element*)*itNode);
 	}
 }
 

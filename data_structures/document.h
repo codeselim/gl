@@ -20,6 +20,7 @@ public:
 	~Document();
 	string toXML();
 	string getRootName(){return rootNode->getName();};
+	Element* getRoot () {return rootNode;}
 	string getDtdFileName();
 };
 

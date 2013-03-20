@@ -16,7 +16,7 @@ public:
 	DtdEltMap(): elt_map(new map<string, DtdElt*>()), attr_map(new map<string, list<DtdAttr*> *>()) {}
 	void add_elt(DtdElt* element);
 	void add_attrs(string element, list<DtdAttr*> * attList) ;
-	DtElt * getElement(String eltName) { return (*elt_map)[eltName]; }
+	DtdElt * getElement(string eltName) { return (*elt_map)[eltName]; }
 	list<DtdAttr*> * getAttributes(string eltName) { return (*attr_map)[eltName]; }
 	string toString();
 	~DtdEltMap();
@@ -27,6 +27,7 @@ class Dtd {
 public:
 	Dtd(DtdEltMap* lst_elements): elements(lst_elements) {}
 	string toString();
+	DtdEltMap* getElementMap () {return elements ;}
 };
 
 #endif
