@@ -4,6 +4,7 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 #include "commun.h"
+#include <special_node.h>
 #include <document.h>
 #include "yy.tab.h"
 
@@ -24,7 +25,7 @@ int main(int argc, char **argv) {
     printf("Parse ended with %d error(s)\n", err);
   } else {
     printf("Parse ended with success\n", err);
-    rootExpr->toXML();
+    cout << rootExpr->toXML() << endl;
   } 
   return 0;
 }

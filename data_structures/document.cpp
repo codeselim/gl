@@ -13,7 +13,9 @@ Document::~Document() {
 
 string Document::toXML() {
 	stringstream str;
-	str << this->declarations << endl;
+	for (list<Node*>::iterator i = declarations->begin(); i != declarations->end(); ++i) {
+		str << (*i)->toXML() << "\n";
+	}
 	str << this->rootNode->toXML();
 	return str.str();
 }

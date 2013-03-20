@@ -11,6 +11,7 @@ using namespace std;
 #include <text_node.h>
 #include <dtd.h>
 #include <document.h>
+#include <special_node.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
 int yywrap(void);
@@ -29,7 +30,6 @@ Document* rootExpr;
    attributesMap * am;
    Document * d;
    SpecialNode * sn;
-   
 }
 
 %token EGAL SLASH SUP SUPSPECIAL DOCTYPE
@@ -38,7 +38,7 @@ Document* rootExpr;
 
 %type <en> ouvre
 %type <elt> element
-%type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin
+%type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin declarations_opt
 %type <attr> attribut
 %type <am> attributs_opt
 %type <d> document
@@ -47,7 +47,7 @@ Document* rootExpr;
 %%
 
 document
- : declarations_opt element misc_seq_opt  {$$ = new Document(NULL, $2); rootExpr = $$;}
+ : declarations_opt element misc_seq_opt  {$$ = new Document($1, $2); rootExpr = $$;}
  ;
 
 
@@ -62,15 +62,15 @@ misc
 
 
 declarations_opt
- : declarations_opt declaration
- | /*vide*/
+ : declarations_opt declaration { $$ = $1; $$->push_back($2);}
+ | /*vide*/ { $$ = new list<Node*>();}
  ;
 
 declaration
  : DOCTYPE NOM NOM VALEUR SUP { 
- 				attributesMap mymap = new attributesMap();
- 				mymap->insert();
- 				$$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), $3);  
+ 				attributesMap* map = new attributesMap();
+ 				map->insert(pair<string,string>("DTD_FILE_NAME", $4));
+ 				$$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);  
  				}
  ;
 

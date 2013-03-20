@@ -8,7 +8,7 @@ string SpecialNode::toXML() {
 	stringstream str;
 	
 	// The element tag...
-	str << "<";
+	str << "<docrype dude>>>";
 	//if(this->type == )
 	// str << "<" << this->name;
 

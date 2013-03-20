@@ -1,3 +1,7 @@
+#ifndef __SPECIAL_NODE_H_
+
+#define __SPECIAL_NODE_H_
+
 #include "enums.h"
 #include "element.h"
 #include "../AnalyseurXML/commun.h"
@@ -12,3 +16,5 @@ class SpecialNode: public Element {
 		virtual string toXML();
 		SpecialNodeType getType() { return type; }
 };
+
+#endif
