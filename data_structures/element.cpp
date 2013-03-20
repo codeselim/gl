@@ -1,12 +1,13 @@
 #include "element.h"
 #include <sstream>
+#include "xsl_element.h"
 #include <exception>
 
 Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/) {
 	if ("xsl" == en->first) // namespace comparison
 	{
 		// Instanciate a XSL element
-		throw NotYetImplementedException();
+		return new XSLElement(en, attrs, children);
 	} else {
 		return new Element(en, attrs, children);
 	}
@@ -18,7 +19,7 @@ Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = N
 	}
 	this->children = children;
 	this->attributes = attrs;
-	this->name = en->first;
+	this->name = en->second;
 }
 
 Element& Element::setParent(Element* e) {

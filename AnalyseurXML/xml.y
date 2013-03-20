@@ -6,18 +6,19 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 
-#include "commun.h"
+#include <commun.h>
 #include <element.h>
 #include <text_node.h>
 #include <document.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
-int yywrap(void);
-void yyerror(const char *msg);
-int yylex(void);
+int xmlwrap(void);
+void xmlerror(Document** xmlDocument, const char *msg);
+int xmllex(void);
 
-Document* rootExpr;
 %}
+
+%parse-param { Document ** xmlDocument }
 
 %union {
    char * s;
@@ -42,7 +43,7 @@ Document* rootExpr;
 %%
 
 document
- : declarations_opt element misc_seq_opt  {$$ = new Document(NULL, $2); rootExpr = $$;}
+ : declarations_opt element misc_seq_opt  {$$ = new Document(NULL, $2); *xmlDocument = $$;}
  ;
 
 
@@ -104,12 +105,12 @@ contenu_opt
 
 %%
 
-int yywrap(void)
+int xmlwrap(void)
 {
   return 1;
 }
 
-void yyerror(const char *msg) {
+void xmlerror(Document** xmlDocument, const char *msg) {
   cout << msg;
 }
 
