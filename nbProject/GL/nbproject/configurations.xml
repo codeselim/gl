@@ -74,6 +74,12 @@
                      kind="TEST">
         <itemPath>../../tests/element_getters.cpp</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3"
+                     displayName="HTMLBuilder"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>../../tests/html_builder.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1"
                      displayName="toXMLTest"
                      projectFiles="true"
@@ -140,8 +146,6 @@
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="../../xsl/html_builder.cpp" ex="false" tool="0" flavor2="0">
-      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -172,6 +176,21 @@
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
     </conf>
@@ -218,8 +237,6 @@
             flavor2="0">
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../xsl/html_builder.cpp" ex="false" tool="0" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>
