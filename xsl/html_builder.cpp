@@ -50,7 +50,7 @@ string HTMLBuilder::build_html(Node* curr) {
 
 	templateIndex::iterator it = index.find(curr->getName());
 
-	if (it->second != index.end())
+	if (it != index.end())
 	{
 		XSLElement* xslel = it->second;
 		string tmp = xslel->toXML();

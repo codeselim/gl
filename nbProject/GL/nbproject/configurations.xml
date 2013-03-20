@@ -140,6 +140,8 @@
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="../../xsl/html_builder.cpp" ex="false" tool="0" flavor2="0">
+      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -216,6 +218,8 @@
             flavor2="0">
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../xsl/html_builder.cpp" ex="false" tool="0" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>
