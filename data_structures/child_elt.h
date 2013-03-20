@@ -21,7 +21,7 @@ public:
 	virtual string toString() = 0;
 	EltType getType();
 	string cardToString(); /* Retourne ?, + ou * suivant la valeur de card */
-
+	string typeToString();
 };
 
 class ChildListElt: public Child {
@@ -30,8 +30,9 @@ class ChildListElt: public Child {
 public:
 	void add(Child* elt) { eltList->push_back(elt); };
 	ChildListElt(Child* elt, ListType theType, Card theCard):
-		Child(theCard), eltList(new list<Child*>()), listType(theType) {eltList->push_back(elt); };
-	ChildListElt(ListType theType): listType(theType), eltList(new list<Child*>()) {};
+		Child(theCard, LIST), eltList(new list<Child*>()), listType(theType) {eltList->push_back(elt); };
+	ChildListElt(ListType theType):
+		Child(NONE, LIST), listType(theType), eltList(new list<Child*>()) {};
 	~ChildListElt() {delete eltList; };
 	virtual string toString();
 };
