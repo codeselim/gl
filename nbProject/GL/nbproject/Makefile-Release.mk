@@ -138,7 +138,7 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/_ext/1635097729/to_xml.o ${OBJECTFILES:%.o=%
 ${TESTDIR}/_ext/1635097729/element_getters.o: ../../tests/element_getters.cpp 
 	${MKDIR} -p ${TESTDIR}/_ext/1635097729
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
+	$(COMPILE.c) -O2 -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
 
 
 ${TESTDIR}/_ext/1635097729/to_xml.o: ../../tests/to_xml.cpp 

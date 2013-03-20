@@ -9,6 +9,7 @@ using namespace std;
 #include "commun.h"
 #include <element.h>
 #include <text_node.h>
+#include <dtd.h>
 #include <document.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
@@ -27,17 +28,21 @@ Document* rootExpr;
    Attribut * attr;
    attributesMap * am;
    Document * d;
+   SpecialNode * sn;
+   
 }
 
 %token EGAL SLASH SUP SUPSPECIAL DOCTYPE
 %token <s> ENCODING VALEUR DONNEES COMMENT NOM ENNOM
 %token <en> OBALISEEN OBALISE OBALISESPECIALE FBALISE FBALISEEN
+
 %type <en> ouvre
 %type <elt> element
 %type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin
 %type <attr> attribut
 %type <am> attributs_opt
 %type <d> document
+%type <sn> declaration
 
 %%
 
@@ -62,7 +67,11 @@ declarations_opt
  ;
 
 declaration
- : DOCTYPE NOM NOM VALEUR SUP
+ : DOCTYPE NOM NOM VALEUR SUP { 
+ 				attributesMap mymap = new attributesMap();
+ 				mymap->insert();
+ 				$$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), $3);  
+ 				}
  ;
 
 
