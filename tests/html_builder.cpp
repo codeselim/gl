@@ -41,6 +41,7 @@ bool html_building(){
         ElementName en = ElementName(string("blorg"), string("xml"));
         Element* a = Element::createElement(&en, NULL, &l);
 
+        //<xsl:stylesheet> 
         //<xsl:template match="xml">
         //<html>
         //<body>
@@ -48,6 +49,7 @@ bool html_building(){
         //</body>
         //</html>
         //</xsl:template>
+        //</xsl:stylesheet>
         nodeList n;
         nodeList n1;
         nodeList n2;
@@ -73,9 +75,6 @@ bool html_building(){
         HTMLBuilder htmlb(root, a);
         string result = htmlb.html();
 
-        //
-        //
-        //
         string expected = "<html>\n<body>\nBlorg\n</body>\n</html>";
         if (expected != result)
         {
