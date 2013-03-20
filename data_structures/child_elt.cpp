@@ -11,7 +11,18 @@ string Child::cardToString() {
 	}
 }
 
+string Child::typeToString() {
+	switch (type) {
+		case T_ANY: return "(ANY)";
+		case T_EMPTY: return "(EMPTY)";
+		case LIST: return "(LIST)";
+		case T_PCDATA: return "(PCDATA)";
+		case TOKEN: return "(TOKEN)";
+	}
+}
+
 string ChildElt::toString() {
+	// return eltName + cardToString() + " " + typeToString();
 	return eltName + cardToString();
 }
 
@@ -33,5 +44,6 @@ string ChildListElt::toString() {
 		str << (*i)->toString();
 	}
 	str << ")";
+	// return str.str() + cardToString() + " " + typeToString();
 	return str.str() + cardToString();
 }

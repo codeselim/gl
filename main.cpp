@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdio>
+#include <cstring>
+#include <cstdlib>
 
 #include <dtd.h>
 #include <document.h>
@@ -47,33 +49,55 @@ int main(int argc, char** argv) {
 	Dtd* dtd = NULL;
 
   xmlin = fopen(xmlfile, "r");
+  if (!xmlin) {
+  	cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+  	return EXIT_FAILURE;
+  }
 
   err = xmlparse(&xmlDocument);
   fclose(xmlin);
 
   if (err != 0) {
-    printf("XML parse ended with %d error(s)\n", err);
-    return 1;
+  	cerr << "Analyse du XML terminée avec " << err << " erreurs" << endl;
+    return EXIT_FAILURE;
   }
 
-  printf("XML parse ended with success\n", err);
+  cout << "------------------------------------" << endl;
   cout << xmlDocument->toXML() << endl;
+  cout << "------------------------------------" << endl;
 
-  if (dtdfile != NULL) {
-  	dtdin = fopen(dtdfile, "r");
-  	if (dtdin) {
-		  err = dtdparse(&dtd);
-	  	fclose(dtdin);
-	  	cout << dtd->toString() << endl;
+  if (! xmlDocument->getDtdFileName().empty()) {
+  	strcpy(dtdfile, xmlDocument->getDtdFileName().c_str());
+  }
 
-  	}
+  if (dtdfile == NULL) {
+  	cerr << "Pas de fichier DTD." << endl;
+  	return EXIT_FAILURE;
+  }
+
+	dtdin = fopen(dtdfile, "r");
+	if (!dtdin) {
+  	cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
+  	return EXIT_FAILURE;
+  }
+
+  err = dtdparse(&dtd);
+  fclose(dtdin);
+
+	if (err != 0) {
+  	cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
+    return EXIT_FAILURE;
   }
 
 
-  return 0;
+  cout << dtd->toString() << endl;
+  cout << "------------------------------------" << endl;
+
+  /* dtd et xmlDocument sont maintenant correctement initialisés. */
 
 
-	// Put main test logic here
+  delete dtd;
+  delete xmlDocument;
 
-	return 0;
+  return EXIT_SUCCESS;
 }
