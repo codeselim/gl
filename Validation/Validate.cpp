@@ -63,6 +63,6 @@ for(nodeList::iterator itNode = children->begin(); itNode != children->end(); it
 }
 
 bool Validate::isValid() {
-	isElementValid(xml->getRoot());
+	return isElementValid(xml->getRoot());
 }
 
