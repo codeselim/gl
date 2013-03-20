@@ -14,7 +14,7 @@ typedef list<Node*> nodeList;
 typedef map<string, string> attributesMap;
 
 class Element : public Node {
-private:
+protected:
     nodeList * children;
     attributesMap * attributes;
     Element* parent;
@@ -32,6 +32,7 @@ public:
 	virtual string getName();
 	Element* getParent();
 	nodeList* getChildren();
+	string getAttributeValue(string attr);
 	string getSpaceSeparatedChildrenList();
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string

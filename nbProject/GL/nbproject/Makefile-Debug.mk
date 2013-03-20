@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/676253835/dtd.o \
 	${OBJECTDIR}/_ext/676253835/document.o \
 	${OBJECTDIR}/_ext/43898991/main.o \
+	${OBJECTDIR}/_ext/1445279537/html_builder.o \
 	${OBJECTDIR}/_ext/676253835/text_node.o \
 	${OBJECTDIR}/_ext/676253835/dtd_elt.o \
 	${OBJECTDIR}/_ext/676253835/element.o
@@ -106,6 +107,11 @@ ${OBJECTDIR}/_ext/43898991/main.o: ../../main.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/43898991
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/43898991/main.o ../../main.cpp
+
+${OBJECTDIR}/_ext/1445279537/html_builder.o: ../../xsl/html_builder.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1445279537
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1445279537/html_builder.o ../../xsl/html_builder.cpp
 
 ${OBJECTDIR}/_ext/676253835/text_node.o: ../../data_structures/text_node.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
@@ -224,6 +230,19 @@ ${OBJECTDIR}/_ext/43898991/main_nomain.o: ${OBJECTDIR}/_ext/43898991/main.o ../.
 	    $(COMPILE.c) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/43898991/main_nomain.o ../../main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/43898991/main.o ${OBJECTDIR}/_ext/43898991/main_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/1445279537/html_builder_nomain.o: ${OBJECTDIR}/_ext/1445279537/html_builder.o ../../xsl/html_builder.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1445279537
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/1445279537/html_builder.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.c) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1445279537/html_builder_nomain.o ../../xsl/html_builder.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/1445279537/html_builder.o ${OBJECTDIR}/_ext/1445279537/html_builder_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/676253835/text_node_nomain.o: ${OBJECTDIR}/_ext/676253835/text_node.o ../../data_structures/text_node.cpp 

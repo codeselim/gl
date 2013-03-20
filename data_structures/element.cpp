@@ -3,7 +3,7 @@
 #include <exception>
 
 Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/) {
-	if ("xsl" == en->second)
+	if ("xsl" == en->first) // namespace comparison
 	{
 		// Instanciate a XSL element
 		throw NotYetImplementedException();
@@ -27,6 +27,16 @@ Element& Element::setParent(Element* e) {
 
 Element* Element::getParent() {
 	return this->parent;
+}
+
+string Element::getAttributeValue(string attr) {
+	attributesMap::iterator it = this->attributes->find(attr);
+	if (this->attributes->end() != it)
+	{
+		return it->second;
+	} else {
+		return string("");
+	}
 }
 
 string Element::toXML() {
