@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
     printf("Parse ended with %d error(s)\n", err);
   } else {
     printf("Parse ended with success\n", err);
-    rootExpr->toXML();
+    cout << rootExpr->toXML() << endl;
   } 
   return 0;
 }
