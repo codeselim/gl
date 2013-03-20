@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="84">
+<configurationDescriptor version="80">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -57,6 +57,10 @@
         <itemPath>../../data_structures/text_node.cpp</itemPath>
         <itemPath>../../data_structures/text_node.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="Validation" displayName="Validation" projectFiles="true">
+        <itemPath>../../Validation/Validate.cpp</itemPath>
+        <itemPath>../../Validation/Validate.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -84,6 +88,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../../../../../TP-IF/4IF/gl/code</Elem>
+    <Elem>../../Validation</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -93,42 +98,28 @@
         <compilerSet>default</compilerSet>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>../../../Téléchargements/boost_1_33_1/</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>boost_regex-gcc-1_33_1</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
-      <item path="../../data_structures/child_elt.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../data_structures/document.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd_attr.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd_elt.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/element.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/node.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/text_node.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
@@ -141,10 +132,12 @@
         <cTool>
           <incDir>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
+            <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
@@ -173,35 +166,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../data_structures/child_elt.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../data_structures/document.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd_attr.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/dtd_elt.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/element.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/node.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="../../data_structures/text_node.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
@@ -210,10 +178,26 @@
           <incDir>
             <pElem>.</pElem>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
     </conf>

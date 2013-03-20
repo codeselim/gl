@@ -22,7 +22,6 @@ AS=as
 
 # Macros
 CND_PLATFORM=GNU-Linux-x86
-CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -40,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/676253835/dtd_attr.o \
 	${OBJECTDIR}/_ext/676253835/dtd.o \
 	${OBJECTDIR}/_ext/676253835/document.o \
+	${OBJECTDIR}/_ext/755487289/Validate.o \
 	${OBJECTDIR}/_ext/676253835/main.o \
 	${OBJECTDIR}/_ext/676253835/text_node.o \
 	${OBJECTDIR}/_ext/676253835/dtd_elt.o \
@@ -67,7 +67,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lboost_regex-gcc-1_33_1
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -80,47 +80,52 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl: ${OBJECTFILES}
 ${OBJECTDIR}/_ext/676253835/node.o: ../../data_structures/node.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/node.o ../../data_structures/node.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/node.o ../../data_structures/node.cpp
 
 ${OBJECTDIR}/_ext/676253835/child_elt.o: ../../data_structures/child_elt.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/child_elt.o ../../data_structures/child_elt.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/child_elt.o ../../data_structures/child_elt.cpp
 
 ${OBJECTDIR}/_ext/676253835/dtd_attr.o: ../../data_structures/dtd_attr.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_attr.o ../../data_structures/dtd_attr.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_attr.o ../../data_structures/dtd_attr.cpp
 
 ${OBJECTDIR}/_ext/676253835/dtd.o: ../../data_structures/dtd.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd.o ../../data_structures/dtd.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd.o ../../data_structures/dtd.cpp
 
 ${OBJECTDIR}/_ext/676253835/document.o: ../../data_structures/document.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/document.o ../../data_structures/document.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/document.o ../../data_structures/document.cpp
+
+${OBJECTDIR}/_ext/755487289/Validate.o: ../../Validation/Validate.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/755487289
+	${RM} $@.d
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/755487289/Validate.o ../../Validation/Validate.cpp
 
 ${OBJECTDIR}/_ext/676253835/main.o: ../../data_structures/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main.o ../../data_structures/main.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main.o ../../data_structures/main.cpp
 
 ${OBJECTDIR}/_ext/676253835/text_node.o: ../../data_structures/text_node.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/text_node.o ../../data_structures/text_node.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/text_node.o ../../data_structures/text_node.cpp
 
 ${OBJECTDIR}/_ext/676253835/dtd_elt.o: ../../data_structures/dtd_elt.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_elt.o ../../data_structures/dtd_elt.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_elt.o ../../data_structures/dtd_elt.cpp
 
 ${OBJECTDIR}/_ext/676253835/element.o: ../../data_structures/element.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/676253835
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/element.o ../../data_structures/element.cpp
+	$(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/element.o ../../data_structures/element.cpp
 
 # Subprojects
 .build-subprojects:
@@ -139,13 +144,13 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/_ext/1635097729/to_xml.o ${OBJECTFILES:%.o=%
 ${TESTDIR}/_ext/1635097729/element_getters.o: ../../tests/element_getters.cpp 
 	${MKDIR} -p ${TESTDIR}/_ext/1635097729
 	${RM} $@.d
-	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
+	$(COMPILE.cc) -g -I. -I. -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/element_getters.o ../../tests/element_getters.cpp
 
 
 ${TESTDIR}/_ext/1635097729/to_xml.o: ../../tests/to_xml.cpp 
 	${MKDIR} -p ${TESTDIR}/_ext/1635097729
 	${RM} $@.d
-	$(COMPILE.cc) -g -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/to_xml.o ../../tests/to_xml.cpp
+	$(COMPILE.cc) -g -I. -I. -I. -I../../../Téléchargements/boost_1_33_1/ -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/1635097729/to_xml.o ../../tests/to_xml.cpp
 
 
 ${OBJECTDIR}/_ext/676253835/node_nomain.o: ${OBJECTDIR}/_ext/676253835/node.o ../../data_structures/node.cpp 
@@ -156,7 +161,7 @@ ${OBJECTDIR}/_ext/676253835/node_nomain.o: ${OBJECTDIR}/_ext/676253835/node.o ..
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/node_nomain.o ../../data_structures/node.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/node_nomain.o ../../data_structures/node.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/node.o ${OBJECTDIR}/_ext/676253835/node_nomain.o;\
 	fi
@@ -169,7 +174,7 @@ ${OBJECTDIR}/_ext/676253835/child_elt_nomain.o: ${OBJECTDIR}/_ext/676253835/chil
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/child_elt_nomain.o ../../data_structures/child_elt.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/child_elt_nomain.o ../../data_structures/child_elt.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/child_elt.o ${OBJECTDIR}/_ext/676253835/child_elt_nomain.o;\
 	fi
@@ -182,7 +187,7 @@ ${OBJECTDIR}/_ext/676253835/dtd_attr_nomain.o: ${OBJECTDIR}/_ext/676253835/dtd_a
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_attr_nomain.o ../../data_structures/dtd_attr.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_attr_nomain.o ../../data_structures/dtd_attr.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/dtd_attr.o ${OBJECTDIR}/_ext/676253835/dtd_attr_nomain.o;\
 	fi
@@ -195,7 +200,7 @@ ${OBJECTDIR}/_ext/676253835/dtd_nomain.o: ${OBJECTDIR}/_ext/676253835/dtd.o ../.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_nomain.o ../../data_structures/dtd.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_nomain.o ../../data_structures/dtd.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/dtd.o ${OBJECTDIR}/_ext/676253835/dtd_nomain.o;\
 	fi
@@ -208,9 +213,22 @@ ${OBJECTDIR}/_ext/676253835/document_nomain.o: ${OBJECTDIR}/_ext/676253835/docum
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/document_nomain.o ../../data_structures/document.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/document_nomain.o ../../data_structures/document.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/document.o ${OBJECTDIR}/_ext/676253835/document_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/755487289/Validate_nomain.o: ${OBJECTDIR}/_ext/755487289/Validate.o ../../Validation/Validate.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/755487289
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/755487289/Validate.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/755487289/Validate_nomain.o ../../Validation/Validate.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/755487289/Validate.o ${OBJECTDIR}/_ext/755487289/Validate_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/676253835/main_nomain.o: ${OBJECTDIR}/_ext/676253835/main.o ../../data_structures/main.cpp 
@@ -221,7 +239,7 @@ ${OBJECTDIR}/_ext/676253835/main_nomain.o: ${OBJECTDIR}/_ext/676253835/main.o ..
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main_nomain.o ../../data_structures/main.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/main_nomain.o ../../data_structures/main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/main.o ${OBJECTDIR}/_ext/676253835/main_nomain.o;\
 	fi
@@ -234,7 +252,7 @@ ${OBJECTDIR}/_ext/676253835/text_node_nomain.o: ${OBJECTDIR}/_ext/676253835/text
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/text_node_nomain.o ../../data_structures/text_node.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/text_node_nomain.o ../../data_structures/text_node.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/text_node.o ${OBJECTDIR}/_ext/676253835/text_node_nomain.o;\
 	fi
@@ -247,7 +265,7 @@ ${OBJECTDIR}/_ext/676253835/dtd_elt_nomain.o: ${OBJECTDIR}/_ext/676253835/dtd_el
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_elt_nomain.o ../../data_structures/dtd_elt.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/dtd_elt_nomain.o ../../data_structures/dtd_elt.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/dtd_elt.o ${OBJECTDIR}/_ext/676253835/dtd_elt_nomain.o;\
 	fi
@@ -260,7 +278,7 @@ ${OBJECTDIR}/_ext/676253835/element_nomain.o: ${OBJECTDIR}/_ext/676253835/elemen
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/element_nomain.o ../../data_structures/element.cpp;\
+	    $(COMPILE.cc) -g -I../../../Téléchargements/boost_1_33_1/ -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/676253835/element_nomain.o ../../data_structures/element.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/676253835/element.o ${OBJECTDIR}/_ext/676253835/element_nomain.o;\
 	fi

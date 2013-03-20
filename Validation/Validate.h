@@ -3,6 +3,7 @@
 #define __VALIDATE_H_
 
 #include <string>
+#include <boost/regex.hpp>
 #include "../data_structures/document.h"
 #include "../data_structures/dtd.h"
 #include "../data_structures/element.h"

@@ -42,6 +42,12 @@ if( eltContentType == T_EMPTY) {
 else if (eltContentType == LIST || eltContentType == TOKEN) {
 	//Match regex
 	//string regex = createRegex(dtdElt);
+
+  boost::regex ex(dtdEltRegex);
+  if (boost::regex_match(childrenstring, ex)) 
+  {
+    cout << "match" << endl;
+  }
 	//TODO
 }
 
