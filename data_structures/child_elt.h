@@ -43,7 +43,7 @@ class ChildElt: public Child {
 public:
 	ChildElt(string name, Card theCard = NONE, EltType type = TOKEN):
 		Child(theCard, type) {eltName = name; };
-	ChildElt(): Child(NONE, T_PCDATA), eltName("#PC_DATA")  {};
+	ChildElt(): Child(NONE, T_PCDATA), eltName("#PCDATA")  {};
 	string getName() { return eltName; };
 	string setName(string name) { eltName = name; };
 	virtual string toString();

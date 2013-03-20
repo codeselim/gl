@@ -14,9 +14,14 @@
 using namespace std;
 #define DBG
 
+#define EXIT(success) \
+	if (xmlDocument != NULL) delete xmlDocument;\
+	if (dtd != NULL) 	delete dtd;\
+	return success ? EXIT_SUCCESS : EXIT_FAILURE;\
 
 int dtdparse(Dtd**);
 int xmlparse(Document**);
+
 
 int main(int argc, char** argv) {
 	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
@@ -43,71 +48,74 @@ int main(int argc, char** argv) {
 		cout << "XSL: " << xslfile << endl;
 #endif
 	}
-  //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
+	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
 	extern FILE *dtdin, *xmlin;
-  int err;
-  Document* xmlDocument = NULL;
+	int err;
+	Document* xmlDocument = NULL;
 	Dtd* dtd = NULL;
 
-  xmlin = fopen(xmlfile, "r");
-  if (!xmlin) {
-  	cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
-  	return EXIT_FAILURE;
-  }
+	xmlin = fopen(xmlfile, "r");
+	if (!xmlin) {
+		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+		EXIT(false);
+	}
 
-  err = xmlparse(&xmlDocument);
-  fclose(xmlin);
+	err = xmlparse(&xmlDocument);
+	fclose(xmlin);
 
-  if (err != 0) {
-  	cerr << "Analyse du XML terminée avec " << err << " erreurs" << endl;
-    return EXIT_FAILURE;
-  }
+	if (err != 0) {
+		cerr << "Analyse du XML terminée avec " << err << " erreurs" << endl;
+		EXIT(false);
+	}
 
-  cout << "------------------------------------" << endl;
-  cout << xmlDocument->toXML() << endl;
-  cout << "------------------------------------" << endl;
+	cout << "------------------------------------" << endl;
+	cout << xmlDocument->toXML() << endl;
+	cout << "------------------------------------" << endl;
 
-  if (! xmlDocument->getDtdFileName().empty()) {
-  	strcpy(dtdfile, xmlDocument->getDtdFileName().c_str());
-  }
+	if (! xmlDocument->getDtdFileName().empty()) {
+		strcpy(dtdfile, xmlDocument->getDtdFileName().c_str());
+	}
 
-  if (dtdfile == NULL) {
-  	cerr << "Pas de fichier DTD." << endl;
-  	return EXIT_FAILURE;
-  }
+	if (dtdfile == NULL) {
+		cerr << "Pas de fichier DTD." << endl;
+		EXIT(false);
+	}
 
 	dtdin = fopen(dtdfile, "r");
 	if (!dtdin) {
-  	cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
-  	return EXIT_FAILURE;
-  }
+		cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
+		EXIT(false);
+	}
 
-  err = dtdparse(&dtd);
-  fclose(dtdin);
+	err = dtdparse(&dtd);
+	fclose(dtdin);
 
 	if (err != 0) {
-  	cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
-    return EXIT_FAILURE;
+		cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
+		EXIT(false);
+	}
+
+	cout << dtd->toString() << endl;
+	cout << "------------------------------------" << endl;
+
+	/* dtd et xmlDocument sont maintenant correctement initialisés. */
+	/****************************************************************/
+
+	//Validating xml with dtd
+	Validate validator(xmlDocument, dtd);
+	if (validator.isValid()) {
+		cout << "Le document XML est conforme à la DTD." << endl;
+	} else {
+		cout << "Le document XML n'est pas conforme à la DTD." << endl;
+		EXIT(false);
+	}
 
 
 
-  	}
+	/****************************************************************/
+	delete dtd;
+	delete xmlDocument;
 
-
-
-
-  cout << dtd->toString() << endl;
-  cout << "------------------------------------" << endl;
-
-  /* dtd et xmlDocument sont maintenant correctement initialisés. */
-
-	  	//Validating xml with dtd
-	  	Validate validator(xmlDocument, dtd);
-	  	cout << validator.isValid() << endl;
-
-  delete dtd;
-  delete xmlDocument;
-
-  return EXIT_SUCCESS;
+	EXIT(true);
 }
