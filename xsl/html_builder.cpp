@@ -39,5 +39,12 @@ string HTMLBuilder::html() {
 
 string HTMLBuilder::build_html(Node* curr) {
 	// Is there any template for this node ?
-	// templateIndex index.find
+	throw NotYetImplementedException();
+	return string("");
+	// templateIndex::iterator it = index.find(curr->getName());
+
+	// if (it->second != index.end())
+	// {
+		
+	// }
 }
