@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 		"htmlb_instanciation"
 	};
 	// increment this number each time you add a new test
-	int test_count = 5;
+	int test_count = 1;
 
 	std::cout << "%SUITE_STARTING% html_builder" << std::endl;
 	std::cout << "%SUITE_STARTED%" << std::endl;

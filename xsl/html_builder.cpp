@@ -28,10 +28,18 @@ HTMLBuilder::HTMLBuilder(XSLElement* xsl_root, Element* xml_root) {
  */
 void HTMLBuilder::createIndex() {
 	// Note : All the template are supposed to be children of the XSL stylesheet root element
+	if(NULL == xsl_root) {
+		return;
+	}
 	nodeList* children = xsl_root->getChildren();
+	if(NULL == children) {
+		return;
+	}
 	for(nodeList::iterator it = children->begin(); it != children->end(); ++it) {
-		XSLElement* xslel = (XSLElement*)(*it);
-		index[xslel->getAttributeValue("match")] = xslel;
+		if((*it)->getName() == "template") {
+			XSLElement* xslel = (XSLElement*)(*it);
+			index[xslel->getAttributeValue("match")] = xslel;
+		}
 	}
 }
 
