@@ -21,7 +21,7 @@ bool simpleToXMLWithAttributes() {
 	nodeList l = nodeList();
 	Node* b = new TextNode(string("Blorg"));
 	l.push_back(b);
-	ElementName en = ElementName(string("xml"), string("blorg"));
+	ElementName en = ElementName(string("xml"), string("xml"));
 	attributesMap attrMap;
 	attrMap["blorg1"] = "blurp";
 	attrMap["huhu"] = "haha";
@@ -46,7 +46,7 @@ bool simpleToXMLWithoutAttributes() {
 	nodeList l = nodeList();
 	Node* b = new TextNode(string("Blorg"));
 	l.push_back(b);
-	ElementName en = ElementName(string("xml"), string("blorg"));
+	ElementName en = ElementName(string("xml"), string("xml"));
 	Node* a = Element::createElement(&en, NULL, &l);
 	
 	string expected = "<xml>\nBlorg\n</xml>";
@@ -72,8 +72,8 @@ bool ComplexXMLWithMixedElementsAndNodesWithoutAttributes() {
 	Node* e = new TextNode(string("Blorg3"));
 	la.push_back(b);
 	lc.push_back(d);
-	ElementName ena = ElementName(string("xml"), string("blorg"));
-	ElementName enc = ElementName(string("yoyo"), string("blorg"));
+	ElementName ena = ElementName(string("xml"), string("xml"));
+	ElementName enc = ElementName(string("yoyo"), string("yoyo"));
 	Node* c = Element::createElement(&enc, NULL, &lc);
 	la.push_back(c);
 	la.push_back(e);
@@ -114,8 +114,8 @@ bool ComplexXMLWithMixedElementsAndNodesWithAttributes() {
 	attrMapc["vulgar"] = "Hey, you touch my tralala.";
 	attrMapc["type"] = "xml";
 
-	ElementName ena = ElementName(string("xml"), string("blorg"));
-	ElementName enc = ElementName(string("yoyo"), string("blorg"));
+	ElementName ena = ElementName(string("blorg"), string("xml"));
+	ElementName enc = ElementName(string("blorg"), string("yoyo"));
 	Node* c = Element::createElement(&enc, &attrMapc, &lc);
 	la.push_back(c);
 	la.push_back(e);
@@ -155,12 +155,12 @@ bool testDocumentToXML() {
         nodeList chapitre_children = nodeList();
         nodeList rapport_children = nodeList();
         
-        ElementName titre = ElementName(string("titre"), string(""));
-        ElementName p = ElementName(string("p"), string(""));
-        ElementName section = ElementName(string("section"), string(""));
-        ElementName chapitre = ElementName(string("chapitre"), string(""));
-        ElementName resume = ElementName(string("resume"), string(""));
-        ElementName rapport = ElementName(string("rapport"), string(""));
+        ElementName titre = ElementName(string(""), string("titre"));
+        ElementName p = ElementName(string("p"), string("p"));
+        ElementName section = ElementName(string("section"), string("section"));
+        ElementName chapitre = ElementName(string("chapitre"), string("resume"));
+        ElementName resume = ElementName(string("resume"), string("chapitre"));
+        ElementName rapport = ElementName(string("rapport"), string("rapport"));
         
          
         p_children.push_back(p_text);

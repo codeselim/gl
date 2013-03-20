@@ -54,6 +54,13 @@ string Element::toXML() const {
 	}
 
 	str << ">";// close the XML tag
+	str << this->getInnerXML();
+	str << endl << "</" << this->name << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::getInnerXML() const {
+	stringstream str;
 	// Its children...
 	if (NULL != this->children)
 	{
@@ -61,7 +68,6 @@ string Element::toXML() const {
 			str << endl << (*it)->toXML();
 		}
 	}
-	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
 }
 
