@@ -20,6 +20,7 @@ public:
 	void setCard(Card theCard) { card = theCard; };
 	virtual string toString() = 0;
 	string cardToString();
+	EltType getType();
 };
 
 class ChildListElt: public Child {

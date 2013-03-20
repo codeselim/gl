@@ -11,6 +11,12 @@ string Child::cardToString() {
 	}
 }
 
+EltType Child::getType() {
+
+	return type;
+
+}
+
 string ChildElt::toString() {
 	return eltName + cardToString();
 }
