@@ -9,12 +9,13 @@ using namespace std;
 
 #include <dtd.h>
 
-void dtderror(char *msg);
+void dtderror(Dtd** dtd, char *msg);
 int dtdwrap(void);
 int dtdlex(void);
 
-Dtd* rootExpr = NULL;
 %}
+
+%parse-param { Dtd ** dtd }
 
 %union {
   char *s;
@@ -51,7 +52,7 @@ Card card;
 %%
 
 main
-: dtd_list_opt  {$$ = new Dtd($1); rootExpr = $$;}
+: dtd_list_opt  {$$ = new Dtd($1); *dtd = $$;}
 ;
 
 dtd_list_opt
@@ -158,33 +159,33 @@ contenu_mixed
 
 %%
 
-int main(int argc, char **argv)
-{
-  extern FILE* dtdin;
-  FILE* fid;
-  int err;
-  fid = fopen("rap1.dtd", "r");
-  //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
+// int main(int argc, char **argv)
+// {
+//   extern FILE* dtdin;
+//   FILE* fid;
+//   int err;
+//   fid = fopen("rap1.dtd", "r");
+//   //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
-  dtdin = fid;
-  err = dtdparse();
-  if (err != 0) {
-    printf("Parse ended with %d error(s)\n", err);
-    return 1;
-  } else {
-    printf("Parse ended with success\n", err);
-    cout << rootExpr->toString() << endl;
-  }
+//   dtdin = fid;
+//   err = dtdparse();
+//   if (err != 0) {
+//     printf("Parse ended with %d error(s)\n", err);
+//     return 1;
+//   } else {
+//     printf("Parse ended with success\n", err);
+//     cout << Dtd->toString() << endl;
+//   }
 
-  fclose(fid);
-  return 0;
-}
+//   fclose(fid);
+//   return 0;
+// }
 int dtdwrap(void)
 {
   return 1;
 }
 
-void dtderror(char *msg)
+void dtderror(Dtd** dtd, char *msg)
 {
   fprintf(stderr, "%s\n", msg);
 }

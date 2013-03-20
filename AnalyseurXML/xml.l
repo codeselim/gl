@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include "commun.h"
+#include <commun.h>
 
 #include <element.h>
 #include <text_node.h>

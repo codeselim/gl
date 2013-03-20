@@ -1,5 +1,11 @@
 #include <iostream>
+#include <cstdio>
+
+#include <dtd.h>
+#include <document.h>
+
 #include <dtd.tab.h>
+#include <xml.tab.h>
 
 using namespace std;
 #define DBG
@@ -31,7 +37,6 @@ int main(int argc, char** argv) {
 
 
 	extern FILE* dtdin;
-	extern Dtd* rootExpr;
 
   FILE* fid;
   int err;
@@ -39,13 +44,14 @@ int main(int argc, char** argv) {
   //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
   dtdin = fid;
-  err = dtdparse();
+  Dtd* dtd = NULL;
+  err = dtdparse(&dtd);
   if (err != 0) {
     printf("Parse ended with %d error(s)\n", err);
     return 1;
   } else {
     printf("Parse ended with success\n", err);
-    cout << rootExpr->toString() << endl;
+    cout << dtd->toString() << endl;
   }
 
   fclose(fid);
