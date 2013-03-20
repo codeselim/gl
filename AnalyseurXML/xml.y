@@ -64,6 +64,7 @@ declarations_opt
 
 declaration
  : DOCTYPE NOM NOM VALEUR SUP
+ | OBALISESPECIALE attributs_opt SUPSPECIAL
  ;
 
 

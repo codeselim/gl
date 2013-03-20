@@ -9,12 +9,12 @@ using namespace std;
 
 
 int xmlparse(Document**);
-extern int yydebug;
+extern int xmldebug;
 
 int main(int argc, char **argv) {
   int err;
 
-  //yydebug = 1; // pour enlever l'affichage de l'exécution du parser, commenter cette ligne
+  xmldebug = 1; // pour enlever l'affichage de l'exécution du parser, commenter cette ligne
 
   Document* document = NULL;
   err = xmlparse(&document);
