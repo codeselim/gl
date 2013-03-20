@@ -5,11 +5,10 @@ using namespace std;
 #include <cstdlib>
 #include "commun.h"
 #include <document.h>
-#include "yy.tab.h"
+#include "xml.tab.h"
 
 
 
-extern Document* rootExpr;
 int yyparse();
 
 int main(int argc, char **argv) {
@@ -17,14 +16,13 @@ int main(int argc, char **argv) {
 
   //yydebug = 1; // pour enlever l'affichage de l'exécution du parser, commenter cette ligne
 
-  // Document* document = NULL;
-  err = yyparse();
-  
+  Document* document = NULL;
+  err = xmlparse(&document);
   if (err != 0) {
     printf("Parse ended with %d error(s)\n", err);
   } else {
     printf("Parse ended with success\n", err);
-    rootExpr->toXML();
-  } 
+    cout << document->toXML() << endl;
+  }
   return 0;
 }
