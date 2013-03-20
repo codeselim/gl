@@ -9,7 +9,11 @@
 
 using namespace std;
 #define DBG
+
+
 int dtdparse(Dtd**);
+int xmlparse(Document**);
+
 int main(int argc, char** argv) {
 	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
 	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
@@ -35,27 +39,37 @@ int main(int argc, char** argv) {
 		cout << "XSL: " << xslfile << endl;
 #endif
 	}
-
-
-	extern FILE* dtdin;
-
-  FILE* fid;
-  int err;
-  fid = fopen("rap1.dtd", "r");
   //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
-  dtdin = fid;
-  Dtd* dtd = NULL;
-  err = dtdparse(&dtd);
+	extern FILE *dtdin, *xmlin;
+  int err;
+  Document* xmlDocument = NULL;
+	Dtd* dtd = NULL;
+
+  xmlin = fopen(xmlfile, "r");
+
+  err = xmlparse(&xmlDocument);
+  fclose(xmlin);
+
   if (err != 0) {
-    printf("Parse ended with %d error(s)\n", err);
+    printf("XML parse ended with %d error(s)\n", err);
     return 1;
-  } else {
-    printf("Parse ended with success\n", err);
-    cout << dtd->toString() << endl;
   }
 
-  fclose(fid);
+  printf("XML parse ended with success\n", err);
+  cout << xmlDocument->toXML() << endl;
+
+  if (dtdfile != NULL) {
+  	dtdin = fopen(dtdfile, "r");
+  	if (dtdin) {
+		  err = dtdparse(&dtd);
+	  	fclose(dtdin);
+	  	cout << dtd->toString() << endl;
+
+  	}
+  }
+
+
   return 0;
 
 
