@@ -19,7 +19,7 @@ class XSLTest(unittest.TestCase):
        simple_test(2)
 
    def test_simple3(self):
-       simple_test(2)
+       simple_test(3)
 
 if __name__ == '__main__':
     unittest.main()
