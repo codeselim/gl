@@ -4,9 +4,11 @@ Validate::Validate(Document *xmlFile, Dtd * dtdFile) {
 	xml = xmlFile;
 	dtd = dtdFile;
 
+
 	string childrenstring = "b dl";
 	boost::regex ex("b (dl)+");
  	cout << " ????   " << boost::regex_match(childrenstring, ex)<<endl;
+
 
 }
 

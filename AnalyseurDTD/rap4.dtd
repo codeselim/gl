@@ -6,8 +6,6 @@
 <!ELEMENT Administrator      (#PCDATA)>
 <!ELEMENT DatabaseAttributes EMPTY>
 <!ELEMENT Comments           (#PCDATA)>
-
 <!ATTLIST Administrator       EmailAlias CDATA #REQUIRED>
 <!ATTLIST Administrator       Extension  CDATA #IMPLIED>
 <!ATTLIST DatabaseAttributes  Type       (Production|Development|Testing) #REQUIRED>
-

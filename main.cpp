@@ -76,6 +76,7 @@ int main(int argc, char** argv) {
 	cout << xmlDocument->toXML() << endl;
 	cout << "------------------------------------" << endl;
 
+<<<<<<< HEAD
 	// if (! xmlDocument->getDtdFileName().empty()) {
 	// 	string sep = "/";
 	// 	string tmp = string(xmlfile);
@@ -87,6 +88,19 @@ int main(int argc, char** argv) {
 // 
 	// 	strcpy(dtdfile, tmp.c_str());
 	// }
+=======
+	/*if (! xmlDocument->getDtdFileName().empty()) {
+		string sep = "/";
+		string tmp = string(xmlfile);
+
+		unsigned found = tmp.rfind(sep); // position de la dernière occurence de sep 
+  	if ( found != std::string::npos) {
+    	tmp.replace(found+1, tmp.substr(found+1).length(), xmlDocument->getDtdFileName());
+  	}
+
+		strcpy(dtdfile, tmp.c_str());
+	}*/
+>>>>>>> edc98ee3b593755cdc72a9d43df8694fafb1dc6b
 
 	if (dtdfile == NULL) {
 		cerr << "Pas de fichier DTD." << endl;
@@ -130,7 +144,7 @@ int main(int argc, char** argv) {
 
 	xmlin = fopen(xslfile, "r");
 	if (!xmlin) {
-		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+		cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
 		EXIT(false);
 	}
 
