@@ -40,7 +40,7 @@ public:
 		@return string valid XML for this element
 	*/
 	virtual string toXML() const;
-	virtual string getInnerXML() const;
+	virtual string getInnerXML(bool first_newl = true) const;
 	virtual string xmlOpeningTag() const;
 	virtual string xmlClosingTag() const;
 };

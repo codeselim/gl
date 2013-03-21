@@ -83,37 +83,44 @@ string HTMLBuilder::build_html(Node* curr) {
 		int newLineLen = strlen("\n");
 		string tmpstring = xslel->toXML();
 		const char* tmp = tmpstring.c_str();
-		const char* end = tmp;
-		while(*end++);// find the end of the string
-		end--; // not the \0 to be taken into account (if we did ++end instead of end++ then the empty string would cause a array overread)
-		int openingTagLen = xslel->xmlOpeningTag().length();
-		int closingTagLen = xslel->xmlClosingTag().length();
-		const char* openingTagPtr = tmp + openingTagLen + newLineLen;//necessarily begins at 0... ! //strstr(tmp, openingTag);
-		const char* closingTagPtr = end - closingTagLen; //necessarily ends at end-closingTagLen strstr(tmp, xslel->xmlClosingTag().c_str());
 		const char* pch = strstr(tmp, APPLY_TEMPLATES_STR);
-		int beforeSize = (pch - openingTagPtr);
-		const char* tempval = pch + APPLY_TEMPLATES_STR_LEN;
-		int afterSize = (closingTagPtr - tempval);
-		char* before = (char*)malloc(sizeof(char) * (beforeSize + 1));
-		char* after = (char*)malloc(sizeof(char) * (afterSize + 1));
-#ifdef DBG
-		std::cout << "tmp: \n--------------\n" << tmp << "\n--------------\n" << std::endl;
-		std::cout << "Opening tag: \n--------------\n" << openingTagPtr << "\n--------------\n" << std::endl;
-		std::cout << "Beforesize=" << beforeSize << std::endl;
-		std::cout << "Aftersize=" << afterSize << std::endl;
-#endif
-		strncpy (before, openingTagPtr, beforeSize);// copy the beginning of the string to "before"
-		strncpy (after, pch + APPLY_TEMPLATES_STR_LEN - newLineLen + 1, afterSize); // copy the end of the string to "end"
-		// It seems that strncpy does not push \0 char at the end of the string so we have to do it manually
-		before[beforeSize] = '\0';
-		after[afterSize] = '\0';
-#ifdef DBG
-		std::cout << "Before=" << before << std::endl;
-		std::cout << "After=" << after << std::endl;
-#endif
-		str << before << do_build_html_on_children(xslel) << after;
-		free(before);
-		free(after);
+		if (NULL != pch)
+		{
+			// We found an apply-templates node inside that node, split before html and after html and recurse :
+			const char* end = tmp;
+			while(*end++);// find the end of the string
+			end--; // not the \0 to be taken into account (if we did ++end instead of end++ then the empty string would cause a array overread)
+			int openingTagLen = xslel->xmlOpeningTag().length();
+			int closingTagLen = xslel->xmlClosingTag().length();
+			const char* openingTagPtr = tmp + openingTagLen + newLineLen;//necessarily begins at 0... ! //strstr(tmp, openingTag);
+			const char* closingTagPtr = end - closingTagLen; //necessarily ends at end-closingTagLen strstr(tmp, xslel->xmlClosingTag().c_str());
+			int beforeSize = (pch - openingTagPtr);
+			const char* tempval = pch + APPLY_TEMPLATES_STR_LEN;
+			int afterSize = (closingTagPtr - tempval);
+			char* before = (char*)malloc(sizeof(char) * (beforeSize + 1));
+			char* after = (char*)malloc(sizeof(char) * (afterSize + 1));
+	#ifdef DBG
+			std::cout << "tmp: \n--------------\n" << tmp << "\n--------------\n" << std::endl;
+			std::cout << "Opening tag: \n--------------\n" << openingTagPtr << "\n--------------\n" << std::endl;
+			std::cout << "Beforesize=" << beforeSize << std::endl;
+			std::cout << "Aftersize=" << afterSize << std::endl;
+	#endif
+			strncpy (before, openingTagPtr, beforeSize);// copy the beginning of the string to "before"
+			strncpy (after, pch + APPLY_TEMPLATES_STR_LEN - newLineLen + 1, afterSize); // copy the end of the string to "end"
+			// It seems that strncpy does not push \0 char at the end of the string so we have to do it manually
+			before[beforeSize] = '\0';
+			after[afterSize] = '\0';
+	#ifdef DBG
+			std::cout << "Before=" << before << std::endl;
+			std::cout << "After=" << after << std::endl;
+	#endif
+			str << before << do_build_html_on_children(xslel) << after;
+			free(before);
+			free(after);
+		} else {
+			// No template to apply inside that node anymore, just get the XML value of what's inside the node (should be HTML)
+			str << xslel->getInnerXML(false);
+		}
 	}
 	return str.str();
 }

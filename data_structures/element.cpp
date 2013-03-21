@@ -72,13 +72,19 @@ string Element::toXML() const {
 	return str.str();
 }
 
-string Element::getInnerXML() const {
+string Element::getInnerXML(bool first_newl /*= true*/) const {
 	stringstream str;
 	// Its children...
 	if (NULL != this->children)
 	{
+		string newl = "";
+		if (first_newl)
+		{
+			newl = "\n";
+		}
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
-			str << endl << (*it)->toXML();
+			str << newl << (*it)->toXML();
+			newl = "\n";
 		}
 	}
 	return str.str();
