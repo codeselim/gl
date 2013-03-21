@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="H4114">
-
 <xsl:template match="/">
 	<html>
 	<body>
@@ -36,5 +35,4 @@
 	</font>
 	</html>
 </xsl:template>
-
 </xsl:stylesheet>

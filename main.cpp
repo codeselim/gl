@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
 #ifdef DBG
 		cout << "XML file: " << xmlfile << endl;
 #endif
-	char*dtdfile, *xslfile;
+	char*dtdfile;
+	char*xslfile = NULL;
 	bool is_dtd = false, is_xsl = false;
 	if(argc > 2) {
 		is_dtd = true;
@@ -49,8 +50,10 @@ int main(int argc, char** argv) {
 #endif
 	}
 	if(argc > 3) {
+	xslfile = new char[strlen(argv[3])+1];
 		is_xsl = true;
-		xslfile = argv[3];
+		//xslfile = argv[3];
+		strcpy(xslfile, argv[3]);
 #ifdef DBG
 		cout << "XSL: " << xslfile << endl;
 #endif
@@ -84,7 +87,6 @@ int main(int argc, char** argv) {
   	if ( found != std::string::npos) {
     	tmp.replace(found+1, tmp.substr(found+1).length(), xmlDocument->getDtdFileName());
   	}
-
 		strcpy(dtdfile, tmp.c_str());
 	}
 
