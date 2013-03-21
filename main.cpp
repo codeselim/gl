@@ -119,9 +119,8 @@ int main(int argc, char** argv) {
 		cout << "Le document XML est conforme à la DTD." << endl;
 	} else {
 		cout << "Le document XML n'est pas conforme à la DTD." << endl;
-		EXIT(false);
+		//EXIT(false);
 	}
-
 
 	if (xslfile == NULL) {
 		cerr << "Pas de fichier XSL. " << endl;
@@ -130,7 +129,7 @@ int main(int argc, char** argv) {
 
 	xmlin = fopen(xslfile, "r");
 	if (!xmlin) {
-		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+		cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
 		EXIT(false);
 	}
 
