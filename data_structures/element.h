@@ -34,6 +34,7 @@ public:
 	nodeList* getChildren();
 	string getAttributeValue(string attr);
 	string getSpaceSeparatedChildrenList();
+	attributesMap* getAttributes() {return attributes ;}
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
 		/!\ The attributes are ALWAYS output in alphabetical order /!\

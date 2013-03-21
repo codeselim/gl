@@ -139,7 +139,7 @@ contenu_choice
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->add($2);}
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->addFront($2); cout << $3->toString() << endl;}
 ;
 
 contenu_seq_opt
@@ -159,27 +159,6 @@ contenu_mixed
 
 %%
 
-// int main(int argc, char **argv)
-// {
-//   extern FILE* dtdin;
-//   FILE* fid;
-//   int err;
-//   fid = fopen("rap1.dtd", "r");
-//   //dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
-
-//   dtdin = fid;
-//   err = dtdparse();
-//   if (err != 0) {
-//     printf("Parse ended with %d error(s)\n", err);
-//     return 1;
-//   } else {
-//     printf("Parse ended with success\n", err);
-//     cout << Dtd->toString() << endl;
-//   }
-
-//   fclose(fid);
-//   return 0;
-// }
 int dtdwrap(void)
 {
   return 1;
