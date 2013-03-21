@@ -23,9 +23,9 @@ HTMLBuilder::HTMLBuilder(XSLElement* xsl_root, Element* xml_root) {
 	createIndex();
 
 #ifdef DBG
-  cout << "templateIndex: " << endl;
+  cerr << "templateIndex: " << endl;
   for (templateIndex::iterator i = index.begin(); i != index.end(); ++i) {
-  	cout << "\t" << i->first << i->second->toXML() << endl;
+  	cerr << "\t" << i->first << i->second->toXML() << endl;
   }
 #endif
 }
@@ -72,7 +72,9 @@ string HTMLBuilder::html() {
 string HTMLBuilder::do_build_html_on_children(Element* node) {
 	stringstream str;
 	nodeList* children = node->getChildren();
+		// cerr << "BB" << endl;
 	for(nodeList::iterator it = children->begin(); it != children->end(); ++it) {
+		// cerr << "CC" << endl;
 		Node* curr = (*it);
 		if (TextNode::NODE_NAME != curr->getName()) // Not a text node, so, is an element node (or some children class of Element)
 		{
@@ -91,19 +93,18 @@ string HTMLBuilder::build_html(Element* curr) {
   templateIndex::iterator it = index.find(curr->getName());
 
 #ifdef DBG
-  cout << "currentNode: " << curr->getFullName() << endl;
+  cerr << "currentNode: " << curr->getFullName() << endl;
 #endif
 
+  // cerr << "AA" << endl;
 	if (it != index.end()) {
 		Element* xslcontent = (Element*)it->second->getChildren()->front();
 
 		string tmpstring = xslcontent->toXML();
-		cout << "--" << tmpstring << endl;
 		string pch = APPLY_TEMPLATES->toXML();
 		before = tmpstring.substr(0, tmpstring.find(pch));
 		after = tmpstring.substr(pch.length() + before.length());
 	} else {
-		cout << "ELSE!" << endl;
 		before = curr->xmlOpeningTag();
 		after = curr->xmlClosingTag();
 	}

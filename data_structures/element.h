@@ -36,6 +36,7 @@ public:
 	string getAttributeValue(string attr);
 	string getSpaceSeparatedChildrenList();
 	attributesMap* getAttributes() {return attributes ;}
+	virtual ~Element();
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
 		/!\ The attributes are ALWAYS output in alphabetical order /!\

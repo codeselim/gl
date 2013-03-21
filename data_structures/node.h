@@ -13,7 +13,7 @@ public:
 	virtual string toXML() const = 0 ;
 	virtual string getName() = 0;
 	virtual string getFullName() = 0;
-
+	virtual ~Node() {}
 };
 
 #endif

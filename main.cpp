@@ -17,6 +17,7 @@ using namespace std;
 #define EXIT(success) \
 	if (xmlDocument != NULL) delete xmlDocument;\
 	if (dtd != NULL) 	delete dtd;\
+	if (xsl != NULL) 	delete xsl;\
 	return success ? EXIT_SUCCESS : EXIT_FAILURE;\
 
 
@@ -66,9 +67,9 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
-	cout << "------------------------------------" << endl;
-	cout << xmlDocument->toXML() << endl;
-	cout << "------------------------------------" << endl;
+	cerr << "------------------------------------" << endl;
+	cerr << xmlDocument->toXML() << endl;
+	cerr << "------------------------------------" << endl;
 
 
 	/** Lecture DTD ***********************************************************/
@@ -103,8 +104,8 @@ int main(int argc, char** argv) {
 			EXIT(false);
 		}
 
-		cout << dtd->toString() << endl;
-		cout << "------------------------------------" << endl;
+		cerr << dtd->toString() << endl;
+		cerr << "------------------------------------" << endl;
 
 	/** Analyse XML par rapport à la DTD ***************************************/
 
@@ -117,9 +118,9 @@ int main(int argc, char** argv) {
 		Validate validator(xmlDocument, dtd);
 
 		if (validator.isValid()) {
-			cout << "Le document XML est conforme à la DTD." << endl;
+			cerr << "Le document XML est conforme à la DTD." << endl;
 		} else {
-			cout << "Le document XML n'est pas conforme à la DTD." << endl;
+			cerr << "Le document XML n'est pas conforme à la DTD." << endl;
 			EXIT(false);
 		}
 	}
@@ -142,16 +143,15 @@ int main(int argc, char** argv) {
 			EXIT(false);
 		}
 
-		cout << "------------------------------------" << endl;
-		cout << xsl->getRoot()->toXML() << endl;
-		cout << "-------------------" << endl;
-		cout << xmlDocument->getRoot()->toXML() << endl;
-		cout << "------------------------------------" << endl;
+		cerr << "------------------------------------" << endl;
+		cerr << xsl->getRoot()->toXML() << endl;
+		cerr << "-------------------" << endl;
+		cerr << xmlDocument->getRoot()->toXML() << endl;
+		cerr << "------------------------------------" << endl;
 
 		HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
 
 		cout << htmlb.html() << endl;
-		cout << "------------------------------------" << endl;
 	}
 
 

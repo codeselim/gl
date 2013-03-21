@@ -6,7 +6,7 @@
 			<TITLE></TITLE>
 		</HEAD>
 		<BODY>
-			<xsl:apply-templates select="greeter"/>
+			<xsl:apply-templates />
 		</BODY>
 	</HTML>
 </xsl:template>

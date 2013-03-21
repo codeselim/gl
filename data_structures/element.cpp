@@ -115,3 +115,13 @@ string Element::getFullName() {
 		return ns + ":" + name;
 	}
 }
+
+
+Element::~Element() {
+  parent = NULL; /* s'autodétruira après. */
+	for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+		delete *it;
+	}
+	delete attributes;
+	delete children;
+}
