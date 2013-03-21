@@ -5,9 +5,10 @@ DSDIR = data_structures
 DTDDIR = AnalyseurDTD
 XMLDIR = AnalyseurXML
 VDIR = Validation
-INCLUDES = -I$(CURDIR)/$(DSDIR) -I$(CURDIR)/$(DTDDIR) -I$(CURDIR)/$(XMLDIR) -I$(CURDIR)/$(VDIR)
+HDIR = xsl
+INCLUDES = -I$(CURDIR)/$(DSDIR) -I$(CURDIR)/$(DTDDIR) -I$(CURDIR)/$(XMLDIR) -I$(CURDIR)/$(VDIR) -I$(CURDIR)/$(HDIR)
 EXENAME = gl
-VO_FILES = $(VDIR)/Validate.o
+VO_FILES = $(VDIR)/Validate.o $(HDIR)/html_builder.o
 LIBRARIES = -lboost_regex
 
 
@@ -31,5 +32,8 @@ $(DSDIR)/%.o: $(DSDIR)/%.cpp
 	g++ -c -o $@ $<
 
 $(VDIR)/%.o: $(VDIR)/%.cpp
+	g++ -c -o $@ $<
+
+$(HDIR)/%.o: $(HDIR)/%.cpp
 	g++ -c -o $@ $<
 

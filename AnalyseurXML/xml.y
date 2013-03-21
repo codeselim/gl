@@ -77,7 +77,7 @@ declaration
         map->insert(pair<string,string>(string("rootName"), $2));
         $$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);
         }
- | OBALISESPECIALE attributs_opt SUPSPECIAL
+ | OBALISESPECIALE attributs_opt SUPSPECIAL { }
  ;
 
 

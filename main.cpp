@@ -10,6 +10,7 @@
 #include <xml.tab.h>
 
 #include <Validate.h>
+#include <html_builder.h>
 
 using namespace std;
 #define DBG
@@ -29,6 +30,12 @@ int main(int argc, char** argv) {
 	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
 	char* xmlfile = argv[1];
+	extern FILE *dtdin, *xmlin;
+	int err;
+	Document* xmlDocument = NULL;
+	Document* xsl = NULL;
+	Dtd* dtd = NULL;
+
 #ifdef DBG
 		cout << "XML file: " << xmlfile << endl;
 #endif
@@ -50,10 +57,6 @@ int main(int argc, char** argv) {
 	}
 	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
-	extern FILE *dtdin, *xmlin;
-	int err;
-	Document* xmlDocument = NULL;
-	Dtd* dtd = NULL;
 
 	xmlin = fopen(xmlfile, "r");
 	if (!xmlin) {
@@ -119,8 +122,33 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
-	// @TODO: to html
 
+	if (xslfile == NULL) {
+		cerr << "Pas de fichier XSL. " << endl;
+		EXIT(false);
+	}
+
+	xmlin = fopen(xslfile, "r");
+	if (!xmlin) {
+		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+		EXIT(false);
+	}
+
+	err = xmlparse(&xsl);
+	fclose(xmlin);
+
+	if (err != 0) {
+		cerr << "Analyse du XSL terminée avec " << err << " erreurs" << endl;
+		EXIT(false);
+	}
+
+	cout << xsl->toXML() << endl;
+	cout << "------------------------------------" << endl;
+
+	HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
+
+	cout << htmlb.html() << endl;;
+	cout << "------------------------------------" << endl;
 
 
 	/****************************************************************/
