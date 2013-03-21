@@ -14,6 +14,7 @@ public:
 	TextNode(string content);
 	virtual string toXML() const;
 	virtual string getName();
+	virtual string getFullName();
 	static string NODE_NAME;
 };
 

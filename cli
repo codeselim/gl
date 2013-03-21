@@ -38,7 +38,7 @@ if __name__ == '__main__':
 	if options.dtd:
 		args2.append(options.dtd)
 	else:
-		args2.append("_")
+		args2.append("")
 	if options.xsl:
 		args2.append(options.xsl)
 

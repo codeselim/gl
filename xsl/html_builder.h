@@ -16,9 +16,9 @@ protected:
 	XSLElement* xsl_root;
 	Element* xml_root;
 	templateIndex index;
-	string build_html(Node* curr);
+	string build_html(Element* curr);
 	void createIndex();
-	string do_build_html_on_children(Node* node);
+	string do_build_html_on_children(Element* node);
 public:
     HTMLBuilder(XSLElement* xsl_root, Element* xml_root);
     string html();

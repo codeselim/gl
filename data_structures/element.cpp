@@ -107,3 +107,11 @@ string Element::getSpaceSeparatedChildrenList() {
 string Element::getName() {
 	return this->name;
 }
+
+string Element::getFullName() {
+	if (ns.empty()) {
+		return name;
+	} else {
+		return ns + ":" + name;
+	}
+}

@@ -30,6 +30,7 @@ public:
 	static Element* createElement(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	Element& setParent(Element* e);
 	virtual string getName();
+	virtual string getFullName();
 	Element* getParent();
 	nodeList* getChildren();
 	string getAttributeValue(string attr);

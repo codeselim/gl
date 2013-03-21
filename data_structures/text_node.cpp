@@ -13,3 +13,6 @@ string TextNode::toXML() const {
 string TextNode::getName() {
 	return TextNode::NODE_NAME;
 }
+string TextNode::getFullName() {
+	return getName();
+}

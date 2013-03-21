@@ -142,7 +142,10 @@ int main(int argc, char** argv) {
 			EXIT(false);
 		}
 
-		cout << xsl->toXML() << endl;
+		cout << "------------------------------------" << endl;
+		cout << xsl->getRoot()->toXML() << endl;
+		cout << "-------------------" << endl;
+		cout << xmlDocument->getRoot()->toXML() << endl;
 		cout << "------------------------------------" << endl;
 
 		HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
