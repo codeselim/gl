@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
 	// second and third arguments are going to be DTD and XSL
 	char* xmlfile = argv[1];
 	extern FILE *dtdin, *xmlin;
+	extern void XML_FLUSH_BUFFER();
 	int err;
 	Document* xmlDocument = NULL;
 	Document* xsl = NULL;
@@ -129,6 +130,8 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
+	XML_FLUSH_BUFFER;
+	
 	xmlin = fopen(xslfile, "r");
 	if (!xmlin) {
 		cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
