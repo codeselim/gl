@@ -1,4 +1,8 @@
-CPP_SRC = element.cpp node.cpp text_node.cpp document.cpp
+<<<<<<< HEAD
+CPP_SRC = element.cpp node.cpp text_node.cpp document.cpp xsl_element.cpp
+=======
+CPP_SRC = element.cpp node.cpp text_node.cpp document.cpp special_node.cpp
+>>>>>>> master
 CPP_FILES = $(addprefix ../data_structures/, $(CPP_SRC))
 OBJ_FILES = $(CPP_FILES:.cpp=.o)
 DSDIR = ../data_structures

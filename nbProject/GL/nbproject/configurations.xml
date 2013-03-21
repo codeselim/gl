@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="80">
+<configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -55,15 +55,14 @@
         <itemPath>../../data_structures/node.h</itemPath>
         <itemPath>../../data_structures/text_node.cpp</itemPath>
         <itemPath>../../data_structures/text_node.h</itemPath>
+        <itemPath>../../data_structures/xsl_element.cpp</itemPath>
+        <itemPath>../../data_structures/xsl_element.h</itemPath>
       </logicalFolder>
-<<<<<<< HEAD
-      <logicalFolder name="Validation" displayName="Validation" projectFiles="true">
-        <itemPath>../../Validation/Validate.cpp</itemPath>
-        <itemPath>../../Validation/Validate.h</itemPath>
+      <logicalFolder name="xsl" displayName="xsl" projectFiles="true">
+        <itemPath>../../xsl/html_builder.cpp</itemPath>
+        <itemPath>../../xsl/html_builder.h</itemPath>
       </logicalFolder>
-=======
       <itemPath>../../main.cpp</itemPath>
->>>>>>> master
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -74,6 +73,12 @@
                      projectFiles="true"
                      kind="TEST">
         <itemPath>../../tests/element_getters.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3"
+                     displayName="HTMLBuilder"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>../../tests/html_builder.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1"
                      displayName="toXMLTest"
@@ -91,29 +96,32 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../../../../../TP-IF/4IF/gl/code</Elem>
-    <Elem>../../Validation</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>../../AnalyseurDTD</pElem>
+            <pElem>../../AnalyseurXML</pElem>
+            <pElem>../../data_structures</pElem>
+            <pElem>../../xsl</pElem>
+          </incDir>
+        </cTool>
         <ccTool>
           <incDir>
-            <pElem>../../../Téléchargements/boost_1_33_1/</pElem>
+            <pElem>../../AnalyseurDTD</pElem>
+            <pElem>../../AnalyseurXML</pElem>
+            <pElem>../../data_structures</pElem>
+            <pElem>../../xsl</pElem>
           </incDir>
         </ccTool>
-        <linkerTool>
-          <linkerLibItems>
-            <linkerLibLibItem>boost_regex-gcc-1_33_1</linkerLibLibItem>
-          </linkerLibItems>
-        </linkerTool>
       </compileType>
-<<<<<<< HEAD
-=======
       <item path="../../data_structures/child_elt.cpp"
             ex="false"
             tool="1"
@@ -138,18 +146,15 @@
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
       </item>
->>>>>>> master
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
-            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
-            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
@@ -162,17 +167,30 @@
         <cTool>
           <incDir>
             <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
             <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
             <pElem>.</pElem>
-            <pElem>.</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f2</output>
+          <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
     </conf>
@@ -196,8 +214,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-<<<<<<< HEAD
-=======
       <item path="../../data_structures/child_elt.cpp"
             ex="false"
             tool="1"
@@ -222,39 +238,21 @@
       </item>
       <item path="../../tests/to_xml.cpp" ex="false" tool="1" flavor2="0">
       </item>
->>>>>>> master
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
-            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
-            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
-        </linkerTool>
-      </folder>
-      <folder path="TestFiles/f2">
-        <cTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
-        </cTool>
-        <ccTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
-        <linkerTool>
-          <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
     </conf>

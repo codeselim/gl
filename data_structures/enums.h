@@ -5,5 +5,6 @@ enum Type {T_CDATA, ID, IDREF, IDREFS, NMTOKEN, NMTOKENS, ENTITY, ENTITIES, NOTA
 enum Card {NONE, QMARK, C_PLUS, STAR};
 enum ListType {CHOICE, SEQ};
 enum EltType {T_ANY, T_EMPTY, LIST, T_PCDATA, TOKEN};
+enum SpecialNodeType { SNT_DOCTYPE, SNT_XML_VER, SNT_SPECIAL };
 
 #endif

@@ -1,13 +1,14 @@
-CPP_SRC = dtd.cpp dtd_elt.cpp child_elt.cpp dtd_attr.cpp element.cpp node.cpp text_node.cpp document.cpp
+CPP_SRC = dtd.cpp dtd_elt.cpp child_elt.cpp dtd_attr.cpp element.cpp node.cpp text_node.cpp document.cpp special_node.cpp xsl_element.cpp
 CPP_FILES = $(addprefix data_structures/, $(CPP_SRC))
 OBJ_FILES = $(CPP_FILES:.cpp=.o)
 DSDIR = data_structures
 DTDDIR = AnalyseurDTD
 XMLDIR = AnalyseurXML
 VDIR = Validation
-INCLUDES = -I$(CURDIR)/$(DSDIR) -I$(CURDIR)/$(DTDDIR) -I$(CURDIR)/$(XMLDIR) -I$(CURDIR)/$(VDIR)
+HDIR = xsl
+INCLUDES = -I$(CURDIR)/$(DSDIR) -I$(CURDIR)/$(DTDDIR) -I$(CURDIR)/$(XMLDIR) -I$(CURDIR)/$(VDIR) -I$(CURDIR)/$(HDIR)
 EXENAME = gl
-VO_FILES = $(VDIR)/Validate.o
+VO_FILES = $(VDIR)/Validate.o $(HDIR)/html_builder.o
 LIBRARIES = -lboost_regex
 
 
@@ -31,5 +32,8 @@ $(DSDIR)/%.o: $(DSDIR)/%.cpp
 	g++ -c -o $@ $<
 
 $(VDIR)/%.o: $(VDIR)/%.cpp
+	g++ -c -o $@ $<
+
+$(HDIR)/%.o: $(HDIR)/%.cpp
 	g++ -c -o $@ $<
 

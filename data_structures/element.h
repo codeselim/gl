@@ -14,27 +14,36 @@ typedef list<Node*> nodeList;
 typedef map<string, string> attributesMap;
 
 class Element : public Node {
-private:
+protected:
     nodeList * children;
     attributesMap * attributes;
     Element* parent;
     string ns; // namespace
     string name;
+    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 
 public:
+	/** @function createELement
+	 * Factory method that creates a XML Element
+	 * @return the created element
+	 */
+	static Element* createElement(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	Element& setParent(Element* e);
 	virtual string getName();
 	Element* getParent();
 	nodeList* getChildren();
+	string getAttributeValue(string attr);
 	string getSpaceSeparatedChildrenList();
 	attributesMap* getAttributes() {return attributes ;}
-    Element(ElementName* en, attributesMap* attrs,  nodeList* children = NULL);
 	/*
 		@function toXML Serializes the current element (and its children) to a XML string
 		/!\ The attributes are ALWAYS output in alphabetical order /!\
 		@return string valid XML for this element
 	*/
-	virtual string toXML();
+	virtual string toXML() const;
+	virtual string getInnerXML() const;
+	virtual string xmlOpeningTag() const;
+	virtual string xmlClosingTag() const;
 };
 
 #endif

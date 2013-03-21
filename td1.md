@@ -74,8 +74,8 @@ Bison:
 /** XML *********************/
 /* ptr Element */
 element
-    : OBALISE attributs_opt SUP contenu_opt FBALISE SUP     {$$ = new Element($1->second, $2, $4);}
-    | OBALISE attributs_opt SLASH SUP                       {$$ = new Element($1->second, $2);}
+    : OBALISE attributs_opt SUP contenu_opt FBALISE SUP     {$$ = Element::createElement($1->second, $2, $4);}
+    | OBALISE attributs_opt SLASH SUP                       {$$ = Element::createElement($1->second, $2);}
     ;
 
 /* ptr liste Node */

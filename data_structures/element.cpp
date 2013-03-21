@@ -1,6 +1,17 @@
 #include "element.h"
 #include <sstream>
+#include "xsl_element.h"
 #include <exception>
+
+Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/) {
+	if ("xsl" == en->first) // namespace comparison
+	{
+		// Instanciate a XSL element
+		return new XSLElement(en, attrs, children);
+	} else {
+		return new Element(en, attrs, children);
+	}
+}
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
 	if(NULL == children) {
@@ -19,9 +30,19 @@ Element* Element::getParent() {
 	return this->parent;
 }
 
-string Element::toXML() {
+string Element::getAttributeValue(string attr) {
+	attributesMap::iterator it = this->attributes->find(attr);
+	if (this->attributes->end() != it)
+	{
+		return it->second;
+	} else {
+		return string("");
+	}
+}
+
+string Element::xmlOpeningTag() const {
 	stringstream str;
-	// The element tag...
+
 	str << "<" << this->name;
 
 	// Its attributes...
@@ -33,6 +54,26 @@ string Element::toXML() {
 	}
 
 	str << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::xmlClosingTag() const {
+	stringstream str;
+	str << endl << "</" << this->name << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::toXML() const {
+	stringstream str;
+	// The element tag...
+	str << this->xmlOpeningTag();
+	str << this->getInnerXML();
+	str << this->xmlClosingTag();
+	return str.str();
+}
+
+string Element::getInnerXML() const {
+	stringstream str;
 	// Its children...
 	if (NULL != this->children)
 	{
@@ -40,7 +81,6 @@ string Element::toXML() {
 			str << endl << (*it)->toXML();
 		}
 	}
-	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
 }
 
