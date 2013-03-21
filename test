@@ -1,0 +1,30 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from unittest import TestCase, main
+from subprocess import Popen, PIPE
+
+
+class TestHTMLGeneration(TestCase):
+
+    def htmlTestTemplate(self, testId):
+        tokens = {"testId": testId, "testDir": "testfiles"}
+        command = ["./gl"]
+        testSrc = ["{testDir}/test{testId}.xml", "",
+                   "{testDir}/test{testId}.xsl"]
+        args = [f.format(**tokens) for f in testSrc]
+        expectedfile = "{testDir}/expected{testId}.html".format(**tokens)
+        expected = open(expectedfile, "r").read()
+        command.extend(args)
+
+        out, _ = Popen(command, stdout=PIPE, stderr=PIPE).communicate()
+
+        if (out != expected):
+            print out
+            self.assertEquals(out, expected, 'the output is wrong')
+
+    def test_1O(self):
+        self.htmlTestTemplate(10)
+
+if __name__ == '__main__':
+    main()

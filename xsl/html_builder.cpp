@@ -12,8 +12,8 @@
 
 // Constant for toXML() comparison
 const XSLElement* APPLY_TEMPLATES = (const XSLElement*) Element::createElement(
-	new ElementName(string("xsl"), string("apply-templates")), 
-	NULL, 
+	new ElementName(string("xsl"), string("apply-templates")),
+	NULL,
 	NULL);
 const string blorg = APPLY_TEMPLATES->toXML();
 const char* APPLY_TEMPLATES_STR = (const char*) blorg.c_str();
@@ -47,7 +47,7 @@ void HTMLBuilder::createIndex() {
 
 string HTMLBuilder::html() {
 	stringstream str;
-	
+
 	if (NULL != this->xml_root)
 	{
 		str << this->build_html(this->xml_root);
