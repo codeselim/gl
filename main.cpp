@@ -29,36 +29,27 @@ int main(int argc, char** argv) {
 	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
 	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
-	char* xmlfile = argv[1];
+	string xmlfile = string(argv[1]);
 	extern FILE *dtdin, *xmlin;
 	int err;
 	Document* xmlDocument = NULL;
 	Document* xsl = NULL;
 	Dtd* dtd = NULL;
 
-#ifdef DBG
-		cout << "XML file: " << xmlfile << endl;
-#endif
-	char*dtdfile, *xslfile;
+	string dtdfile, xslfile;
 	bool is_dtd = false, is_xsl = false;
 	if(argc > 2) {
 		is_dtd = true;
-		dtdfile = argv[2];
-#ifdef DBG
-		cout << "DTD: " << dtdfile << endl;
-#endif
+		dtdfile = string(argv[2]);
 	}
 	if(argc > 3) {
 		is_xsl = true;
-		xslfile = argv[3];
-#ifdef DBG
-		cout << "XSL: " << xslfile << endl;
-#endif
+		xslfile = string(argv[3]);
 	}
 	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
-
-	xmlin = fopen(xmlfile, "r");
+	cerr << "XML: " << xmlfile << endl;
+	xmlin = fopen(xmlfile.c_str(), "r");
 	if (!xmlin) {
 		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
 		EXIT(false);
@@ -76,7 +67,7 @@ int main(int argc, char** argv) {
 	cout << xmlDocument->toXML() << endl;
 	cout << "------------------------------------" << endl;
 
-	if (! xmlDocument->getDtdFileName().empty()) {
+	if ( dtdfile.empty() && !xmlDocument->getDtdFileName().empty()) {
 		string sep = "/";
 		string tmp = string(xmlfile);
 
@@ -85,15 +76,17 @@ int main(int argc, char** argv) {
     	tmp.replace(found+1, tmp.substr(found+1).length(), xmlDocument->getDtdFileName());
   	}
 
-		strcpy(dtdfile, tmp.c_str());
+		dtdfile = string(tmp.c_str());
 	}
 
-	if (dtdfile == NULL) {
+	cerr << "DTD: " << dtdfile << endl;
+
+	if (dtdfile.empty()) {
 		cerr << "Pas de fichier DTD." << endl;
 		EXIT(false);
 	}
 
-	dtdin = fopen(dtdfile, "r");
+	dtdin = fopen(dtdfile.c_str(), "r");
 	if (!dtdin) {
 		cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
 		EXIT(false);
@@ -115,6 +108,7 @@ int main(int argc, char** argv) {
 
 	//Validating xml with dtd
 	Validate validator(xmlDocument, dtd);
+
 	if (validator.isValid()) {
 		cout << "Le document XML est conforme à la DTD." << endl;
 	} else {
@@ -123,12 +117,12 @@ int main(int argc, char** argv) {
 	}
 
 
-	if (xslfile == NULL) {
+	if (xslfile.empty()) {
 		cerr << "Pas de fichier XSL. " << endl;
 		EXIT(false);
 	}
 
-	xmlin = fopen(xslfile, "r");
+	xmlin = fopen(xslfile.c_str(), "r");
 	if (!xmlin) {
 		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
 		EXIT(false);
