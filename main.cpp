@@ -13,13 +13,11 @@
 #include <html_builder.h>
 
 using namespace std;
-#define DBG
 
 #define EXIT(success) \
 	if (xmlDocument != NULL) delete xmlDocument;\
 	if (dtd != NULL) 	delete dtd;\
 	return success ? EXIT_SUCCESS : EXIT_FAILURE;\
-
 
 
 
@@ -36,12 +34,13 @@ int main(int argc, char** argv) {
 	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
 
-	string xmlfile = string(argv[1]);
 	int err;
+	string xmlfile = string(argv[1]);
 	Document* xmlDocument = NULL;
 	Document* xsl = NULL;
 	Dtd* dtd = NULL;
 
+	/** Lecture paramètres ligne de commande ***********************************/
 	string dtdfile, xslfile;
 	if(argc > 2 && strcmp("_", argv[2]) != 0) {
 		dtdfile = string(argv[2]);
@@ -51,6 +50,7 @@ int main(int argc, char** argv) {
 	}
 	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
+	/** Lecture XML ************************************************************/
 	cerr << "XML: " << xmlfile << endl;
 	xmlin = fopen(xmlfile.c_str(), "r");
 	if (!xmlin) {
@@ -70,6 +70,8 @@ int main(int argc, char** argv) {
 	cout << xmlDocument->toXML() << endl;
 	cout << "------------------------------------" << endl;
 
+
+	/** Lecture DTD ***********************************************************/
 	if ( dtdfile.empty() && !xmlDocument->getDtdFileName().empty()) {
 		string sep = "/";
 		string tmp = string(xmlfile);
@@ -86,71 +88,69 @@ int main(int argc, char** argv) {
 
 	if (dtdfile.empty()) {
 		cerr << "Pas de fichier DTD." << endl;
-		EXIT(false);
-	}
-
-	dtdin = fopen(dtdfile.c_str(), "r");
-	if (!dtdin) {
-		cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
-		EXIT(false);
-	}
-
-	err = dtdparse(&dtd);
-	fclose(dtdin);
-
-	if (err != 0) {
-		cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
-		EXIT(false);
-	}
-
-	cout << dtd->toString() << endl;
-	cout << "------------------------------------" << endl;
-
-	/* dtd et xmlDocument sont maintenant correctement initialisés. */
-	/****************************************************************/
-
-	if (!dtd->isValid()) {
-		cerr << "La DTD n'est pas cohérente. (Des éléments non déclarés peut être?)" << endl;
-		EXIT(false);
-	}
-
-	//Validating xml with dtd
-	Validate validator(xmlDocument, dtd);
-
-	if (validator.isValid()) {
-		cout << "Le document XML est conforme à la DTD." << endl;
 	} else {
-		cout << "Le document XML n'est pas conforme à la DTD." << endl;
-		EXIT(false);
+		dtdin = fopen(dtdfile.c_str(), "r");
+		if (!dtdin) {
+			cerr << "Impossible d'ouvrir le fichier nommé '" << dtdfile << "'" << endl;
+			EXIT(false);
+		}
+
+		err = dtdparse(&dtd);
+		fclose(dtdin);
+
+		if (err != 0) {
+			cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
+			EXIT(false);
+		}
+
+		cout << dtd->toString() << endl;
+		cout << "------------------------------------" << endl;
+
+	/** Analyse XML par rapport à la DTD ***************************************/
+
+		if (!dtd->isValid()) {
+			cerr << "La DTD n'est pas cohérente. (Des éléments non déclarés peut être?)" << endl;
+			EXIT(false);
+		}
+
+		//Validating xml with dtd
+		Validate validator(xmlDocument, dtd);
+
+		if (validator.isValid()) {
+			cout << "Le document XML est conforme à la DTD." << endl;
+		} else {
+			cout << "Le document XML n'est pas conforme à la DTD." << endl;
+			EXIT(false);
+		}
 	}
 
-
+	/** Transformation XSL *****************************************************/
 	if (xslfile.empty()) {
 		cerr << "Pas de fichier XSL. " << endl;
-		EXIT(false);
+	} else {
+		xslin = fopen(xslfile.c_str(), "r");
+		if (!xslin) {
+			cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
+			EXIT(false);
+		}
+
+		err = xslparse(&xsl);
+		fclose(xslin);
+
+		if (err != 0) {
+			cerr << "Analyse du XSL terminée avec " << err << " erreurs" << endl;
+			EXIT(false);
+		}
+
+		cout << xsl->toXML() << endl;
+		cout << "------------------------------------" << endl;
+
+		HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
+
+		cout << htmlb.html() << endl;
+		cout << "------------------------------------" << endl;
 	}
 
-	xslin = fopen(xslfile.c_str(), "r");
-	if (!xslin) {
-		cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
-		EXIT(false);
-	}
-
-	err = xslparse(&xsl);
-	fclose(xslin);
-
-	if (err != 0) {
-		cerr << "Analyse du XSL terminée avec " << err << " erreurs" << endl;
-		EXIT(false);
-	}
-
-	cout << xsl->toXML() << endl;
-	cout << "------------------------------------" << endl;
-
-	HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
-
-	cout << htmlb.html() << endl;;
-	cout << "------------------------------------" << endl;
 
 
 	/****************************************************************/

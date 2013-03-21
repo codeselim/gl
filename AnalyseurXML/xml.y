@@ -65,7 +65,7 @@ misc
 
 
 declarations_opt
- : declarations_opt declaration { $$ = $1; $$->push_back($2);}
+ : declarations_opt declaration { $$ = $1; if ($2 != NULL) $$->push_back($2);}
  | /*vide*/ { $$ = new list<SpecialNode*>();}
  ;
 
@@ -77,7 +77,7 @@ declaration
         map->insert(pair<string,string>(string("rootName"), $2));
         $$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);
         }
- | OBALISESPECIALE attributs_opt SUPSPECIAL { }
+ | OBALISESPECIALE attributs_opt SUPSPECIAL {$$ = NULL;}
  ;
 
 

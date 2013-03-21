@@ -35,7 +35,7 @@ analyseXSL: $(XMLDIR)/*.l $(XMLDIR)/*.y makefile
 	bison -p xsl --debug --verbose --defines=$(XMLDIR)/xsl.tab.h $(XMLDIR)/xsl.y
 
 clean:
-	-rm -rf *.tab.c lex.*.c *.tab.h *.output $(EXENAME) $(OBJ_FILES)
+	-rm -rf *.tab.c lex.*.c *.tab.h *.output $(EXENAME) $(OBJ_FILES) xsl.y xsl.l
 
 $(DSDIR)/%.o: $(DSDIR)/%.cpp
 	g++ -c -o $@ $<
