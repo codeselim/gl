@@ -91,11 +91,14 @@ nodeList* Element::getChildren() {
 string Element::getSpaceSeparatedChildrenList() {
 	stringstream result;
 	string space = "";
+	string dernier = "";
 	if (NULL != this->children)
 	{
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+			if ((*it)->getName() == dernier) space= "";
 			result << space << (*it)->getName();
 			space = " ";
+			dernier = (*it)->getName();
 		}
 	}
 	return result.str();

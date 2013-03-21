@@ -27,7 +27,14 @@ EltType Child::getType() {
 
 string ChildElt::toString() {
 	// return eltName + cardToString() + " " + typeToString();
-	return eltName + cardToString();
+	string startWrapper = "";
+	string endWrapper = "";
+	if (card == C_PLUS || card == STAR) {
+		startWrapper = "(";
+		endWrapper = ")";
+		
+	}
+	return startWrapper + eltName + endWrapper + cardToString();
 }
 
 string ChildListElt::toString() {
