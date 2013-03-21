@@ -23,7 +23,7 @@ class TestHTMLGeneration(TestCase):
             print out
             self.assertEquals(out, expected, 'the output is wrong')
 
-    def test_1O(self):
+    def test_10(self):
         self.htmlTestTemplate(10)
 
 if __name__ == '__main__':
