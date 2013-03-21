@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+
 <!DOCTYPE DatabaseInventory SYSTEM "rap4.dtd">
 
 <DatabaseInventory>
@@ -8,7 +8,7 @@
     <OracleSID>production</OracleSID>
     <DatabaseDomain>iDevelopment.info</DatabaseDomain>
     <Administrator EmailAlias="jhunter" Extension="6007">Jeffrey Hunter</Administrator>
-    <DatabaseAttributes Type="Production" Version="9i"/>
+    <DatabaseAttributes Type="Production"/>
     <Comments>
       The following database should be considered the most stable for
       up-to-date data. The backup strategy includes running the database
@@ -23,7 +23,7 @@
     <DatabaseDomain>iDevelopment.info</DatabaseDomain>
     <Administrator EmailAlias="jhunter" Extension="6007">Jeffrey Hunter</Administrator>
     <Administrator EmailAlias="mhunter" Extension="6008">Melody Hunter</Administrator>
-    <DatabaseAttributes Type="Development" Version="9i"/>
+    <DatabaseAttributes Type="Development"/>
     <Comments>
       The following database should contain all hosted applications. Production
       data will be exported on a weekly basis to ensure all development environments
@@ -38,7 +38,7 @@
     <Administrator EmailAlias="jhunter" Extension="6007">Jeffrey Hunter</Administrator>
     <Administrator EmailAlias="mhunter" Extension="6008">Melody Hunter</Administrator>
     <Administrator EmailAlias="ahunter">Alex Hunter</Administrator>
-    <DatabaseAttributes Type="Testing" Version="9i"/>
+    <DatabaseAttributes Type="Testing"/>
     <Comments>
       The following database will host more than half of the testing
       for our hosting environment.

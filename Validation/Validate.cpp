@@ -3,6 +3,7 @@
 Validate::Validate(Document *xmlFile, Dtd * dtdFile) {
 	xml = xmlFile;
 	dtd = dtdFile;
+
 }
 
 bool Validate::isElementValid(Element* elt) {
