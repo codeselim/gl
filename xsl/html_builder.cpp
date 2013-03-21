@@ -99,21 +99,21 @@ string HTMLBuilder::build_html(Node* curr, bool force /*= false*/) {
 			int afterSize = (closingTagPtr - tempval);
 			char* before = (char*)malloc(sizeof(char) * (beforeSize + 1));
 			char* after = (char*)malloc(sizeof(char) * (afterSize + 1));
-	#ifdef DBG
+#ifdef DBG
 			std::cout << "tmp: \n--------------\n" << tmp << "\n--------------\n" << std::endl;
 			std::cout << "Opening tag: \n--------------\n" << openingTagPtr << "\n--------------\n" << std::endl;
 			std::cout << "Beforesize=" << beforeSize << std::endl;
 			std::cout << "Aftersize=" << afterSize << std::endl;
-	#endif
+#endif
 			strncpy (before, openingTagPtr, beforeSize);// copy the beginning of the string to "before"
 			strncpy (after, pch + APPLY_TEMPLATES_STR_LEN - newLineLen + 1, afterSize); // copy the end of the string to "end"
 			// It seems that strncpy does not push \0 char at the end of the string so we have to do it manually
 			before[beforeSize] = '\0';
 			after[afterSize] = '\0';
-	#ifdef DBG
+#ifdef DBG
 			std::cout << "Before=" << before << std::endl;
 			std::cout << "After=" << after << std::endl;
-	#endif
+#endif
 			str << before << do_build_html_on_children((Element*)curr, true) << after;
 			free(before);
 			free(after);
