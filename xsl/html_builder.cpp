@@ -15,7 +15,8 @@ const XSLElement* APPLY_TEMPLATES = (const XSLElement*) Element::createElement(
 	new ElementName(string("xsl"), string("apply-templates")), 
 	NULL, 
 	NULL);
-const char* APPLY_TEMPLATES_STR = (const char*) APPLY_TEMPLATES->toXML().c_str();
+const string blorg = APPLY_TEMPLATES->toXML();
+const char* APPLY_TEMPLATES_STR = (const char*) blorg.c_str();
 const int APPLY_TEMPLATES_STR_LEN = strlen(APPLY_TEMPLATES_STR);
 
 HTMLBuilder::HTMLBuilder(XSLElement* xsl_root, Element* xml_root) {
@@ -54,23 +55,23 @@ string HTMLBuilder::html() {
 	return str.str();
 }
 
-string HTMLBuilder::do_build_html_on_children(Node* node) {
+string HTMLBuilder::do_build_html_on_children(Element* node, bool force /*= false*/) {
 	stringstream str;
-	nodeList* children = xml_root->getChildren();
+	nodeList* children = node->getChildren();
 	for(nodeList::iterator it = children->begin(); it != children->end(); ++it) {
 		Node* curr = (*it);
 		if (TextNode::NODE_NAME != curr->getName()) // Not a text node, so, is an element node (or some children class of Element)
 		{
-			str << build_html(curr);
+			str << build_html(curr, force);
 		} else {
-			str << endl << curr->toXML();
+			str << curr->toXML();
 		}
 	}
 	return str.str();
 }
 
 
-string HTMLBuilder::build_html(Node* curr) {
+string HTMLBuilder::build_html(Node* curr, bool force /*= false*/) {
 	stringstream str;
 
 	string currName = curr->getName();
@@ -80,33 +81,43 @@ string HTMLBuilder::build_html(Node* curr) {
 	{
 		XSLElement* xslel = it->second;
 		int newLineLen = strlen("\n");
-		string tmpstring = xslel->toXML();
+		string tmpstring = xslel->getInnerXML(false);
 		const char* tmp = tmpstring.c_str();
-		const char* end = tmp;
-		while(*(end++));// find the end of the string
-		end--; // not the \0 to be taken into account (if we did ++end instead of end++ then the empty string would cause a array overread)
-		int openingTagLen = xslel->xmlOpeningTag().length();
-		int closingTagLen = xslel->xmlClosingTag().length();
-		const char* openingTagPtr = tmp+openingTagLen + newLineLen;//necessarily begins at 0... ! //strstr(tmp, openingTag);
-		const char* closingTagPtr = end-closingTagLen - newLineLen; //necessarily ends at end-closingTagLen strstr(tmp, xslel->xmlClosingTag().c_str());
 		const char* pch = strstr(tmp, APPLY_TEMPLATES_STR);
-		int beforeSize = (pch - openingTagPtr);
-		int afterSize = (closingTagPtr - (pch + APPLY_TEMPLATES_STR_LEN));
-		char* before = (char*)malloc(sizeof(char) * beforeSize + 1);
-		char* after = (char*)malloc(sizeof(char) * afterSize + 1);
-		strncpy (before, openingTagPtr, beforeSize);// copy the beginning of the string to "before"
-		strncpy (after, pch + APPLY_TEMPLATES_STR_LEN + 1, afterSize); // copy the end of the string to "end"
+		if (NULL != pch)
+		{
+			// We found an apply-templates node inside that node, split before html and after html and recurse :
+			const char* end = tmp;
+			while(*end++);// find the end of the string
+			end--; // not the \0 to be taken into account (if we did ++end instead of end++ then the empty string would cause a array overread)
+			int beforeSize = (pch - tmp);
+			int afterSize = (end - pch);
+			char* before = (char*)malloc(sizeof(char) * (beforeSize + 1));
+			char* after = (char*)malloc(sizeof(char) * (afterSize + 1));
 #ifdef DBG
-		std::cout << "tmp: ||" << tmp << "||" << std::endl;
-		std::cout << "Opening tag: ||" << openingTagPtr << "||" << std::endl;
-		std::cout << "Beforesize=" << beforeSize << std::endl;
-		std::cout << "Aftersize=" << afterSize << std::endl;
-		std::cout << "Before=" << before << std::endl;
-		std::cout << "After=" << after << std::endl;
+			std::cout << "tmp: \n--------------\n" << tmp << "\n--------------\n" << std::endl;
+			std::cout << "Opening tag: \n--------------\n" << openingTagPtr << "\n--------------\n" << std::endl;
+			std::cout << "Beforesize=" << beforeSize << std::endl;
+			std::cout << "Aftersize=" << afterSize << std::endl;
 #endif
-		str << before << do_build_html_on_children(xslel) << after;
-		free(before);
-		free(after);
+			strncpy (before, tmp, beforeSize);// copy the beginning of the string to "before"
+			strncpy (after, pch + APPLY_TEMPLATES_STR_LEN - newLineLen + 1, afterSize); // copy the end of the string to "end"
+			// It seems that strncpy does not push \0 char at the end of the string so we have to do it manually
+			before[beforeSize] = '\0';
+			after[afterSize] = '\0';
+#ifdef DBG
+			std::cout << "Before=" << before << std::endl;
+			std::cout << "After=" << after << std::endl;
+#endif
+			str << before << do_build_html_on_children((Element*)curr, true) << after;
+			free(before);
+			free(after);
+		} else {
+			// No template to apply inside that node anymore, just get the XML value of what's inside the node (should be HTML)
+			str << tmpstring;
+		}
+	} else {
+		str << curr->toXML();
 	}
 	return str.str();
 }

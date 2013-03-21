@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
 	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
 	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
-
 	int err;
 	string xmlfile = string(argv[1]);
 	Document* xmlDocument = NULL;
