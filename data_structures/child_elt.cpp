@@ -27,27 +27,40 @@ EltType Child::getType() {
 
 string ChildElt::toString() {
 	// return eltName + cardToString() + " " + typeToString();
-	return eltName + cardToString();
+	string startWrapper = "";
+	string endWrapper = "";
+	if (card == C_PLUS || card == STAR) {
+		startWrapper = "(";
+		endWrapper = ")";
+		
+	}
+	return startWrapper + eltName + endWrapper + cardToString();
 }
 
 string ChildListElt::toString() {
 	string separator;
 	stringstream str;
+	string startWrapper;
+	string endWrapper;
 
-	if (listType == CHOICE) {
+	if (listType == CHOICE && eltList->size() > 1) {
 		separator = "| ";
+		startWrapper = "[";
+		endWrapper = "]";
 	} else {
-		separator = ", ";
+		separator = " ";
+		startWrapper = "(";
+		endWrapper = ")";
 	}
 
-	str << "(";
+	str << startWrapper;
 	for (list<Child*>::iterator i = eltList->begin(); i != eltList->end(); ++i) {
 		if (i != eltList->begin()) {
 			str << separator;
 		}
 		str << (*i)->toString();
 	}
-	str << ")";
+	str << endWrapper;
 	// return str.str() + cardToString() + " " + typeToString();
 	return str.str() + cardToString();
 }

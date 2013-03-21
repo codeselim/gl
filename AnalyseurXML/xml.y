@@ -125,6 +125,6 @@ int xmlwrap(void)
 }
 
 void xmlerror(Document** xmlDocument, const char *msg) {
-  cout << msg;
+  cout << "Erreur lors du parsing: " << msg << endl;
 }
 

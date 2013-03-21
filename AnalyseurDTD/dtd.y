@@ -166,5 +166,5 @@ int dtdwrap(void)
 
 void dtderror(Dtd** dtd, char *msg)
 {
-  fprintf(stderr, "%s\n", msg);
+  fprintf(stderr, "Erreur de parsing: %s\n", msg);
 }

@@ -3,13 +3,22 @@
 Validate::Validate(Document *xmlFile, Dtd * dtdFile) {
 	xml = xmlFile;
 	dtd = dtdFile;
+
+
+	string childrenstring = "b dl";
+	boost::regex ex("b (dl)+");
+ 	cout << " ????   " << boost::regex_match(childrenstring, ex)<<endl;
+
+
 }
 
 bool Validate::isElementValid(Element* elt) {
 	string eltName = elt->getName();
 	attributesMap* attrXml = elt->getAttributes();
 	DtdEltMap* elements = dtd->getElementMap();
-	list<DtdAttr*> * attrDtd = elements->getAttributes(eltName);
+	DtdElt * dtdElt = elements->getElement(eltName);
+	list<DtdAttr*> * attrDtd = dtdElt->getAttributes();
+
 	bool foundAttr = false;
 
 // Check attributes
@@ -28,10 +37,15 @@ bool Validate::isElementValid(Element* elt) {
 
 }
 
+
+
 // Check children
 string childrenstring = elt->getSpaceSeparatedChildrenList();
-DtdElt * dtdElt = elements->getElement(eltName);
-string dtdEltRegex = dtdElt->getChildren()->toString();
+string dtdEltRegex = "";
+if(dtdElt->getChildren() != NULL) {
+	dtdEltRegex = dtdElt->getChildren()->toString();
+
+
 EltType eltContentType = dtdElt->getChildren()->getType();
 cout << "ELT CONTENT TYPE : " << eltContentType << endl;
 cout << "ELT NAME : " << eltName << endl;
@@ -67,6 +81,13 @@ for(nodeList::iterator itNode = children->begin(); itNode != children->end(); it
 		if(isElementValid((Element*)*itNode) == false) {
 			return false;
 		}
+	}
+}
+
+}
+else {
+	if(!elt->getChildren()->empty()) {
+		return false;
 	}
 }
 	return true;

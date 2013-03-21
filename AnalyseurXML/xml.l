@@ -15,12 +15,6 @@
 
 #include "xml.tab.h"
 
-//#include "xml.c"
-
-// si vous activez l'option -P de flex, changez les deux lignes suivantes
-// #define YYTEXT yytext
-// #define YYLVAL yylval
-// exemple avec -Pxml
 #define YYTEXT xmltext
 #define YYLVAL xmllval
 

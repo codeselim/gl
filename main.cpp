@@ -20,30 +20,33 @@ using namespace std;
 	if (dtd != NULL) 	delete dtd;\
 	return success ? EXIT_SUCCESS : EXIT_FAILURE;\
 
-int dtdparse(Dtd**);
-int xmlparse(Document**);
+
 
 
 int main(int argc, char** argv) {
+	extern FILE *dtdin, *xmlin, *xslin;
+	extern int dtdparse(Dtd**);
+	extern int xmlparse(Document**);
+	extern int xslparse(Document**);
+
+
+
 	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
 	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
 	// (excluded the binary's name) that is the XML file name and the
 	// second and third arguments are going to be DTD and XSL
+
 	string xmlfile = string(argv[1]);
-	extern FILE *dtdin, *xmlin;
 	int err;
 	Document* xmlDocument = NULL;
 	Document* xsl = NULL;
 	Dtd* dtd = NULL;
 
 	string dtdfile, xslfile;
-	bool is_dtd = false, is_xsl = false;
-	if(argc > 2) {
-		is_dtd = true;
+	if(argc > 2 && strcmp("_", argv[2]) != 0) {
 		dtdfile = string(argv[2]);
 	}
 	if(argc > 3) {
-		is_xsl = true;
 		xslfile = string(argv[3]);
 	}
 	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
@@ -71,7 +74,7 @@ int main(int argc, char** argv) {
 		string sep = "/";
 		string tmp = string(xmlfile);
 
-		unsigned found = tmp.rfind(sep); /* position de la dernière occurence de sep */
+		unsigned found = tmp.rfind(sep); // position de la dernière occurence de sep
   	if ( found != std::string::npos) {
     	tmp.replace(found+1, tmp.substr(found+1).length(), xmlDocument->getDtdFileName());
   	}
@@ -106,6 +109,11 @@ int main(int argc, char** argv) {
 	/* dtd et xmlDocument sont maintenant correctement initialisés. */
 	/****************************************************************/
 
+	if (!dtd->isValid()) {
+		cerr << "La DTD n'est pas cohérente. (Des éléments non déclarés peut être?)" << endl;
+		EXIT(false);
+	}
+
 	//Validating xml with dtd
 	Validate validator(xmlDocument, dtd);
 
@@ -122,14 +130,14 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
-	xmlin = fopen(xslfile.c_str(), "r");
-	if (!xmlin) {
-		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
+	xslin = fopen(xslfile.c_str(), "r");
+	if (!xslin) {
+		cerr << "Impossible d'ouvrir le fichier nommé '" << xslfile << "'" << endl;
 		EXIT(false);
 	}
 
-	err = xmlparse(&xsl);
-	fclose(xmlin);
+	err = xslparse(&xsl);
+	fclose(xslin);
 
 	if (err != 0) {
 		cerr << "Analyse du XSL terminée avec " << err << " erreurs" << endl;

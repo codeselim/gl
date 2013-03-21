@@ -2,12 +2,15 @@
 *.output
 *.yy.c
 *.xml.c
+*.xsl.c
 *.dtd.c
 *.tab.c
 *.tab.h
 analyseDTD
 analyseXML
 gl
+xsl.l
+xsl.y
 
 # Compiled Object files
 *.slo
