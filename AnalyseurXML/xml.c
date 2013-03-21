@@ -4,6 +4,7 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 #include "commun.h"
+#include <special_node.h>
 #include <document.h>
 #include "xml.tab.h"
 

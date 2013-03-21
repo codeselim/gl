@@ -39,10 +39,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/676253835/child_elt.o \
 	${OBJECTDIR}/_ext/676253835/dtd_attr.o \
 	${OBJECTDIR}/_ext/676253835/dtd.o \
-	${OBJECTDIR}/_ext/676253835/xsl_element.o \
 	${OBJECTDIR}/_ext/676253835/document.o \
 	${OBJECTDIR}/_ext/43898991/main.o \
-	${OBJECTDIR}/_ext/1445279537/html_builder.o \
 	${OBJECTDIR}/_ext/676253835/text_node.o \
 	${OBJECTDIR}/_ext/676253835/dtd_elt.o \
 	${OBJECTDIR}/_ext/676253835/element.o
@@ -318,7 +316,6 @@ ${OBJECTDIR}/_ext/676253835/element_nomain.o: ${OBJECTDIR}/_ext/676253835/elemen
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl || true; \
 	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gl || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \

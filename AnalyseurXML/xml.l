@@ -11,6 +11,7 @@
 #include <element.h>
 #include <text_node.h>
 #include <document.h>
+#include <special_node.h>
 
 #include "xml.tab.h"
 

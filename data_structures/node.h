@@ -12,6 +12,7 @@ class Node {
 public:
 	virtual string toXML() const = 0 ;
 	virtual string getName() = 0;
+	
 };
 
 #endif

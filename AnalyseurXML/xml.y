@@ -9,7 +9,9 @@ using namespace std;
 #include <commun.h>
 #include <element.h>
 #include <text_node.h>
+#include <dtd.h>
 #include <document.h>
+#include <special_node.h>
 
 // ces trois fonctions devront changer de nom dans le cas où l'otion -p est utilisée
 int xmlwrap(void);
@@ -28,22 +30,27 @@ int xmllex(void);
    Attribut * attr;
    attributesMap * am;
    Document * d;
+   SpecialNode * sn;
+   list<SpecialNode*> * snl;
 }
 
 %token EGAL SLASH SUP SUPSPECIAL DOCTYPE
 %token <s> ENCODING VALEUR DONNEES COMMENT NOM ENNOM
 %token <en> OBALISEEN OBALISE OBALISESPECIALE FBALISE FBALISEEN
+
 %type <en> ouvre
 %type <elt> element
 %type <nl> contenu_opt vide_ou_contenu ferme_contenu_et_fin
 %type <attr> attribut
 %type <am> attributs_opt
 %type <d> document
+%type <sn> declaration
+%type <snl> declarations_opt
 
 %%
 
 document
- : declarations_opt element misc_seq_opt  {$$ = new Document(NULL, $2); *xmlDocument = $$;}
+ : declarations_opt element misc_seq_opt  {$$ = new Document($1, $2); *xmlDocument = $$;}
  ;
 
 
@@ -58,13 +65,19 @@ misc
 
 
 declarations_opt
- : declarations_opt declaration
- | /*vide*/
+ : declarations_opt declaration { $$ = $1; $$->push_back($2);}
+ | /*vide*/ { $$ = new list<SpecialNode*>();}
  ;
 
 declaration
- : DOCTYPE NOM NOM VALEUR SUP
- | OBALISESPECIALE attributs_opt SUPSPECIAL
+ : DOCTYPE NOM NOM VALEUR SUP {
+        attributesMap* map = new attributesMap();
+        map->insert(pair<string,string>(string("fileUrl"), $4));
+        map->insert(pair<string,string>(string("ref"), $3));
+        map->insert(pair<string,string>(string("rootName"), $2));
+        $$ = new SpecialNode(SNT_DOCTYPE, new ElementName("", "DOCTYPE"), map);
+        }
+ | OBALISESPECIALE attributs_opt SUPSPECIAL { }
  ;
 
 

@@ -2,7 +2,8 @@
 #include <sstream>
 #include "document.h"
 
-Document::Document(list<Node*> * declarations, Element* rootNode) {
+
+Document::Document(list<SpecialNode*> * declarations, Element* rootNode) {
 	this->rootNode = rootNode;
 	this->declarations = declarations;
 }
@@ -13,16 +14,20 @@ Document::~Document() {
 
 string Document::toXML() const {
 	stringstream str;
-	str << this->declarations << endl;
+	for (list<SpecialNode*>::iterator i = declarations->begin(); i != declarations->end(); ++i) {
+		str << (*i)->toXML() << "\n";
+	}
 	str << this->rootNode->toXML();
 	return str.str();
 }
 
 string Document::getDtdFileName() {
-	cerr << "TODO getDtdFileName" << endl;
-	return string("");
-	// for (list<Node*>::iterator i = declarations.begin(); i != declarations.end(); ++i) {
-
-
-	// }
+	string dtdurl;
+	for (list<SpecialNode*>::iterator i = declarations->begin(); i != declarations->end(); ++i) {
+		if ( (*i)->getType() == SNT_DOCTYPE ) {
+			dtdurl = (*i)->getAttributes()->find("fileUrl")->second;
+			break;
+		}
+	}
+	return dtdurl;
 }
