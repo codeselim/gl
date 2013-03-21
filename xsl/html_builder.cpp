@@ -55,14 +55,14 @@ string HTMLBuilder::html() {
 	return str.str();
 }
 
-string HTMLBuilder::do_build_html_on_children(Node* node) {
+string HTMLBuilder::do_build_html_on_children(Element* node, bool force /*= false*/) {
 	stringstream str;
-	nodeList* children = xml_root->getChildren();
+	nodeList* children = node->getChildren();
 	for(nodeList::iterator it = children->begin(); it != children->end(); ++it) {
 		Node* curr = (*it);
 		if (TextNode::NODE_NAME != curr->getName()) // Not a text node, so, is an element node (or some children class of Element)
 		{
-			str << build_html(curr);
+			str << build_html(curr, force);
 		} else {
 			str << curr->toXML();
 		}
@@ -71,7 +71,7 @@ string HTMLBuilder::do_build_html_on_children(Node* node) {
 }
 
 
-string HTMLBuilder::build_html(Node* curr) {
+string HTMLBuilder::build_html(Node* curr, bool force /*= false*/) {
 	stringstream str;
 
 	string currName = curr->getName();
@@ -114,13 +114,15 @@ string HTMLBuilder::build_html(Node* curr) {
 			std::cout << "Before=" << before << std::endl;
 			std::cout << "After=" << after << std::endl;
 	#endif
-			str << before << do_build_html_on_children(xslel) << after;
+			str << before << do_build_html_on_children((Element*)curr, true) << after;
 			free(before);
 			free(after);
 		} else {
 			// No template to apply inside that node anymore, just get the XML value of what's inside the node (should be HTML)
 			str << xslel->getInnerXML(false);
 		}
+	} else {
+		str << curr->toXML();
 	}
 	return str.str();
 }
