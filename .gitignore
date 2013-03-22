@@ -6,6 +6,7 @@
 *.dtd.c
 *.tab.c
 *.tab.h
+*.pyc
 analyseDTD
 analyseXML
 gl
