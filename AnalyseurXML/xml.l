@@ -6,22 +6,17 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include "commun.h"
+#include <commun.h>
 
 #include <element.h>
 #include <text_node.h>
 #include <document.h>
+#include <special_node.h>
 
-#include "yy.tab.h"
+#include "xml.tab.h"
 
-//#include "xml.c"
-
-// si vous activez l'option -P de flex, changez les deux lignes suivantes
-#define YYTEXT yytext
-#define YYLVAL yylval
-// exemple avec -Pxml
-//#define YYTEXT xmltext
-//#define YYLVAL xmllval
+#define YYTEXT xmltext
+#define YYLVAL xmllval
 
 // supprime les espaces en début et fin de chaine
 static char* supprimeEspaces(char *s) {

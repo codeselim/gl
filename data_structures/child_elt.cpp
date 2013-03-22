@@ -11,27 +11,56 @@ string Child::cardToString() {
 	}
 }
 
+string Child::typeToString() {
+	switch (type) {
+		case T_ANY: return "(ANY)";
+		case T_EMPTY: return "(EMPTY)";
+		case LIST: return "(LIST)";
+		case T_PCDATA: return "(PCDATA)";
+		case TOKEN: return "(TOKEN)";
+	}
+}
+
+EltType Child::getType() {
+	return type;
+}
+
 string ChildElt::toString() {
-	return eltName + cardToString();
+	// return eltName + cardToString() + " " + typeToString();
+	string startWrapper = "";
+	string endWrapper = "";
+	if (card == C_PLUS || card == STAR) {
+		startWrapper = "(";
+		endWrapper = ")";
+		
+	}
+	return startWrapper + eltName + endWrapper + cardToString();
 }
 
 string ChildListElt::toString() {
 	string separator;
 	stringstream str;
+	string startWrapper;
+	string endWrapper;
 
-	if (listType == CHOICE) {
+	if (listType == CHOICE && eltList->size() > 1) {
 		separator = "| ";
+		startWrapper = "[";
+		endWrapper = "]";
 	} else {
-		separator = ", ";
+		separator = " ";
+		startWrapper = "(";
+		endWrapper = ")";
 	}
 
-	str << "(";
+	str << startWrapper;
 	for (list<Child*>::iterator i = eltList->begin(); i != eltList->end(); ++i) {
 		if (i != eltList->begin()) {
 			str << separator;
 		}
 		str << (*i)->toString();
 	}
-	str << ")";
+	str << endWrapper;
+	// return str.str() + cardToString() + " " + typeToString();
 	return str.str() + cardToString();
 }

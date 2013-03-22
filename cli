@@ -3,7 +3,8 @@
 from subprocess import Popen, PIPE
 
 DBG = False
-PATH_TO_BINARY = "./nbProject/GL/dist/Debug/GNU-Linux-x86/gl"
+# PATH_TO_BINARY = "./nbProject/GL/dist/Debug/GNU-Linux-x86/gl"
+PATH_TO_BINARY = "./gl"
 
 # package things
 def execute_shell_and_get_stdout(shell_command, args_list):
@@ -11,7 +12,7 @@ def execute_shell_and_get_stdout(shell_command, args_list):
 		print "Going to execute command: ", shell_command, args_list
 	command = [shell_command]
 	command.extend(args_list)
-	return Popen(command, stdout=PIPE).communicate()[0]
+	return Popen(command, stdout=PIPE, stderr=PIPE).communicate()[0]
 
 # CLI things
 if __name__ == '__main__':
@@ -36,9 +37,11 @@ if __name__ == '__main__':
 
 	if options.dtd:
 		args2.append(options.dtd)
+	else:
+		args2.append("")
 	if options.xsl:
 		args2.append(options.xsl)
-	
+
 	print execute_shell_and_get_stdout(PATH_TO_BINARY, args2)
 
 

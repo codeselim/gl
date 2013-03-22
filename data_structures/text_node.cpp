@@ -6,10 +6,13 @@ TextNode::TextNode(string content) {
 	this->content = content;
 }
 
-string TextNode::toXML() {
+string TextNode::toXML() const {
 	return this->content;
 }
 
 string TextNode::getName() {
 	return TextNode::NODE_NAME;
+}
+string TextNode::getFullName() {
+	return getName();
 }

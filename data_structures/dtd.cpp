@@ -29,13 +29,6 @@ void DtdEltMap::add_elt(DtdElt* element) {
 }
 
 DtdEltMap::~DtdEltMap() {
-	for (map<string, list<DtdAttr*> *>::iterator i = attr_map->begin(); i != attr_map->end(); ++i) {
-		for (list<DtdAttr*>::iterator it = i->second->begin(); it != i->second->end(); ++it) {
-			delete (*it);
-		}
-		delete i->second;
-	}
-	delete attr_map;
 	for (map<string, DtdElt*>::iterator i = elt_map->begin(); i != elt_map->end(); ++i) {
 		delete i->second;
 	}
@@ -52,3 +45,13 @@ string DtdEltMap::toString() {
 };
 
 string Dtd::toString() {return elements->toString(); };
+
+bool Dtd::isValid() {
+	map<string, DtdElt*>* eMap = elements->getElements();
+	for (map<string, DtdElt*>::iterator i = eMap->begin(); i != eMap->end(); ++i) {
+		if (i->second->getChildren() == NULL) {
+			return false;
+		}
+	}
+	return true;
+}

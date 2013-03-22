@@ -1,6 +1,17 @@
 #include "element.h"
 #include <sstream>
+#include "xsl_element.h"
 #include <exception>
+
+Element* Element::createElement(ElementName* en, attributesMap* attrs,  nodeList* children /*= NULL*/) {
+	if ("xsl" == en->first) // namespace comparison
+	{
+		// Instanciate a XSL element
+		return new XSLElement(en, attrs, children);
+	} else {
+		return new Element(en, attrs, children);
+	}
+}
 
 Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = NULL */) {
 	if(NULL == children) {
@@ -8,7 +19,7 @@ Element::Element(ElementName* en, attributesMap* attrs, nodeList* children/* = N
 	}
 	this->children = children;
 	this->attributes = attrs;
-	this->name = en->first;
+	this->name = en->second;
 }
 
 Element& Element::setParent(Element* e) {
@@ -19,9 +30,19 @@ Element* Element::getParent() {
 	return this->parent;
 }
 
-string Element::toXML() {
+string Element::getAttributeValue(string attr) {
+	attributesMap::iterator it = this->attributes->find(attr);
+	if (this->attributes->end() != it)
+	{
+		return it->second;
+	} else {
+		return string("");
+	}
+}
+
+string Element::xmlOpeningTag() const {
 	stringstream str;
-	// The element tag...
+
 	str << "<" << this->name;
 
 	// Its attributes...
@@ -33,14 +54,39 @@ string Element::toXML() {
 	}
 
 	str << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::xmlClosingTag() const {
+	stringstream str;
+	str << endl << "</" << this->name << ">";// close the XML tag
+	return str.str();
+}
+
+string Element::toXML() const {
+	stringstream str;
+	// The element tag...
+	str << this->xmlOpeningTag();
+	str << this->getInnerXML();
+	str << this->xmlClosingTag();
+	return str.str();
+}
+
+string Element::getInnerXML(bool first_newl /*= true*/) const {
+	stringstream str;
 	// Its children...
 	if (NULL != this->children)
 	{
+		string newl = "";
+		if (first_newl)
+		{
+			newl = "\n";
+		}
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
-			str << endl << (*it)->toXML();
+			str << newl << (*it)->toXML();
+			newl = "\n";
 		}
 	}
-	str << endl << "</" << this->name << ">";// close the XML tag
 	return str.str();
 }
 
@@ -51,11 +97,14 @@ nodeList* Element::getChildren() {
 string Element::getSpaceSeparatedChildrenList() {
 	stringstream result;
 	string space = "";
+	string dernier = "";
 	if (NULL != this->children)
 	{
 		for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+			if ((*it)->getName() == dernier) space= "";
 			result << space << (*it)->getName();
 			space = " ";
+			dernier = (*it)->getName();
 		}
 	}
 	return result.str();
@@ -63,4 +112,22 @@ string Element::getSpaceSeparatedChildrenList() {
 
 string Element::getName() {
 	return this->name;
+}
+
+string Element::getFullName() {
+	if (ns.empty()) {
+		return name;
+	} else {
+		return ns + ":" + name;
+	}
+}
+
+
+Element::~Element() {
+  parent = NULL; /* s'autodétruira après. */
+	for(nodeList::iterator it = this->children->begin(); it != this->children->end(); ++it) {
+		delete *it;
+	}
+	delete attributes;
+	delete children;
 }
