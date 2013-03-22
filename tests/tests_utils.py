@@ -1,6 +1,14 @@
-sys.path.insert(0, '..')
-from cli import execute_shell_and_get_stdout
+# import sys
+# sys.path.insert(0, '..')
+
+from pyutils.run_utils import execute_shell_and_get_stdout
+
 
 def execute_test(args):
-	PATH_TO_BINARY = "../gl"
-	execute_shell_and_get_stdout(PATH_TO_BINARY, args)
+    print "aaa"
+    PATH_TO_BINARY = "../gl"
+    out, err = execute_shell_and_get_stdout(PATH_TO_BINARY, args)
+    if err:
+        print err
+
+    return out
