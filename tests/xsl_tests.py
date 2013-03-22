@@ -1,8 +1,15 @@
 import unittest
 from tests_utils import execute_test
-
+import sys
 
 class XSLTest(unittest.TestCase):
+    def perror(self, expected, result):
+        print "######Expected##########"
+        print expected
+        print "######Result##########"
+        print result
+        print "################"
+
     def simple_test(self, n):
         tokens = {"testId": n, "testDir": "tests"}
         testSrc = ["{testDir}/simple{testId}.xml", "",
@@ -12,21 +19,17 @@ class XSLTest(unittest.TestCase):
         f = open(expectedfile, 'r')
         expected = open(expectedfile, "r").read()
 
-        result = execute_test(args)
+        result, err = execute_test(args)
         expected = f.read()
         f.close()
 
         if (result != expected):
-            print "################"
-            print result
-            print "################"
-            print expected
-            print "################"
+            self.perror(expected, result)
+            sys.stderr.write(err)
 
         self.assertEqual(result, expected, "the output is wrong")
 
     def test_simple1(self):
-        print 1
         self.simple_test(1)
 
     def test_simple2(self):
