@@ -15,7 +15,15 @@ class XSLTest(unittest.TestCase):
         result = execute_test(args)
         expected = f.read()
         f.close()
-        unittest.assertEqual(result, expected, "the output is wrong")
+
+        if (result != expected):
+            print "################"
+            print result
+            print "################"
+            print expected
+            print "################"
+
+        self.assertEqual(result, expected, "the output is wrong")
 
     def test_simple1(self):
         print 1
