@@ -4,7 +4,7 @@ from tests_utils import execute_test
 
 class XSLTest(unittest.TestCase):
     def simple_test(self, n):
-        tokens = {"testId": n, "testDir": "."}
+        tokens = {"testId": n, "testDir": "tests"}
         testSrc = ["{testDir}/simple{testId}.xml", "",
                    "{testDir}/simple{testId}.xsl"]
         args = [f.format(**tokens) for f in testSrc]
