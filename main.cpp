@@ -8,6 +8,7 @@
 
 #include <dtd.tab.h>
 #include <xml.tab.h>
+#include <xsl.tab.h>
 
 #include <Validate.h>
 #include <html_builder.h>
