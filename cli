@@ -1,18 +1,13 @@
 #!/usr/bin/python
  # -*- coding: utf-8 -*-
-from subprocess import Popen, PIPE
 
+from pyutils.run_utils import execute_shell_and_get_stdout
 DBG = False
 # PATH_TO_BINARY = "./nbProject/GL/dist/Debug/GNU-Linux-x86/gl"
 PATH_TO_BINARY = "./gl"
 
 # package things
-def execute_shell_and_get_stdout(shell_command, args_list):
-	if DBG:
-		print "Going to execute command: ", shell_command, args_list
-	command = [shell_command]
-	command.extend(args_list)
-	return Popen(command, stdout=PIPE, stderr=PIPE).communicate()[0]
+
 
 # CLI things
 if __name__ == '__main__':
