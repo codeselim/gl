@@ -6,6 +6,9 @@ Projet Grammaire et Langage: Développement d'un processeur XML
 
 Prérequis
 ---------
+- g++
+- flex
+- bison >= 2.3
 - boost-regex
 - python >= 2.4
 
