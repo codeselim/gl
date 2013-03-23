@@ -49,7 +49,8 @@ string Dtd::toString() {return elements->toString(); };
 bool Dtd::isValid() {
 	map<string, DtdElt*>* eMap = elements->getElements();
 	for (map<string, DtdElt*>::iterator i = eMap->begin(); i != eMap->end(); ++i) {
-		if (i->second->getChildren() == NULL) {
+		DtdElt* element = i->second;
+		if ( element->getType() == TOKEN && element->getChildren() == NULL) {
 			return false;
 		}
 	}

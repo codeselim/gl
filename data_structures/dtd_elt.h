@@ -17,14 +17,18 @@ class DtdElt {
 	EltType type;
 	string name;
 	list<DtdAttr*> * attributes;
+	string typeToString();
 
 public:
-	DtdElt(Child* theContent): name("aa"), content(theContent), attributes(NULL) {}
-	DtdElt(EltType theType): name("aa"), content(NULL), type(theType), attributes(NULL) {}
+	DtdElt(Child* theContent): name(""), content(theContent), attributes(NULL), type(TOKEN) {}
+
+	DtdElt(EltType theType): name(""), content(NULL), type(theType), attributes(NULL) {}
+
 	DtdElt(string theName, list<DtdAttr*> * theAttributes):
-		name(theName), content(NULL), attributes(theAttributes) {}
+		name(theName), content(NULL), attributes(theAttributes), type(TOKEN) {}
+
 	~DtdElt() { delete content; }
-	void copy(DtdElt* toCopy); /* deletes the element once the copy is done! */
+	void copy(DtdElt* toCopy); /* Attention, fait un delete sur l'élément toCopy! */
 	void setName(string theName) {name = string(theName); }
 	void setAttributes(list<DtdAttr*> * la) { attributes = la; }
 	list<DtdAttr*> * getAttributes() { return attributes; }
