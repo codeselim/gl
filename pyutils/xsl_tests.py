@@ -39,5 +39,8 @@ class XSLTest(unittest.TestCase):
     def test_simple3(self):
         self.simple_test(3)
 
+    def test_simple4(self):
+        self.simple_test(4)
+
 if __name__ == '__main__':
     unittest.main()

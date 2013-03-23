@@ -9,13 +9,13 @@
 			</HEAD>
 			<BODY>
 				<H1> </H1>
-				<xsl:apply-templates />
+				<xsl:apply-templates/>
 			</BODY>
 		</HTML>
 	</xsl:template>
 	<xsl:template match="greeter">
 		<DIV>from
-			<I> </I>
+			<I><xsl:apply-templates/></I>
 		</DIV>
 	</xsl:template>
 </xsl:stylesheet>
