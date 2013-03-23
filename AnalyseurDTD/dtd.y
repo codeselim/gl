@@ -139,7 +139,7 @@ contenu_choice
 ;
 
 seq
-: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->addFront($2); cout << $3->toString() << endl;}
+: OUVREPAR cp contenu_seq_opt FERMEPAR { $$ = $3; $$->addFront($2); /*cout << $3->toString() << endl;*/}
 ;
 
 contenu_seq_opt

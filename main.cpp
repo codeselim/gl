@@ -67,9 +67,9 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
-	cerr << "------------------------------------" << endl;
-	cerr << xmlDocument->toXML() << endl;
-	cerr << "------------------------------------" << endl;
+	// cerr << "------------------------------------" << endl;
+	// cerr << xmlDocument->toXML() << endl;
+	// cerr << "------------------------------------" << endl;
 
 
 	/** Lecture DTD ***********************************************************/
@@ -104,8 +104,8 @@ int main(int argc, char** argv) {
 			EXIT(false);
 		}
 
-		cerr << dtd->toString() << endl;
-		cerr << "------------------------------------" << endl;
+		// cerr << dtd->toString() << endl;
+		// cerr << "------------------------------------" << endl;
 
 	/** Analyse XML par rapport à la DTD ***************************************/
 

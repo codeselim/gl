@@ -3,13 +3,6 @@
 Validate::Validate(Document *xmlFile, Dtd * dtdFile) {
 	xml = xmlFile;
 	dtd = dtdFile;
-
-
-	string childrenstring = "b dl";
-	boost::regex ex("b (dl)+");
- 	cout << " ????   " << boost::regex_match(childrenstring, ex)<<endl;
-
-
 }
 
 bool Validate::isElementValid(Element* elt) {
@@ -47,10 +40,10 @@ if(dtdElt->getChildren() != NULL) {
 
 
 EltType eltContentType = dtdElt->getChildren()->getType();
-cout << "ELT CONTENT TYPE : " << eltContentType << endl;
-cout << "ELT NAME : " << eltName << endl;
-cout << "REGEX : " << dtdEltRegex << endl;
-cout << "CHILDREN : " << childrenstring << endl;
+// cout << "ELT CONTENT TYPE : " << eltContentType << endl;
+// cout << "ELT NAME : " << eltName << endl;
+// cout << "REGEX : " << dtdEltRegex << endl;
+// cout << "CHILDREN : " << childrenstring << endl;
 
 if( eltContentType == T_EMPTY) {
 	if(childrenstring.length() > 0) {
@@ -62,15 +55,10 @@ else if (eltContentType == LIST || eltContentType == TOKEN) {
 	//string regex = createRegex(dtdElt);
 
   boost::regex ex(dtdEltRegex);
-  if (boost::regex_match(childrenstring, ex)) 
+  if (!boost::regex_match(childrenstring, ex)) 
   {
-    cout << "CA MATCH" << endl;
+    return false;
   }
-  else {
-  	cout << "CA MATCH PAAAAAAAAAAAAAAAAAS" << endl;
-  	return false;
-  }
-	//TODO
 }
 
 // Get children of the current xml element
