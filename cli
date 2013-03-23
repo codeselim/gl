@@ -37,7 +37,7 @@ if __name__ == '__main__':
 	if options.xsl:
 		args2.append(options.xsl)
 
-	print execute_shell_and_get_stdout(PATH_TO_BINARY, args2)
+	print execute_shell_and_get_stdout(PATH_TO_BINARY, args2)[0]
 
 
 

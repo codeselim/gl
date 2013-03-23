@@ -32,7 +32,6 @@ if __name__ == '__main__':
 
     for i in xrange(1, 4):
         suite.addTest(XSLTest("test_simple" + str(i)))
-
-    result = []
-    suite.run(result)
-    print result
+    unittest.TextTestRunner().run(suite)
+    # result = []
+    # suite.run(result)
