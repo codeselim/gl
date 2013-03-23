@@ -1,8 +1,8 @@
+
 <!DOCTYPE rapport SYSTEM "../AnalyseurDTD/rap1.dtd">
 <rapport>
   <titre>R�aliser un compilateur</titre>
   <auteur>
-    <prenom> Nino </prenom>
     <nom> Silverio </nom>
   </auteur>
   <resume> Ceci est extrait du livre "R�aliser un compilateur :

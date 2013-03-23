@@ -1,5 +1,15 @@
 #include "dtd_elt.h"
 
+string DtdElt::typeToString() {
+	switch (type) {
+		case T_ANY: return "ANY";
+		case T_EMPTY: return "EMPTY";
+		case TOKEN: return "";
+		default: return "Pas de type valide!";
+	}
+}
+
+
 void DtdElt::copy(DtdElt* toCopy) {
 	if (attributes == NULL || content != NULL) {
 		cerr << "Erreur lors de la copie. Attributes de la destination doit être non NULL et content NULL" << endl;
@@ -19,7 +29,7 @@ void DtdElt::copy(DtdElt* toCopy) {
 
 string DtdElt::toString() {
 	stringstream str;
-	str << name;
+	str << name << " " << typeToString();
 	if (content != NULL) {
 		str << "\n\tElements fils: " << content->toString();
 	}

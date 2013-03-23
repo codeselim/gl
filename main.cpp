@@ -77,6 +77,8 @@ int main(int argc, char** argv) {
 		string sep = "/";
 		string tmp = string(xmlfile);
 
+		// Reconstitution du chemin du fichier DTD à partir de celui du XML et de la valeur indiquée
+		// dans la balise <!DOCTYPE> du XML. Ne supporte que les chemins relatifs.
 		unsigned found = tmp.rfind(sep); // position de la dernière occurence de sep
   	if ( found != std::string::npos) {
     	tmp.replace(found+1, tmp.substr(found+1).length(), xmlDocument->getDtdFileName());
