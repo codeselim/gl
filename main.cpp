@@ -67,10 +67,6 @@ int main(int argc, char** argv) {
 		EXIT(false);
 	}
 
-	// cerr << "------------------------------------" << endl;
-	// cerr << xmlDocument->toXML() << endl;
-	// cerr << "------------------------------------" << endl;
-
 
 	/** Lecture DTD ***********************************************************/
 	if ( dtdfile.empty() && !xmlDocument->getDtdFileName().empty()) {
@@ -105,9 +101,6 @@ int main(int argc, char** argv) {
 			cerr << "Analyse du DTD terminée avec " << err << " erreurs" << endl;
 			EXIT(false);
 		}
-
-		// cerr << dtd->toString() << endl;
-		// cerr << "------------------------------------" << endl;
 
 	/** Analyse XML par rapport à la DTD ***************************************/
 

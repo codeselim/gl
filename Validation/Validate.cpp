@@ -40,10 +40,6 @@ if(dtdElt->getChildren() != NULL) {
 
 
 EltType eltContentType = dtdElt->getChildren()->getType();
-// cout << "ELT CONTENT TYPE : " << eltContentType << endl;
-// cout << "ELT NAME : " << eltName << endl;
-// cout << "REGEX : " << dtdEltRegex << endl;
-// cout << "CHILDREN : " << childrenstring << endl;
 
 if( eltContentType == T_EMPTY) {
 	if(childrenstring.length() > 0) {
@@ -52,11 +48,11 @@ if( eltContentType == T_EMPTY) {
 }
 else if (eltContentType == LIST || eltContentType == TOKEN) {
 	//Match regex
-	//string regex = createRegex(dtdElt);
 
   boost::regex ex(dtdEltRegex);
   if (!boost::regex_match(childrenstring, ex))
   {
+    cout << "\nProblème :\n \t(" << childrenstring << ")\n \tne correspond pas à ce qui a été déclaré dans la dtd :\n \t"<< ex <<endl <<endl;
     return false;
   }
 }
