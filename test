@@ -1,37 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# import sys
 import unittest
-# sys.path.insert(0, './tests')
 
-from tests.xsl_tests import XSLTest
-# from subprocess import Popen, PIPE
-
-
-# class TestHTMLGeneration(TestCase):
-    # pass
-    # def htmlTestTemplate(self, testId):
-    #     tokens = {"testId": testId, "testDir": "testfiles"}
-    #     command = ["./gl"]
-    #     testSrc = ["{testDir}/test{testId}.xml", "",
-    #                "{testDir}/test{testId}.xsl"]
-    #     args = [f.format(**tokens) for f in testSrc]
-    #     expectedfile = "{testDir}/expected{testId}.html".format(**tokens)
-    #     expected = open(expectedfile, "r").read()
-    #     command.extend(args)
-
-    #     out, _ = Popen(command, stdout=PIPE, stderr=PIPE).communicate()
-
-    #     if (out != expected):
-    #         print out
-    #         self.assertEquals(out, expected, 'the output is wrong')
-
+from pyutils.xsl_tests import XSLTest
 if __name__ == '__main__':
     suite = unittest.TestSuite()
 
     for i in xrange(1, 4):
         suite.addTest(XSLTest("test_simple" + str(i)))
     unittest.TextTestRunner().run(suite)
-    # result = []
-    # suite.run(result)

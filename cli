@@ -2,42 +2,43 @@
  # -*- coding: utf-8 -*-
 
 from pyutils.run_utils import execute_shell_and_get_stdout
+import sys
+
 DBG = False
 # PATH_TO_BINARY = "./nbProject/GL/dist/Debug/GNU-Linux-x86/gl"
 PATH_TO_BINARY = "./gl"
 
-# package things
 
-
-# CLI things
 if __name__ == '__main__':
-	from optparse import OptionParser
-	parser = OptionParser()
-	parser.usage = "usage: %prog [options] fichier_xml"
-	parser.add_option("-d", "--dtd", dest="dtd", default=None,
-	                  help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_dtd")
-	parser.add_option("-x", "--xsl", dest="xsl", default=None,
-	                  help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_xsl")
-	(options, args) = parser.parse_args()
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.usage = "usage: %prog [options] fichier_xml"
+    parser.add_option("-d", "--dtd", dest="dtd", default=None,
+                      help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_dtd")
+    parser.add_option("-x", "--xsl", dest="xsl", default=None,
+                      help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_xsl")
+    (options, args) = parser.parse_args()
 
-	if DBG:
-		print options
-		print args
+    if DBG:
+        print options
+        print args
 
-	if len(args) != 1:
-		parser.print_help()
-		exit()
+    if len(args) != 1:
+        parser.print_help()
+        exit()
 
-	args2 = [args[0]]
+    args2 = [args[0]]
 
-	if options.dtd:
-		args2.append(options.dtd)
-	else:
-		args2.append("")
-	if options.xsl:
-		args2.append(options.xsl)
+    if options.dtd:
+        args2.append(options.dtd)
+    else:
+        args2.append("")
+    if options.xsl:
+        args2.append(options.xsl)
 
-	print execute_shell_and_get_stdout(PATH_TO_BINARY, args2)[0]
+    out, err = execute_shell_and_get_stdout(PATH_TO_BINARY, args2)
+    sys.stderr.write(err)
+    print out
 
 
 

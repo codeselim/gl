@@ -27,7 +27,7 @@ public:
 	DtdElt(string theName, list<DtdAttr*> * theAttributes):
 		name(theName), content(NULL), attributes(theAttributes), type(TOKEN) {}
 
-	~DtdElt() { delete content; }
+	~DtdElt();
 	void copy(DtdElt* toCopy); /* Attention, fait un delete sur l'élément toCopy! */
 	void setName(string theName) {name = string(theName); }
 	void setAttributes(list<DtdAttr*> * la) { attributes = la; }

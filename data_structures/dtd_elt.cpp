@@ -1,5 +1,18 @@
 #include "dtd_elt.h"
 
+DtdElt::~DtdElt() {
+	if (content != NULL) {
+		delete content;
+	}
+
+	if (attributes != NULL) {
+		for (list<DtdAttr*>::iterator i = attributes->begin(); i != attributes->end(); ++i) {
+			delete *i;
+		}
+		delete attributes;
+	}
+}
+
 string DtdElt::typeToString() {
 	switch (type) {
 		case T_ANY: return "ANY";
@@ -29,9 +42,17 @@ void DtdElt::copy(DtdElt* toCopy) {
 
 string DtdElt::toString() {
 	stringstream str;
-	str << name << " " << typeToString();
-	if (content != NULL) {
-		str << "\n\tElements fils: " << content->toString();
+	str << name << " ";
+
+	str << "\n\tElements fils: ";
+	if (typeToString().empty()) {
+		if (content != NULL) {
+			str << content->toString();
+		} else {
+			str << "Error!";
+		}
+	} else {
+		str << typeToString();
 	}
 
 	if (attributes != NULL) {

@@ -55,7 +55,7 @@ else if (eltContentType == LIST || eltContentType == TOKEN) {
 	//string regex = createRegex(dtdElt);
 
   boost::regex ex(dtdEltRegex);
-  if (!boost::regex_match(childrenstring, ex)) 
+  if (!boost::regex_match(childrenstring, ex))
   {
     return false;
   }

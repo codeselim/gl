@@ -32,7 +32,7 @@ string ChildElt::toString() {
 	if (card == C_PLUS || card == STAR) {
 		startWrapper = "(";
 		endWrapper = ")";
-		
+
 	}
 	return startWrapper + eltName + endWrapper + cardToString();
 }
@@ -64,3 +64,13 @@ string ChildListElt::toString() {
 	// return str.str() + cardToString() + " " + typeToString();
 	return str.str() + cardToString();
 }
+
+// ChildListElt::~ChildListElt() {
+	// cerr << "CLE dest" << endl;
+	// if (eltList != NULL) {
+	// 	for (list<Child*>::iterator i = eltList->begin(); i != eltList->end(); ++i) {
+	// 		delete *i;
+	// 	}
+	// 	delete eltList;
+	// }
+// }

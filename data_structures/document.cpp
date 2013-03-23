@@ -9,11 +9,11 @@ Document::Document(list<SpecialNode*> * declarations, Element* rootNode) {
 }
 
 Document::~Document() {
-	// delete rootNode;
-	// for (list<SpecialNode*>::iterator i = declarations->begin(); i != declarations->end(); ++i) {
-	// 	delete *i;
-	// }
-	// delete declarations;
+	delete rootNode;
+	for (list<SpecialNode*>::iterator i = declarations->begin(); i != declarations->end(); ++i) {
+		delete *i;
+	}
+	delete declarations;
 }
 
 string Document::toXML() const {

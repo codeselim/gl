@@ -36,6 +36,7 @@ analyseXSL: $(XMLDIR)/*.l $(XMLDIR)/*.y makefile
 
 clean:
 	-rm -rf *.tab.c lex.*.c *.tab.h *.output $(EXENAME) $(OBJ_FILES) xsl.y xsl.l
+	-rm -f *.pyc pyutils/*.pyc
 
 $(DSDIR)/%.o: $(DSDIR)/%.cpp
 	g++ -c -o $@ $<
