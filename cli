@@ -12,11 +12,13 @@ PATH_TO_BINARY = "./gl"
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
-    parser.usage = "usage: %prog [options] fichier_xml"
-    parser.add_option("-d", "--dtd", dest="dtd", default=None,
-                      help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_dtd")
+    parser.usage = "%prog [options] fichier_xml"
+    parser.add_option("-d", "--dtd", dest="dtd", default="",
+                      help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.",
+                      metavar="fichier_dtd")
     parser.add_option("-x", "--xsl", dest="xsl", default=None,
-                      help="Specifie le chemin du fichier DTD. Cela remplacera le fichier DTD specifie dans le fichier XML si il y en a un.", metavar="fichier_xsl")
+                      help="Specifie le chemin du fichier XSL",
+                      metavar="fichier_xsl")
     (options, args) = parser.parse_args()
 
     if DBG:
@@ -29,16 +31,11 @@ if __name__ == '__main__':
 
     args2 = [args[0]]
 
-    if options.dtd:
-        args2.append(options.dtd)
-    else:
-        args2.append("")
+    args2.append(options.dtd)
+
     if options.xsl:
         args2.append(options.xsl)
 
     out, err = execute_shell_and_get_stdout(PATH_TO_BINARY, args2)
     sys.stderr.write(err)
     print out
-
-
-

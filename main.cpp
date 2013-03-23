@@ -29,20 +29,14 @@ int main(int argc, char** argv) {
 	extern int xmlparse(Document**);
 	extern int xslparse(Document**);
 
-
-
-	// Note : We do not handle errors of values not being here arrays of things like that as the CLI interface
-	// is manage by the "cli" file and we are thus garantueed there will always be a first argument
-	// (excluded the binary's name) that is the XML file name and the
-	// second and third arguments are going to be DTD and XSL
 	int err;
-	string xmlfile = string(argv[1]);
+	string xmlfile, dtdfile, xslfile;
 	Document* xmlDocument = NULL;
 	Document* xsl = NULL;
 	Dtd* dtd = NULL;
 
 	/** Lecture paramètres ligne de commande ***********************************/
-	string dtdfile, xslfile;
+	xmlfile = string(argv[1]);
 	if(argc > 2 && strcmp("_", argv[2]) != 0) {
 		dtdfile = string(argv[2]);
 	}
@@ -52,7 +46,7 @@ int main(int argc, char** argv) {
 	//dtddebug = 1; // pour désactiver l'affichage de l'exécution du parser LALR, commenter cette ligne
 
 	/** Lecture XML ************************************************************/
-	cerr << "XML: " << xmlfile << endl;
+	cerr << "Fichier XML: " << xmlfile << endl;
 	xmlin = fopen(xmlfile.c_str(), "r");
 	if (!xmlin) {
 		cerr << "Impossible d'ouvrir le fichier nommé '" << xmlfile << "'" << endl;
@@ -83,7 +77,7 @@ int main(int argc, char** argv) {
 		dtdfile = string(tmp.c_str());
 	}
 
-	cerr << "DTD: " << dtdfile << endl;
+	cerr << "Fichier DTD: " << dtdfile << endl;
 
 	if (dtdfile.empty()) {
 		cerr << "Pas de fichier DTD." << endl;
@@ -121,6 +115,7 @@ int main(int argc, char** argv) {
 	}
 
 	/** Transformation XSL *****************************************************/
+	cerr << "Fichier XSL: " << xslfile << endl;
 	if (xslfile.empty()) {
 		cerr << "Pas de fichier XSL. " << endl;
 	} else {
@@ -138,18 +133,16 @@ int main(int argc, char** argv) {
 			EXIT(false);
 		}
 
-		cerr << "------------------------------------" << endl;
-		cerr << xsl->getRoot()->toXML() << endl;
-		cerr << "-------------------" << endl;
-		cerr << xmlDocument->getRoot()->toXML() << endl;
-		cerr << "------------------------------------" << endl;
+		// cerr << "------------------------------------" << endl;
+		// cerr << xsl->getRoot()->toXML() << endl;
+		// cerr << "------------------------------------" << endl;
+		// cerr << xmlDocument->getRoot()->toXML() << endl;
+		// cerr << "------------------------------------" << endl;
 
 		HTMLBuilder htmlb((XSLElement*)xsl->getRoot(), xmlDocument->getRoot());
 
 		cout << htmlb.html() << endl;
 	}
-
-
 
 	/****************************************************************/
 

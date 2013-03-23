@@ -1,32 +1,36 @@
 Projet Grammaire et Langage: Développement d'un processeur XML
 ==============================================================
 
+(github.com/ndossougbe/gl)
 
-TODO
+
+Prérequis
+---------
+- boost-regex
+- python >= 2.4
+
+
+Compilation
+-----------
+Il suffit d'exécuter la commande `make`.
+
+
+Exécution
+---------
+Le programme se lance avec la commande `./cli`
+
+- Lancer le programme sans paramètre afficher l'aide.
+- Le paramètre obligatoire est le chemin du fichier XML
+- Les paramètres optionnels sont:
+    * Le chemin du fichier DTD (précédé de `-d `). Si il est présent la déclaration de DTD dans le fichier XML sera ignorée
+    * Le chemin du fichier XSL (précédé de `-x `).
+
+
+Affichage
+---------
+Le html généré est affiché sur `stdout`. Les autres informations sont affichées sur `stderr`. Rediriger la sortie standard sur un fichier permet donc d'obtenir le fichier HTML.
+
+
+Tests
 -----
-### Finir structures données dtd/parsing dtd => Nicolas
-#### Tests dtd
-### Finir output xml/tests => Théo
-### Compilation avec main externe, parsing xml + dtd en un exe => Florent
-### Algo validation: rédiger présentation pseudo algo => Julien, Amri
-#### Quand les structures de données seront prêtes, implémenter l'algo
-### Définition format sérialisation xml => Julien
-### Finir Diagrammes de classes => Selim
-
-
-
-
-Notes Random
-------------
-
-- renseigner DTD si elle n'y est pas
--
-
-
-
-- CDATA et #implied => pas de vérification de type. Il suffit de vérifier que les attributs déclarés sont présents.
-
-
-1. Document de conception: env 30 pages
-2. (! make test => lance les tests)
-3. Avoir une méthode getRegex() renvoyant l'expression régulière associée dans l'objet représentant un élément dans la structure de la DTD
+La suite de tests se lance avec la commande `./test`
