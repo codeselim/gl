@@ -13,9 +13,9 @@ class XSLTest(unittest.TestCase):
         print result
         print "################"
 
-    def simple_test(self, n):
-        result, err = execute_test([self.test_folder + "simple" + str(n) + ".xml", "-x" + self.test_folder + "simple" + str(n) + ".xsl"])
-        f = open(self.test_folder + "simple" + str(n) + ".html", 'r')
+    def __test_xsl(self, xml_filename, xsl_filename, html_filename):
+        result, err = execute_test([self.test_folder + xml_filename, "-x" + self.test_folder + xsl_filename])
+        f = open(self.test_folder + html_filename, 'r')
         expected = f.read()
         f.close()
         
@@ -24,6 +24,14 @@ class XSLTest(unittest.TestCase):
             sys.stderr.write(err)
 
         self.assertEqual(result, expected, "the output is wrong")
+
+    def simple_test(self, n):
+        n2 = str(n)
+        return self.__test_xsl("simple" + n2 + ".xml", "simple" + n2 + ".xsl", "simple" + n2 + ".html")
+
+    def complex_test(self, n):
+            n2 = str(n)
+            return self.__test_xsl("complex" + n2 + ".xml", "complex" + n2 + ".xsl", "complex" + n2 + ".html")
 
     def test_simple1(self):
         self.simple_test(1)
@@ -51,6 +59,9 @@ class XSLTest(unittest.TestCase):
     
     def test_simple9(self):
         self.simple_test(9)
+    
+    def test_complex1(self):
+        self.simple_test(1)
 
 if __name__ == '__main__':
     unittest.main()
