@@ -38,6 +38,24 @@ class XSLTest(unittest.TestCase):
 
     def test_simple3(self):
         self.simple_test(3)
+    
+    def test_simple4(self):
+        self.simple_test(4)
+    
+    def test_simple5(self):
+        self.simple_test(5)
+    
+    def test_simple6(self):
+        self.simple_test(6)
+    
+    def test_simple7(self):
+        self.simple_test(7)
+    
+    def test_simple8(self):
+        self.simple_test(8)
+    
+    def test_simple9(self):
+        self.simple_test(9)
 
 if __name__ == '__main__':
     unittest.main()
