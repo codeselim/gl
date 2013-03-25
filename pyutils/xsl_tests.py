@@ -7,6 +7,7 @@ class XSLTest(unittest.TestCase):
     test_folder = "tests/"
 
     def perror(self, expected, result):
+        print ""
         print "######Expected##########"
         print expected
         print "######Result##########"
@@ -21,7 +22,9 @@ class XSLTest(unittest.TestCase):
         
         if (result != expected):
             self.perror(expected, result)
+            sys.stderr.write("\n@@@@@@@@@@@@@@@@\n")
             sys.stderr.write(err)
+            sys.stderr.write("\n@@@@@@@@@@@@@@@@\n")
 
         self.assertEqual(result, expected, "the output is wrong")
 
@@ -61,7 +64,25 @@ class XSLTest(unittest.TestCase):
         self.simple_test(9)
     
     def test_complex1(self):
-        self.simple_test(1)
+        self.complex_test(1)
+
+    def test_complex2(self):
+        self.complex_test(2)
+
+    def test_complex3(self):
+        self.complex_test(3)
+
+    def test_complex4(self):
+        self.complex_test(4)
+
+    def test_complex5(self):
+        self.complex_test(5)
+
+    def test_complex6(self):
+        self.complex_test(6)
+
+    def test_complex7(self):
+        self.complex_test(7)
 
 if __name__ == '__main__':
     unittest.main()
