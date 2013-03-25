@@ -38,4 +38,4 @@ if __name__ == '__main__':
 
     out, err = execute_shell_and_get_stdout(PATH_TO_BINARY, args2)
     sys.stderr.write(err)
-    print out
+    print out,
