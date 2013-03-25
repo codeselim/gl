@@ -4,6 +4,8 @@ import sys
 
 
 class XSLTest(unittest.TestCase):
+    test_folder = "tests/"
+
     def perror(self, expected, result):
         print "######Expected##########"
         print expected
@@ -12,18 +14,11 @@ class XSLTest(unittest.TestCase):
         print "################"
 
     def simple_test(self, n):
-        tokens = {"testId": n, "testDir": "tests"}
-        testSrc = ["{testDir}/simple{testId}.xml", "",
-                   "{testDir}/simple{testId}.xsl"]
-        args = [f.format(**tokens) for f in testSrc]
-        expectedfile = "{testDir}/simple{testId}.html".format(**tokens)
-        f = open(expectedfile, 'r')
-        expected = open(expectedfile, "r").read()
-
-        result, err = execute_test(args)
+        result, err = execute_test([self.test_folder + "simple" + str(n) + ".xml", "-x" + self.test_folder + "simple" + str(n) + ".xsl"])
+        f = open(self.test_folder + "simple" + str(n) + ".html", 'r')
         expected = f.read()
         f.close()
-
+        
         if (result != expected):
             self.perror(expected, result)
             sys.stderr.write(err)
