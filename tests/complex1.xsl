@@ -4,6 +4,7 @@
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template match="xml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <body>
 	<xsl:apply-templates />
@@ -12,16 +13,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 <xsl:template match="a">
-	<bleh>
+	<div id="page">
 		<xsl:apply-templates/>
-	</bleh>
+	</div>
 </xsl:template>
 
 <xsl:template match="b">
-	<howto>
+	<p>
 		<xsl:apply-templates/>
-	</howto>
+	</p>
 </xsl:template>
 
+<xsl:template match="c">
+	<strong>
+		<xsl:apply-templates/>
+	</strong>
+</xsl:template>
 
 </xsl:stylesheet>

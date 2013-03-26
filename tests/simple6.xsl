@@ -23,5 +23,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</howto>
 </xsl:template>
 
+<xsl:template match="c">
+	<span a="o" u="b" d="l">
+		<xsl:apply-templates/>
+	</span>
+</xsl:template>
+
 
 </xsl:stylesheet>
