@@ -9,6 +9,6 @@ if __name__ == '__main__':
 
     for i in xrange(1, 10):
         suite.addTest(XSLTest("test_simple" + str(i)))
-    for i in xrange(1, 4):
+    for i in xrange(2, 4):
         suite.addTest(XSLTest("test_complex" + str(i)))
     unittest.TextTestRunner().run(suite)

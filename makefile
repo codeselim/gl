@@ -26,16 +26,17 @@ analyseXML: $(XMLDIR)/*.l $(XMLDIR)/*.y makefile
 	bison -p xml --debug --verbose --defines=$(XMLDIR)/xml.tab.h $(XMLDIR)/xml.y
 
 analyseXSL: $(XMLDIR)/*.l $(XMLDIR)/*.y makefile
-	sed 's/xml/xsl/g' AnalyseurXML/xml.y > AnalyseurXML/xsl.y
+	sed 's/xml/xsl/g' $(XMLDIR)/xml.y > $(XMLDIR)/xsl.y
 	sed -e 's/xml.tab.h/xsl.tab.h/g'\
 	    -e 's/xmltext/xsltext/g'\
 	    -e 's/xmllval/xsllval/g'\
-	    AnalyseurXML/xml.l > AnalyseurXML/xsl.l
+	    $(XMLDIR)/xml.l > $(XMLDIR)/xsl.l
 	flex -Pxsl $(XMLDIR)/xsl.l
 	bison -p xsl --debug --verbose --defines=$(XMLDIR)/xsl.tab.h $(XMLDIR)/xsl.y
 
 clean:
 	-rm -rf *.tab.c lex.*.c *.tab.h *.output $(EXENAME) $(OBJ_FILES) xsl.y xsl.l
+	-rm -rf $(DTDDIR)/*.tab.* $(XMLDIR)/*.tab.* $(XMLDIR)/xsl.*
 	-rm -f *.pyc pyutils/*.pyc
 
 $(DSDIR)/%.o: $(DSDIR)/%.cpp
