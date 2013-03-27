@@ -19,7 +19,7 @@ class XSLTest(unittest.TestCase):
         f = open(self.test_folder + html_filename, 'r')
         expected = f.read()
         f.close()
-        
+
         if (result != expected):
             self.perror(expected, result)
             sys.stderr.write("\n@@@@@@@@@@@@@@@@\n")
@@ -44,25 +44,28 @@ class XSLTest(unittest.TestCase):
 
     def test_simple3(self):
         self.simple_test(3)
-    
+
     def test_simple4(self):
         self.simple_test(4)
-    
+
     def test_simple5(self):
         self.simple_test(5)
-    
+
     def test_simple6(self):
         self.simple_test(6)
-    
+
     def test_simple7(self):
         self.simple_test(7)
-    
+
     def test_simple8(self):
         self.simple_test(8)
-    
+
     def test_simple9(self):
         self.simple_test(9)
-    
+
+    def test_simple10(self):
+        self.simple_test(10)
+
     def test_complex1(self):
         self.complex_test(1)
 
@@ -72,17 +75,17 @@ class XSLTest(unittest.TestCase):
     def test_complex3(self):
         self.complex_test(3)
 
-    def test_complex4(self):
-        self.complex_test(4)
+    # def test_complex4(self):
+    #     self.complex_test(4)
 
-    def test_complex5(self):
-        self.complex_test(5)
+    # def test_complex5(self):
+    #     self.complex_test(5)
 
-    def test_complex6(self):
-        self.complex_test(6)
+    # def test_complex6(self):
+    #     self.complex_test(6)
 
-    def test_complex7(self):
-        self.complex_test(7)
+    # def test_complex7(self):
+    #     self.complex_test(7)
 
 if __name__ == '__main__':
     unittest.main()
